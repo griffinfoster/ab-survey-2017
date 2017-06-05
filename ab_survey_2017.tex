@@ -1,0 +1,199 @@
+% mnras_template.tex
+%
+% LaTeX template for creating an MNRAS paper
+%
+% v3.0 released 14 May 2015
+% (version numbers match those of mnras.cls)
+%
+% Copyright (C) Royal Astronomical Society 2015
+% Authors:
+% Keith T. Smith (Royal Astronomical Society)
+
+% Change log
+%
+% v3.0 May 2015
+%    Renamed to match the new package name
+%    Version number matches mnras.cls
+%    A few minor tweaks to wording
+% v1.0 September 2013
+%    Beta testing only - never publicly released
+%    First version: a simple (ish) template for creating an MNRAS paper
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Basic setup. Most papers should leave these options alone.
+\documentclass[a4paper,fleqn,usenatbib]{mnras}
+
+% MNRAS is set in Times font. If you don't have this installed (most LaTeX
+% installations will be fine) or prefer the old Computer Modern fonts, comment
+% out the following line
+\usepackage{newtxtext,newtxmath}
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+
+%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
+
+% Only include extra packages if you really need them. Common packages are:
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+\usepackage[xindy]{glossaries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
+
+% Please keep new commands to a minimum, and use \newcommand not \def to avoid
+% overwriting existing commands. Example:
+%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
+
+\newcommand{\GSF}[1]{\noindent\textcolor{blue}{GSF:#1}}
+
+\makeglossaries
+
+%glossary
+\newacronym{alfa}{ALFA}{Arecibo L-Band Feed Array}
+\newacronym{frb}{FRB}{Fast Radio Burst}
+\newacronym{igm}{IGM}{Intergalactic Medium}
+\newacronym{ism}{ISM}{Interstellar Medium}
+\newacronym{sefd}{SEFD}{System Equivalent Flux Density}
+\newacronym{snr}{SNR}{Signal-to-Noise Ratio}
+\newacronym{sps}{SPS}{Single Pulse Search}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[A Low-Flux FRB Rate Limit using ALFA]{A Low-Flux FRB Rate Limit using ALFA}
+
+\author[ALFABURST Team]{
+ALFABURST Team
+}
+
+% These dates will be filled out by the publisher
+\date{Accepted XXX. Received YYY; in original form ZZZ}
+
+% Enter the current year, for the copyright statements etc.
+\pubyear{2017}
+
+% Don't change these lines
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+% Abstract of the paper
+\begin{abstract}
+% What is the point of the paper?
+% What is the context of the study? What background information is necessary to understand the study?
+% How was the study done?
+% What is the main take away message?
+% What can be said about these results, and how does this affect future work?
+The ALFABURST fast radio burst (FRB) survey has been observing commensally with
+other projects using the ALFA receiver since July 2015. We report on the
+non-detection of any FRBs from that time until May 2017. With current FRB rate
+models we expected to see multiple FRBs in based on the total observing time,
+telescope sensitivity and beam size. We discuss the implications for this
+non-detection FRBs in the context of recent detections with other telescopes.
+\end{abstract}
+
+% Select between one and six entries from the list of approved keywords.
+% Don't make up new ones.
+\begin{keywords}
+radio continuum: transients -- methods: observational
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+ALFABURST is an \gls*{frb} search instrument which has been used to commensally
+observe since July 2015 with other \gls*{alfa} observations at Arecibo
+Observatory. This system is a component of the SETIBURST backend
+\citep{2017ApJS..228...21C} and uses ARTEMIS \citep{2015MNRAS.452.1254K} for
+automated, real-time detection.
+
+%%% OBSERVATION TIME BEGINS %%%
+
+%TODO: observation time
+
+%%% OBSERVATION TIME ENDS   %%%
+
+%%% SENSITIVITY BEGINS %%%
+
+Using Equation 6 of \cite{2015MNRAS.452.1254K}, a \gls*{sps} pipeline is
+sensitive to pulses with a minimum flux density (in Jy) of
+%
+\begin{equation}
+S_{min} = \textrm{SEFD} \frac{\textrm{SNR}_{min}}{\sqrt{D \; \Delta \tau \;
+\Delta \nu}}
+\end{equation}
+%
+which is a function of the telescope \gls*{sefd}, the minimum \gls*{snr}
+detection level $\textrm{SNR}_{min}$ and the decimation rate $D$ compared to the
+native instrumental time resolution $\tau$, this comes from the search pipeline
+which averages together spectra to search for scattered pulses. ALFABURST has a
+native resolution of $\Delta \tau = 256 \; \mu s$, effective bandwidth $\Delta
+\nu = 56 \textrm{MHz}$, and $\textrm{SNR}_{min} = 10$. The \gls*{sefd} of the
+\gls*{alfa} receiver is approximately 3 Jy across the band.
+
+%%% SENSITIVITY ENDS   %%%
+
+%%% SKY COVERAGE BEGINS %%%
+
+Since ALFABURST was installed, the majority of ALFA observation time is
+allocated for the AGES \citep{2006MNRAS.371.1617A} and PALFA
+\citep{2006ApJ...637..446C} surveys. The AGES survey pointing is primarily off
+the galactic plane, thus there is little dispersion and scattering due to the galactic
+\gls*{ism}. PALFA is a pulsar search survey with pointings near the galactic
+plane. These lines of sight can introduce significant dispersion due to the
+\gls*{ism}. We search out to a DM of 10000 which is well beyond the maximum
+galactic dispersion, even when \gls*{igm} dispersion is accounted for from
+sources of cosmological distances.
+
+%TODO: figure of sky coverage
+
+%%% SKY COVERAGE ENDS   %%%
+
+% Introduction/Verification of system
+%   * detection of bright single pulse events from known pulsars
+%   * statement: no FRBs detected
+
+\section{Event Prioritization and Classification}
+
+% Event Classification and Prioritization
+%   * priority classifier model
+%       * labelled data
+%       * wide feature selection + classifier
+%       * deep feature selection + classifier
+%   * event statistics
+
+\section{Implied Low-Flux FRB Rates}
+
+% Low flux FRB limits from ALFABURST
+%   * Do we expect to see the known frbs at a further distance which we are probing?
+%   * limits based on non-detection, observation time, and FRB standard candle model
+%   * possible reasons: star formation rate, scintillation, steep spectrum
+%   * implied FRB Luminosity function: cosmological star formation rate, peaks
+%   around z=1? write notebook to produce rates
+%   * implications in relation to current single-event FRBs and the repeater: limited frequency band, scintillation
+%   * relation to ASKAP detections
+%   * relations to Law et al multi-frequency observations: band-limited source,
+%   but no astrophysical source
+%   * relation to Macquart and Johnston paper: rate off/on the plane is
+%   different due to scintillation regimes
+%   * repeater and low freq frb searches: spectra are not pulsar like. may be
+%   due to strong scintillation
+
+\bibliographystyle{mnras}
+\bibliography{alfaburst.bib} 
+
+\bsp	% typesetting comment
+\label{lastpage}
+\end{document}
+
+% End of mnras_template.tex
