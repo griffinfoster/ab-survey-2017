@@ -59,9 +59,14 @@
 
 %glossary
 \newacronym{alfa}{ALFA}{Arecibo L-Band Feed Array}
+\newacronym{dm}{DM}{Dispersion Measure}
 \newacronym{frb}{FRB}{Fast Radio Burst}
+\newacronym{gbt}{GBT}{Greenbank Telescope}
 \newacronym{igm}{IGM}{Intergalactic Medium}
 \newacronym{ism}{ISM}{Interstellar Medium}
+\newacronym{nip}{NIP}{Non-image Processing}
+\newacronym{rfi}{RFI}{Radio-frequency Interference}
+\newacronym{ska}{SKA}{Square Kilometre Array}
 \newacronym{sefd}{SEFD}{System Equivalent Flux Density}
 \newacronym{snr}{SNR}{Signal-to-Noise Ratio}
 \newacronym{sps}{SPS}{Single Pulse Search}
@@ -115,11 +120,28 @@ ALFABURST is an \gls*{frb} search instrument which has been used to commensally
 observe since July 2015 with other \gls*{alfa} observations at Arecibo
 Observatory. This system is a component of the SETIBURST backend
 \citep{2017ApJS..228...21C} and uses ARTEMIS \citep{2015MNRAS.452.1254K} for
-automated, real-time detection.
+automated, real-time detection. During this time period an \gls*{sps} was
+performed from \gls*{dm} 0 to 10000, pulse width from $256 \mu s$ to $16$ ms,
+across a 56 MHz bandwidth for all 7 beams. Detection above an \gls*{snr} of 10
+were recorded along with an $8.4$ second dynamic spectrum window around the
+event. If multiple events were detected in the same time window, these events
+were pooled together.  Approximately 150k windows were recorded between July
+2015 and June 2017, the vast majority of which are false detections due to
+\gls*{rfi} signals passing through the real-time \gls*{rfi} exciser. We detect
+no \glspl*{frb} in our commensal survey.
+
+A wide-feature, learned model was used to classify the event windows in order to
+filter out \gls*{rfi} and create a priority queue for visual examination. This
+model and the post-processing procedures are discussed in Section
+\ref{sec:event_classify}. We discuss the expected event rates in Section
+\ref{sec:frb_rates} and consider possible explainations for our non-detection
+result in Section \ref{sec:discuss}.
 
 %%% OBSERVATION TIME BEGINS %%%
 
 %TODO: observation time
+The current system is setup to be reliably in use for all beam any time
+\gls*{alfa} is active and in the correct receiver turret poistion.
 
 %%% OBSERVATION TIME ENDS   %%%
 
@@ -139,7 +161,7 @@ native instrumental time resolution $\tau$, this comes from the search pipeline
 which averages together spectra to search for scattered pulses. ALFABURST has a
 native resolution of $\Delta \tau = 256 \; \mu s$, effective bandwidth $\Delta
 \nu = 56 \textrm{MHz}$, and $\textrm{SNR}_{min} = 10$. The \gls*{sefd} of the
-\gls*{alfa} receiver is approximately 3 Jy across the band.
+\gls*{alfa} receiver is approximately 3 Jy across the band for all beams.
 
 %%% SENSITIVITY ENDS   %%%
 
@@ -147,23 +169,46 @@ native resolution of $\Delta \tau = 256 \; \mu s$, effective bandwidth $\Delta
 
 Since ALFABURST was installed, the majority of ALFA observation time is
 allocated for the AGES \citep{2006MNRAS.371.1617A} and PALFA
-\citep{2006ApJ...637..446C} surveys. The AGES survey pointing is primarily off
-the galactic plane, thus there is little dispersion and scattering due to the galactic
-\gls*{ism}. PALFA is a pulsar search survey with pointings near the galactic
-plane. These lines of sight can introduce significant dispersion due to the
-\gls*{ism}. We search out to a DM of 10000 which is well beyond the maximum
-galactic dispersion, even when \gls*{igm} dispersion is accounted for from
-sources of cosmological distances.
+\citep{2006ApJ...637..446C} surveys (Figure \ref{fig:sky_coverage}).  The AGES
+survey pointing is off the galactic plane, thus there is little dispersion and
+scattering due to the galactic \gls*{ism}. PALFA is a pulsar search survey with
+pointings near the galactic plane. These lines of sight can introduce
+significant dispersion due to the \gls*{ism}. We search out to a DM of 10000
+which is well beyond the maximum galactic dispersion, even when \gls*{igm}
+dispersion is accounted for from sources of cosmological distances.
 
-%TODO: figure of sky coverage
+% TODO: regenerate the sky coverage with coverage up to June 2017
+% alfaburst-initial-survey/notebooks/Sky_Coverage.ipynb
+\begin{figure*}
+    \includegraphics[width=1.0\linewidth]{figures/cartview_sky_coverage.pdf}
+    \caption{Sky coverage during ALFA usage between July 2015 and June 2017,
+    shown in a Cartesian projection in galactic coordinates. Color represents
+    total time pointing in a log scale. The majority of ALFA usage during this
+    time was for the PALFA survey along the galactic plane (dot-dashed boxes)
+    and the AGES survey (dashed box).  The S-shaped arcs across the plot are due
+    to fixed pointings in local azimuth and altitude.
+    }
+    \label{fig:sky_coverage}
+\end{figure*}
 
 %%% SKY COVERAGE ENDS   %%%
 
-% Introduction/Verification of system
-%   * detection of bright single pulse events from known pulsars
-%   * statement: no FRBs detected
+%%% SYSTEM VERIFICATION BEGINS %%%
+
+PALFA scheduling regularly observe known pulsars to verify timing analysis,
+this provides a consistent verification of our \gls*{sps} to detect
+pulses. As the PALFA survey is performed in the galactic plane a number of high
+\gls*{dm} pulsars were observed, single pulses from B1859+03 (\gls*{dm}: 402),
+B1900+01 (\gls*{dm}: 245), B2002+32 (\gls*{dm}: 234), B1933+16 (\gls*{dm}: 158),
+among others were detected.
+
+% TODO: figure: B1900+01 pulse (dynamic spectrum, intergrated dedispered time
+% series)
+
+%%% SYSTEM VERIFICATION ENDS   %%%
 
 \section{Event Prioritization and Classification}
+\label{sec:event_classify}
 
 % Event Classification and Prioritization
 %   * priority classifier model
@@ -173,21 +218,50 @@ sources of cosmological distances.
 %   * event statistics
 
 \section{Implied Low-Flux FRB Rates}
+\label{sec:frb_rates}
 
 % Low flux FRB limits from ALFABURST
+%   * expected rates based on non-detection, observation time, and FRB standard candle model
 %   * Do we expect to see the known frbs at a further distance which we are probing?
-%   * limits based on non-detection, observation time, and FRB standard candle model
-%   * possible reasons: star formation rate, scintillation, steep spectrum
-%   * implied FRB Luminosity function: cosmological star formation rate, peaks
-%   around z=1? write notebook to produce rates
-%   * implications in relation to current single-event FRBs and the repeater: limited frequency band, scintillation
-%   * relation to ASKAP detections
-%   * relations to Law et al multi-frequency observations: band-limited source,
-%   but no astrophysical source
-%   * relation to Macquart and Johnston paper: rate off/on the plane is
-%   different due to scintillation regimes
-%   * repeater and low freq frb searches: spectra are not pulsar like. may be
-%   due to strong scintillation
+
+\section{Discussion}
+\label{sec:discuss}
+
+% Possible reasons: star formation rate, scintillation, steep spectrum
+%   * Star formation rate:
+%       * implied FRB Luminosity function: cosmological star formation rate, peaks
+%       around z=2? write notebook to produce rates, Madau & Dickinson 2014
+%   * scintillation:
+%       * limited bandwidth, repeater band varys
+%       * relation to Macquart and Johnston paper: rate off/on the plane is
+%       different due to scintillation regimes
+%       * repeater and low freq frb searches: spectra are not pulsar like. may be
+%       due to strong scintillation
+%   * steep spectrum/band limited:
+%       * relation to ASKAP detections
+%       * Law et al see no detections at low and 5 GHz+ freqs -> band limited,
+%       steep spectrum
+
+\section{Future Work}
+\label{sec:future_work}
+
+The current \gls*{sps} pipeline is undergoing a significant upgrade. The input
+bandwidth is limited to 56 MHz of the full 336 MHz digital band due to IO
+limitations. A new pipeline developed for \gls*{ska} \gls*{nip} will be used to
+process the full \gls*{alfa} band. This will increase sensitivity, and improve
+detection rate if \glspl*{frb} scintillate similar to FRB121102. An improved
+version of the real-time \gls*{rfi} exciser is currently being developed and
+will be deployed to reduce the false detection rate. The post-processing
+classifier and prioritizer model is being updated to make use of an auto-encoder
+to select deep features and auto-generate classes.
+
+Over the time period ALFABURST has been active, the use of \gls*{alfa} has
+decreased as the PALFA and AGES surveys end. The 327 MHz and L-band wide feeds
+are commonly used. We are generalizing the \gls*{alfa} specific \gls*{sps}
+pipeline to be used when these feeds are active, increasing our survey time and
+sampling a larger portion of frequency space. Additionally, our search pipeline
+will be duplicated for use on the \gls*{gbt} to be commensally run with L-band
+obsevrations. 
 
 \bibliographystyle{mnras}
 \bibliography{alfaburst.bib} 
