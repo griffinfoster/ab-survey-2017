@@ -36,7 +36,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
 
-
 %%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
 
 % Only include extra packages if you really need them. Common packages are:
@@ -61,6 +60,7 @@
 \newacronym{alfa}{ALFA}{Arecibo L-Band Feed Array}
 \newacronym{dm}{DM}{Dispersion Measure}
 \newacronym{frb}{FRB}{Fast Radio Burst}
+\newacronym{fwhm}{FWHM}{Full-Width at Half-Maximum}
 \newacronym{gbt}{GBT}{Greenbank Telescope}
 \newacronym{igm}{IGM}{Intergalactic Medium}
 \newacronym{ism}{ISM}{Interstellar Medium}
@@ -73,7 +73,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title[A Low-Flux FRB Rate Limit using ALFA]{A Low-Flux FRB Rate Limit using ALFA}
+\title[ALFABURST Initial]{ALFABURST Initial}
 
 \author[ALFABURST Team]{
 ALFABURST Team
@@ -114,6 +114,28 @@ radio continuum: transients -- methods: observational
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%% TO REVIEW
+
+% to check: petroff non-detection, ATA, repeater initial, lorimer burst
+
+% 1307.1200 (FRB Standard Candle Model)
+% 1307.1628 (4 FRBs from HTRU and sky rates)
+% Madau & Dickinson 2014 (Star Formation Rate Review)
+% 1505.05893 (Scintillation Effects of FRB Sky Distribution)
+% 1601.03547 (FRBCAT)
+% 1603.08880 (Repeater Additional Bursts)
+% Champion et al 2016 (5 FRBs from HTRU)
+% Caleb et al 2016 (UTMOST Initial Survey)
+% 1611.05758 (Bright Parkes FRB)
+% Chatterjee et al 2017 (Repeater VLA Localization)
+% 1701.01099 (Repeater EVN Localization)
+% 1701.01100 (Repeater Redshift and Host)
+% 1702.08040 (Initial CHIME Survey)
+% 1703.10173 (3 FRBs from UTMOST)
+% 1705.07553 (Repeater Multi- radio-freq observations)
+% 1705.07581 (ASKAP First Bright FRB)
+% 1705.07698 (Repeater Star Forming Region)
+
 \section{Introduction}
 
 ALFABURST is an \gls*{frb} search instrument which has been used to commensally
@@ -139,9 +161,20 @@ result in Section \ref{sec:discuss}.
 
 %%% OBSERVATION TIME BEGINS %%%
 
-%TODO: observation time
-The current system is setup to be reliably in use for all beam any time
-\gls*{alfa} is active and in the correct receiver turret poistion.
+From the beginning of July 2015 to the end of May 2017 \gls*{alfa} has been used
+for approximately 1400 hours of observing, with all seven beams functional. Due
+to pipeline development and hardware reliability ALFABURST was active and
+functional for on average 350 hours per beam.  The current system is setup to be
+reliably in use for all beams any time \gls*{alfa} is active and in the correct
+receiver turret poistion.
+
+An \gls*{alfa} beam is approximately 3.8' x 3.3' at \gls*{fwhm} across the band.
+Using this beam size and the average observation time per beam the
+telescope-independent \gls*{frb} suvery coverage metric for ALFABURST as of June
+2017 is 6.7 square-degree hours.
+% TODO: how does this metric compare to other surveys? why is ALFABURST useful?
+% sensitivity
+% TODO: obs time 60% out of plane, 40% in plane
 
 %%% OBSERVATION TIME ENDS   %%%
 
@@ -177,7 +210,6 @@ significant dispersion due to the \gls*{ism}. We search out to a DM of 10000
 which is well beyond the maximum galactic dispersion, even when \gls*{igm}
 dispersion is accounted for from sources of cosmological distances.
 
-% TODO: regenerate the sky coverage with coverage up to June 2017
 % alfaburst-initial-survey/notebooks/Sky_Coverage.ipynb
 \begin{figure*}
     \includegraphics[width=1.0\linewidth]{figures/cartview_sky_coverage.pdf}
@@ -221,7 +253,11 @@ among others were detected.
 \label{sec:frb_rates}
 
 % Low flux FRB limits from ALFABURST
-%   * expected rates based on non-detection, observation time, and FRB standard candle model
+%   * survey coverage compare: HTRU/Parkes, ASKAP, GBT, ATA, Molongolo
+%   * update to standard candle model using the repeater
+%   * log n - log s curve
+%   * expected rates based on non-detection, observation time, and FRB standard
+%   candle model, use fluence
 %   * Do we expect to see the known frbs at a further distance which we are probing?
 
 \section{Discussion}
