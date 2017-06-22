@@ -36,13 +36,13 @@
 \usepackage[T1]{fontenc}
 \usepackage{ae,aecompl}
 
-
 %%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
 
 % Only include extra packages if you really need them. Common packages are:
 \usepackage{graphicx}	% Including figure files
 \usepackage{amsmath}	% Advanced maths commands
 \usepackage{amssymb}	% Extra maths symbols
+\usepackage[xindy]{glossaries}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -52,33 +52,54 @@
 % overwriting existing commands. Example:
 %\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\GSF}[1]{\noindent\textcolor{blue}{GSF:#1}}
 
-%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+%glossary
+\newacronym{alfa}{ALFA}{Arecibo L-Band Feed Array}
+\newacronym{dm}{DM}{Dispersion Measure}
+\newacronym{frb}{FRB}{Fast Radio Burst}
+\newacronym{fwhm}{FWHM}{Full-Width at Half-Maximum}
+\newacronym{gbt}{GBT}{Greenbank Telescope}
+\newacronym{if}{IF}{Intermediate Frequency}
+\newacronym{igm}{IGM}{Intergalactic Medium}
+\newacronym{ism}{ISM}{Interstellar Medium}
+\newacronym{nip}{NIP}{Non-image Processing}
+\newacronym{pll}{PLL}{Phased-locked Loop}
+\newacronym{rfi}{RFI}{Radio-frequency Interference}
+\newacronym{ska}{SKA}{Square Kilometre Array}
+\newacronym{sefd}{SEFD}{System Equivalent Flux Density}
+\newacronym{snr}{SNR}{Signal-to-Noise Ratio}
+\newacronym{sps}{SPS}{Single Pulse Search}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[Short title, max. 45 characters]{MNRAS \LaTeXe\ template -- title goes here}
+\title[Verification Tests for FRB Detections]{Verification Tests for FRB
+Detections}
 
-% The list of authors, and the short list which is used in the headers.
-% If you need two or more lines of authors, add an extra line using \newauthor
-\author[K. T. Smith et al.]{
-Keith T. Smith,$^{1}$\thanks{E-mail: mn@ras.org.uk (KTS)}
-A. N. Other,$^{2}$
-Third Author$^{2,3}$
-and Fourth Author$^{3}$
-\\
-% List of institutions
-$^{1}$Royal Astronomical Society, Burlington House, Piccadilly, London W1J 0BQ, UK\\
-$^{2}$Department, Institution, Street Address, City Postal Code, Country\\
-$^{3}$Another Department, Different Institution, Street Address, City Postal Code, Country
+\author[ALFABURST Team]{
+ALFABURST Team
 }
+%% The list of authors, and the short list which is used in the headers.
+%% If you need two or more lines of authors, add an extra line using \newauthor
+%\author[K. T. Smith et al.]{
+%Keith T. Smith,$^{1}$\thanks{E-mail: mn@ras.org.uk (KTS)}
+%A. N. Other,$^{2}$
+%Third Author$^{2,3}$
+%and Fourth Author$^{3}$
+%\\
+%% List of institutions
+%$^{1}$Royal Astronomical Society, Burlington House, Piccadilly, London W1J 0BQ, UK\\
+%$^{2}$Department, Institution, Street Address, City Postal Code, Country\\
+%$^{3}$Another Department, Different Institution, Street Address, City Postal Code, Country
+%}
 
 % These dates will be filled out by the publisher
 \date{Accepted XXX. Received YYY; in original form ZZZ}
 
 % Enter the current year, for the copyright statements etc.
-\pubyear{2015}
+\pubyear{2017}
 
 % Don't change these lines
 \begin{document}
@@ -88,32 +109,162 @@ $^{3}$Another Department, Different Institution, Street Address, City Postal Cod
 
 % Abstract of the paper
 \begin{abstract}
-This is a simple template for authors to write new MNRAS papers.
-The abstract should briefly describe the aims, methods, and main results of the paper.
-It should be a single paragraph not more than 250 words (200 words for Letters).
-No references should appear in the abstract.
+% What is the point of the paper?
+% What is the context of the study? What background information is necessary to understand the study?
+% How was the study done?
+% What is the main take away message?
+% What can be said about these results, and how does this affect future work?
+The ALFABURST commensal FRB survey has been in operation since June 2015. In
+that time a number of false-positive events, which on initial inspect appear to
+be FRB-like, have been found to be of local origin. Here we report on one such event
+as an example of the difficult challenge of fully automating an FRB search. The
+one-off nature of most FRBs requires extra scrutiny in reporting an
+astrophysical FRB and triggering automated follow-ups with a telescope network.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
 % Don't make up new ones.
 \begin{keywords}
-keyword1 -- keyword2 -- keyword3
+radio continuum: transients -- methods: observational
 \end{keywords}
 
 %%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
 
+% TODO: notebook of dec 4 event, low SNR event, make filterbanks available
+
 \section{Introduction}
 
-% see Dropbox/tcb/FRB_RFI_letter.md
-% explanation of terrestial FRB detection
-% follow-up to verify is is a local source, what is the source?
+A narrow-in-time, broad-in-frequency, millisecond pulse was detected with the
+ALFABURST \citep{2017ApJS..228...21C} system at MJD 57726.563263913 / Unix time
+1480858266 (09:31:06 Arecibo local time) in Beam 0 (the central beam) of the
+\gls{alfa} receiver. ALFABURST was processing 56 MHz of bandwidth between 1457
+MHz and 1513 MHz. The \gls{snr} of this pulse is maximized (10.46) when the
+pulse is dedispersed with a \gls{dm} of 293 and the 256 microsecond resolution
+is decimated by a factor of 16 to 4 ms time resolution. We believe this event to
+have been generated by a local source, mostly likely within the receiver dome.
+
+% TODO: 125k events recorded over two years of operation -> many false positives
+Over two years of the initial ALFABURST survey over 125k 8-second windows have
+been recorded in which our \gls{frb} search pipeline detected an event above the
+minimum \gls{snr} threshold of 10. The vast majority of these events have been
+due to \gls{rfi}, some of the events are due bright single pulses of known
+pulsars. Sorting through these false positive events is the main focus of our
+post-processing methods.
+
+% TODO: figure: dynamic spectrum with bandpass, and dedispersed, freq int time
+% series in beam 0
+
+The flux density of the event can be computed with the radiometer equation
+%
+$$
+S = \textrm{SEFD} \frac{\textrm{SNR}}{\sqrt{D \; \Delta \tau \;
+\Delta \nu}}
+$$
+%
+using an \gls{sefd} of 3 Jy for the \gls{alfa} receiver. This results in a flux
+density of $S_0 = 66$ mJy from Beam 0, which would be lower flux than any
+previously detected \gls{frb} \citep{2016PASA...33...45P}. Flux estimate is an
+upper limit, as we are assuming the source was at the centre of the beam.
+
+In isolation this pulse looks like a potential \gls{frb}. A bright \gls{frb} can
+show up in multiple \gls{alfa} beams, so we inspected all other events in the
+same time window as the Beam 0 event. An event was found in Beam 5 only. This
+pulse lines up exactly in time with the Beam 0 event but the \gls{frb} was
+maximized (15.99) with a DM=829 dedispersion. Upon further inspection and
+testing different DMs for dedispersion we found that this event appeared to
+narrow in width at lower DM. We see that there was \gls{rfi} clipping in this
+event which is known to introduce a bias. This could account for the increased
+DM to maximize the SNR. The Beam 0 and Beam 5 event are the same event. The
+higher \gls{snr} and \gls{rfi} clipping in Beam 5 indicates that the signal was
+stronger in that beam.
+
+But, the Beam 5 spectrogram introduces new issues with this event being an
+non-terrestrial \gls{frb}. Before and after the event there are events that look
+similar to the main event, these event SNRs are maximized by choosing a range of
+DMs.
+
+Further, there is a serious red flag when inspecting the bandpass during the
+event. The detection band of \gls{alfa} was chosen because it is the most sensitive
+region of the band, and relatively flat. But during the event there is a
+noticeable shape and slant to the bandpass which is not seen in a typical
+observation. The system noise appears higher which could indicate an
+introduction of a stable, warm source to the system. There is also
+narrow-in-frequency, periodic RFI at 1468, 1480, 1496, 1504 MHz not usually seen
+in this band. In the high time and frequency resolution view these short pulses
+in 12.5 MHz steps have a characteristic dampened harmonic oscillation due to
+frequency locking with a \gls{pll}.
+
+% TODO: figure: bandpasses
+% TODO: figure: PLL locking
+
+We considered that the band could have been changed. We have setup the automated
+system to restart observations when the \gls{if} frequency is changed. The
+Arecibo telescope logging data is reported locally in SCRAM packets which
+provide pointing, frequency tuning, and receiver information at approximately
+one second resoltuion. During the time of the event there was no
+change in the \gls{if} during that time and the telescope was pointed at a fixed Dec
+(+15:11:28.34) and drifting in RA (event detected at RA=14:42:26.18), i.e. a fixed (alt,az)
+pointing.
+
+Looking at the observation schedule for the morning of December 4, project P3080
+was using \gls{alfa} to perform an \gls{frb} survey of the Virgo cluster until 09:00 local
+time. From there Project R3037 was scheduled, this is an S-Band RADAR
+observation. \gls{alfa} was not register as switched off until around
+10:00, approximately 15 minutes after the event was detected. This indicated to
+us that the events we are seeing all likely related to the setup of the S-Band
+RADAR.
+
+% TODO: dec 4 event: turrent in wrong position
+
+Looking at a longer time window before the event we found further indication of
+time and frequency-variable structure in the band before the event which looks
+related. Approximately 90 seconds before the event we see the band change in
+multiple beams, and the appearance of narrow-in-frequency \gls{rfi}.
+
+Currently, we are considering that the event is due to ALFA being covered to
+protect against the RADAR system while it was still the active rx. It could be
+that this event is due to some standing-wave coupling between the ALFA and the
+cover.
+
+% TODO: What is the physical process which generated this event?
+% TODO: explanation of terrestial FRB detection
+% TODO: follow-up to verify is is a local source, what is the source?
+
+In isolation, and the one-off, transient nature of FRBs make the initial Beam 0
+detection look very reasonable. It is only with an extended study of the
+meta-data, earlier-in-time evolution of the band, and use of multiple beams to
+confirm that this is indeed not an FRB.
+
+% TODO:
+% low SNR events, due to sudden changes in the noise statistics, expect to
+% detect a few of these based in the minimum SNR, what is the time scale for an
+% SNR 6 event? these events are due to turrent movement, add flag to filter out
+% figure: DM - t plot
+
+% TODO:
+% decision tree
 % important tests:
 %   bandpass check
 %   telescope status
 %   negative DM statistics
-% considerations for automated follow-up/VOevents
-% considerations for releasing FRB event data as they are one-off events that
+%   previous in time events
+
+% TODO: DM search space: 0-10000, no negative DMs, could reveal RFI by comparing
+%  number of events detected in positive and negative DM search space
+
+% TODO: considerations for automated follow-up/VOevents
+
+% TODO: considerations for releasing FRB event data as they are one-off events that
 % require extra scrutiny
+
+% TODO:
+% future developments in FRB surveys require additional layers of processing.
+% large surveys will produce an abundance of false positives. it is cumbersome
+% to follow up events now. in the future it will be impossible. additional
+% layers should prioritize events by how interesting they are
+
+\bibliographystyle{mnras}
+\bibliography{../alfaburst.bib} 
 
 % Don't change these lines
 \bsp	% typesetting comment
