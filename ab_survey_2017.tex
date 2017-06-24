@@ -164,24 +164,60 @@ result in Section \ref{sec:discuss}.
 
 %%% OBSERVATION TIME BEGINS %%%
 
-From the beginning of July 2015 to the end of May 2017 \gls*{alfa} has been used
-for approximately 1400 hours of observing, with all seven beams functional. Due
-to pipeline development and hardware reliability ALFABURST was active and
-functional for on average 350 hours per beam.  The current system is setup to be
-reliably in use for all beams any time \gls*{alfa} is active and in the correct
-receiver turret position.
-
-An \gls*{alfa} beam is approximately 3.8' x 3.3' at \gls*{fwhm} across the band.
-Using this beam size and the average observation time per beam the
-telescope-independent \gls*{frb} survey coverage metric for ALFABURST as of June
-2017 is 6.7 square-degree hours.
-% TODO: how does this metric compare to other surveys? why is ALFABURST useful?
-% sensitivity
-% TODO: obs time 60% out of plane, 40% in plane
+From the beginning of July 2015 to the end of May 2017 \gls*{alfa} has been
+used for approximately 1400 hours of observing, with all seven beams
+functional. Due to pipeline development and hardware reliability ALFABURST was
+active and functional for on average 350 hours per beam.  The current system is
+setup to be reliably in use for all beams any time \gls*{alfa} is active and in
+the correct receiver turret position. Of the survey coverage, approximately
+65\% of the time has been in pointings out of the galactic plane ($|b| >
+5^{\circ}$). Since we are searching up to a \gls{dm} of 10000 the survey is
+still sensitive to \glspl{frb} at cosmological distances when observing in the
+galactic plane. But, scintillation effects can reduce the overall \gls{frb}
+event rates \citep{2015MNRAS.451.3278M}.
 
 %%% OBSERVATION TIME ENDS   %%%
 
 %%% SENSITIVITY BEGINS %%%
+\subsection{FRB Survey Metric}
+\label{sec:survey_metric}
+
+Using the survey observing time and the \gls{alfa} beam size we can derive the
+\gls{frb} survey metric of square-degree hours. An \gls*{alfa} beam is
+approximately 3.8' x 3.3' at \gls*{fwhm} across the band.  Using this beam size
+and the average observation time per beam the telescope-independent \gls*{frb}
+survey coverage metric for ALFABURST as of June 2017 is 6.7 square-degree hours.
+This is a fairly small survey metric becuase of the small beam size. But, we are
+only taking into account the beam size out to the \gls{fwhm}. We can take into
+acount the entire first sidelobes of the beams as Arecibo would be senstive
+enough to detect most previous \glspl{frb} in the first sidelobes. Using the
+parameterized \gls{alfa} beam model (Figure \ref{fig:alfa_beam})
+\citep{GALFAbeam} we can compute the \gls{frb} survey metric as a function of
+the minimum \gls{alfa} sensitvity (Figure \ref{fig:survey_metric}).
+
+% alfaburst-initial-survey/notebooks/ALFA_Beam_Response.ipynb
+\begin{figure}
+    \includegraphics[width=1.0\linewidth]{figures/ALFA_beam_1425MHz_dB.pdf}
+    \caption{Primary lobe and first sidelobe model of the AFLA receiver in
+    decibels. The sidelobes are sensitive many of the previously detected FRBs.
+    }
+    \label{fig:alfa_beam}
+\end{figure}
+
+% alfaburst-initial-survey/notebooks/ALFA_Beam_Response.ipynb
+\begin{figure}
+    \includegraphics[width=1.0\linewidth]{figures/survey_metric.pdf}
+    \caption{ALFABURST FRB survey metric for pulses of different widths,
+    accounting for the ALFA primary beam and first sidelobe sensitivity.
+    }
+    \label{fig:survey_metric}
+\end{figure}
+
+% TODO: relate beam gain to sensitivity
+% TODO: relate this figure to previously detected FRBs
+% TODO: how does this metric compare to other surveys?
+% TODO: how does this compare to expected rates?
+% TODO: why is ALFABURST useful? sensitivity
 
 Using Equation 6 of \cite{2015MNRAS.452.1254K}, a \gls*{sps} pipeline is
 sensitive to pulses with a minimum flux density (in Jy) of
