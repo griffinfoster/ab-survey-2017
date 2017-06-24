@@ -43,6 +43,8 @@
 \usepackage{amsmath}	% Advanced maths commands
 \usepackage{amssymb}	% Extra maths symbols
 \usepackage[xindy]{glossaries}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -114,12 +116,15 @@ ALFABURST Team
 % How was the study done?
 % What is the main take away message?
 % What can be said about these results, and how does this affect future work?
-The ALFABURST commensal FRB survey has been in operation since June 2015. In
-that time a number of false-positive events, which on initial inspect appear to
-be FRB-like, have been found to be of local origin. Here we report on one such event
-as an example of the difficult challenge of fully automating an FRB search. The
-one-off nature of most FRBs requires extra scrutiny in reporting an
-astrophysical FRB and triggering automated follow-ups with a telescope network.
+The one-off nature of most Fast Radio Bursts (FRBs) requires extra scrutiny in
+reporting an astrophysical FRB and triggering automated follow-ups with a
+telescope network.  The ALFABURST commensal FRB survey at Arecibo Observatory
+has been in operation since June 2015. In that time a number of false-positive
+events, which on initial inspect appear to be FRB-like, have been found to be of
+local origin. Here we report on one such event as an example of the difficult
+challenge of fully automating an FRB search. We discuss observational and
+post-processing techniques which are useful to further automate an FRB search
+survey.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -130,49 +135,87 @@ radio continuum: transients -- methods: observational
 
 %%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
 
-% TODO: notebook of dec 4 event, low SNR event, make filterbanks available
-
 \section{Introduction}
 \label{sec:intro}
 
-Over two years of the initial ALFABURST survey over 125k 8-second windows have
-been recorded in which our \gls{frb} search pipeline detected an event above the
-minimum \gls{snr} detection threshold. The vast majority of these events have been
-due to \gls{rfi}, some of the events are due bright single pulses of known
-pulsars. Sorting through these false positive events is the main focus of our
-post-processing methods. Most of the events are clearly \gls{rfi} which are
-classified with an automated classifier model. A small number of windows contain
-FRB-like events which only on further inspection of the data, the telescope
-operation status, and contextual information is it clear that these events are
-from local sources.
+In the two years of the initial ALFABURST survey\citep{2017ApJS..228...21C} over
+125k 8-second windows have been recorded in which our \gls{frb} search pipeline
+detected an event above the minimum \gls{snr} detection threshold. The vast
+majority of these events have been due to \gls{rfi}, some of the events are due
+to bright single pulses of known pulsars. Sorting through these false positive
+events is the main focus of our post-processing methods. Most of the events are
+clearly \gls{rfi} which are classified with an automated classifier model. A
+small number of windows contain FRB-like events which only on further inspection
+of the data, the telescope operation status, and contextual information is it
+clear that these events are from local sources.
 
-\section{Example: A dispersed pulse}
+We expect a number of false-positives to pass our post-processing detection
+tests, as we would like to severly limit the potential for type-II errors in our
+classifier by accepting a number of type-I errors. So far, all false-positives
+we have detected are explainable as relating to the telescope or \gls{rfi} by
+examing the observing situation after the fact. This creates a challenge of
+automating the triggering of follow-up signalling to other telescopes. Either
+there will be an excess of false-positive triggers but with a short delay
+between detection and triggering. Or, a non-automated, expert examination of the
+event is required to verify, creating a delay in any follow-up.
+
+In this letter we report on FRB-like signals detected with our ALFABURST system,
+and discuss how we have improved our post-processing pipleine and observing
+system to handle unexpected, but explainable signals. These improvements are
+valuable to incorporate into any \gls{frb} search survey.
+
+\section{An example of a FRB-like Signal detected with ALFABURST}
 \label{sec:D20161204}
 
 A narrow-in-time, broad-in-frequency, millisecond pulse was detected with the
-ALFABURST \citep{2017ApJS..228...21C} system at MJD 57726.563263913 / Unix time
-1480858266 (09:31:06 Arecibo local time) in Beam 0 (the central beam) of the
-\gls{alfa} receiver (Figure \ref{fig:beam0_dynamic_spec}). ALFABURST was
-processing 56 MHz of bandwidth between 1457 MHz and 1513 MHz. The \gls{snr} of
-this pulse is maximized (10.46) when the pulse is dedispersed with a \gls{dm} of
-293 and the 256 microsecond resolution is decimated by a factor of 16 to 4 ms
-time resolution. We believe this event to have been generated by a local source,
-mostly likely within the receiver dome.
-%
-% notebooks/event_figures.ipynb
-\begin{figure}
-    \includegraphics[width=1.0\linewidth]{figures/D20161204_buf23_Beam0.pdf}
-    \caption{Dynamic spectrum (top) and dedispersed time series (bottom) of an
-    FRB-like event that was detected in beam 0 of the ALFA receiver on December
-    4, 2016. The dynamic spectrum has been bandpass normalized. The
-    characteristic dip before and after the event is due to zero-DM removal
-    which is part of the ALFABURST RFI exciser. The strong, narrowband source at
-    1480 MHz around 0.1 s is due to a  local RFI source.
+ALFABURST system at MJD 57726.563263913 / Unix time 1480858266 (09:31:06 Arecibo
+local time) in Beam 0 (the central beam) of the \gls{alfa}
+receiver\footnote{http://www.naic.edu/alfa/} (Figure
+\ref{fig:beam0_dynamic_spec}). ALFABURST was processing 56 MHz of bandwidth
+between 1457 MHz and 1513 MHz. The \gls{snr} of this pulse is maximized (10.46)
+when the pulse is dedispersed with a \gls{dm} of 293 and the 256 microsecond
+resolution is decimated by a factor of 16 to 4 ms time resolution. The
+dedispered time series shows an approximately 20 ms \gls{fwhm} pulse. The dip
+before and after the pulse is due to the DM-zero removal (i.e. the moving
+average is subtracted) during pulse detection. This is a simple way to remove a
+drifting gain baseline at the cost of removing some of the overall pulse power,
+particually at low DM. The bright, narrow-band signal at approximately $t=0.1$
+seconds is locally generated \gls{rfi} which we will cover later in this
+section.
+
+\begin{figure*}
+    \centering
+    % notebooks/event_figures.ipynb
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering\captionsetup{width=.95\linewidth}
+        \includegraphics[width=1.0\textwidth]{figures/D20161204_buf23_Beam0.pdf}
+        \caption{Detected FRB-like event in beam 0 of ALFA. The characteristic dip
+        before and after the event is due to zero-DM removal which is part of the
+        ALFABURST RFI exciser. The strong, narrowband source at 1480 MHz around 0.1
+        s is due to a  local RFI source.  }
+        \label{fig:beam0_dynamic_spec}
+    \end{subfigure}
+    % notebooks/event_figures.ipynb
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering\captionsetup{width=.95\linewidth}
+        \includegraphics[width=1.0\textwidth]{figures/D20161204_buf4_Beam5.pdf}
+        \caption{Detected FRB-like event in beam 5 of ALFA. The event width
+        appears wider than the beam 0 event as the zero-DM dips are not as
+        prominent.
+        }
+        \label{fig:beam5_dynamic_spec}
+    \end{subfigure}
+    \caption{
+    Dynamic spectrum (top) and dedispersed time series (bottom) of an FRB-like
+    event that was detected simultaneously in beam 0 and 5 of the ALFA receiver
+    on December 4, 2016. The dynamic spectrum has been bandpass normalized.
     }
-    \label{fig:beam0_dynamic_spec}
-\end{figure}
-%
-The flux density of the event can be computed with the radiometer equation
+    \label{fig:dynamic_spec}
+\end{figure*}
+
+On initial inspection this event looks like a promising new astrophysical
+\gls{frb}. The flux density of the event can be computed with the radiometer
+equation
 %
 $$
 S = \textrm{SEFD} \frac{\textrm{SNR}}{\sqrt{D \; \Delta \tau \;
@@ -181,21 +224,92 @@ $$
 %
 using an \gls{sefd} of 3 Jy for the \gls{alfa} receiver. This results in a flux
 density of $S = 66$ mJy from Beam 0, which would be lower flux than any
-previously detected \gls{frb} \citep{2016PASA...33...45P}. Flux estimate is an
-upper limit, as we are assuming the source was at the centre of the beam.
+previously detected \gls{frb} \citep{2016PASA...33...45P}. This flux estimate is
+an lower limit, as we are assuming the source was at the centre of the beam. The
+width is on the high end for \glspl{frb} but still within the range of those
+previously reported.
 
-In isolation this pulse looks like a potential \gls{frb}. A bright \gls{frb} can
-show up in multiple \gls{alfa} beams, so we inspected all other events in the
-same time window as the Beam 0 event. An event was found in Beam 5 only. This
-pulse lines up exactly in time with the Beam 0 event but the \gls{frb} was
-maximized (15.99) with a DM=829 dedispersion. Upon further inspection and
-testing different DMs for dedispersion we found that this event appeared to
-narrow in width at lower DM. We see that there was \gls{rfi} clipping in this
-event which is known to introduce a bias. This could account for the increased
-DM to maximize the SNR. The Beam 0 and Beam 5 event are the same event. The
-higher \gls{snr} and \gls{rfi} clipping in Beam 5 indicates that the signal was
-stronger in that beam.
+We inspected all other events in the same time window as the Beam 0 event. An
+event was found in Beam 5 only (Figure \ref{fig:beam5_dynamic_spec}). This pulse
+lines up exactly in time with the Beam 0 event but the \gls{frb} was maximized
+(15.99) with a DM=829 dedispersion. Upon further inspection and testing
+different DMs for dedispersion we found that this event appeared to narrow in
+width at lower DM trials. We see that there was \gls{rfi} clipping in this event
+which is known to introduce a bias, resulting in a maximized \gls{snr} at a
+different DM trial. The beam 0 and beam 5 event are the same event.
 
+The beam 5 detection has a lower \gls{snr} than the beam 0 detection at DM trial
+293. This is still reasonable as the beam 0 sidelobes overlap with all the other
+beams, as does the beam 5 sidelobe overlap with the beam 0 primary beam. This
+would indicate that the sky source is somewhere between the beam 0 and beam 5
+pointing centres. And, the detection was from the edge of the primary lobe or in
+the sidelobe of each beam.
+
+The width of the dedispersed pulse in beam 5 appears wider, but this is likely
+due to the lower \gls{snr} of the event having a smaller effect on the
+spectrum normalization.
+
+One can look at the immediate period before and after the pulse to see that
+there are no similar events (Figure \ref{fig:dm_time}). The event appears to be
+isolated in time, with a fairly compact representation in DM-space. The event
+would be detected with significant \gls{snr} at higher \gls{dm} trials due to
+the wide width of the pulse, but peaks at a \gls{dm} trial of 293.
+
+% notebooks/event_figures.ipynb
+\begin{figure}
+    \includegraphics[width=1.0\linewidth]{figures/D20161204_dmtrials_buf23_Beam0.pdf}
+    \caption{DM vs. time plot of for a 1.5 second window centred on the December
+    4th event in beam 0. The SNR peaks at a DM of 293. There is a significant
+    detection at larger DM trials due to the width of the pulse.
+    }
+    \label{fig:dm_time}
+\end{figure}
+%
+
+The Arecibo telescope logging data is reported locally in SCRAM packets which
+provide pointing, frequency tuning, and receiver information at approximately
+one second resoltuion. From these logs the telescope was pointed at a fixed Dec
+(+15:11:28.34) and drifting in RA (event detected at RA=14:42:26.18), i.e. a
+fixed (alt,az) pointing during the event. No known pulsar or RRAT is within the
+beam at this pointing.
+
+We considered that the observing band could have been changed in that time.  We
+have setup the automated system to restart observations when the \gls{if}
+frequency is changed.  During the time of the event there was no change in the
+\gls{if} during that time.
+
+The SCRAM logs do provide the first indication that this event is due to a local
+source. Beyond the pointing and \gls{if}, the SCRAM logs report the position of
+the receiver turret and if \gls{alfa} is active. \gls{alfa} is at a position
+angle of approximately $26.64^{\circ}$ in the turret, the system reported the
+turret was at $206^{\circ}$. \gls{alfa} is not in, or even near the focus.  Our
+commensal observation script checks if \gls{alfa} is active before we run
+ALFABURST. This is a check on whether the analogue receiver chain is properly
+setup for \gls{alfa}, which almost always means that \gls{alfa} is in the focus.
+But, as we have found out, there are times when this is not true.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% telescope status
+% TODO: dec 4 event: turret in wrong position
+The SCRAM logs do not report the active project or observing schedule. During
+the time of the event it appears that no receiver was in use, otherwise
+\gls{alfa} would not have been active, and we see that \gls{alfa} was
+deactivated approximately 20 minutes after the event when a new observation
+began.  Looking at the observation schedule for the morning of December 4,
+project
+P3080\footnote{http://www.naic.edu/vscience/schedule/tpfiles/MichillitagP3080tp.pdf}
+was using \gls{alfa} to perform an \gls{frb} survey of the Virgo cluster until
+09:00 local time.  After 09:00 local time Project
+R3037\footnote{http://www.naic.edu/vscience/schedule/tpfiles/TaylortagR3037tp.pdf}
+was scheduled, this is an S-Band RADAR observation.
+
+%\gls{alfa} was not register as switched off until around
+%10:00, approximately 15 minutes after the event was detected. This indicated to
+%us that the events we are seeing all likely related to the setup of the S-Band
+%RADAR.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 But, the Beam 5 spectrogram introduces new issues with this event being an
 non-terrestrial \gls{frb}. Before and after the event there are events that look
 similar to the main event, these event SNRs are maximized by choosing a range of
@@ -231,35 +345,21 @@ dampened harmonic oscillation due to frequency locking with a \gls{pll} (Figure
     \caption{Dynamic spectrum when a local oscialltor in the receiver dome is
     being locked with a phased-locked loop circuit. This LO is not related to
     the receiver analogue mixing chain, but rather it is associated with RFI
-    monnitoring equipment.
+    monitoring equipment.
     }
     \label{fig:pll_spectrum}
 \end{figure}
 %
 
-We considered that the band could have been changed. We have setup the automated
-system to restart observations when the \gls{if} frequency is changed. The
-Arecibo telescope logging data is reported locally in SCRAM packets which
-provide pointing, frequency tuning, and receiver information at approximately
-one second resoltuion. During the time of the event there was no change in the
-\gls{if} during that time and the telescope was pointed at a fixed Dec
-(+15:11:28.34) and drifting in RA (event detected at RA=14:42:26.18), i.e. a
-fixed (alt,az) pointing.
-
-Looking at the observation schedule for the morning of December 4, project P3080
-was using \gls{alfa} to perform an \gls{frb} survey of the Virgo cluster until
-09:00 local time. From there Project R3037 was scheduled, this is an S-Band
-RADAR observation. \gls{alfa} was not register as switched off until around
-10:00, approximately 15 minutes after the event was detected. This indicated to
-us that the events we are seeing all likely related to the setup of the S-Band
-RADAR.
-
-% TODO: dec 4 event: turret in wrong position
-
 Looking at a longer time window before the event we found further indication of
 time and frequency-variable structure in the band before the event which looks
 related. Approximately 90 seconds before the event we see the band change in
 multiple beams, and the appearance of narrow-in-frequency \gls{rfi}.
+
+%But, after inspecting the ancillary data such as the telescope
+%status, detections in other beams, observing schedules, and previous in time
+%events, we believe this event to have been generated by a local source, mostly
+%likely within the receiver dome. 
 
 Currently, we are considering that the event is due to ALFA being covered to
 protect against the RADAR system while it was still the active rx. It could be
@@ -304,6 +404,10 @@ confirm that this is indeed not an FRB.
 % large surveys will produce an abundance of false positives. it is cumbersome
 % to follow up events now. in the future it will be impossible. additional
 % layers should prioritize events by how interesting they are
+
+% TODO: notebook of dec 4 event, low SNR event, make filterbanks available
+Jupyter notebooks and information on the filterbanks files are hosted on our
+public git repository\footnote{https://github.com/griffinfoster/ab-survey-2017}.
 
 \bibliographystyle{mnras}
 \bibliography{../alfaburst.bib} 
