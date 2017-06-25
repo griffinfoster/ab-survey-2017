@@ -150,10 +150,10 @@ of the data, the telescope operation status, and contextual information is it
 clear that these events are from local sources.
 
 We expect a number of false-positives to pass our post-processing detection
-tests, as we would like to severly limit the potential for type-II errors in our
+tests, as we would like to severely limit the potential for type-II errors in our
 classifier by accepting a number of type-I errors. So far, all false-positives
 we have detected are explainable as relating to the telescope or \gls{rfi} by
-examing the observing situation after the fact. This creates a challenge of
+examining the observing situation after the fact. This creates a challenge of
 automating the triggering of follow-up signalling to other telescopes. Either
 there will be an excess of false-positive triggers but with a short delay
 between detection and triggering. Or, a non-automated, expert examination of the
@@ -179,7 +179,7 @@ dedispered time series shows an approximately 20 ms \gls{fwhm} pulse. The dip
 before and after the pulse is due to the DM-zero removal (i.e. the moving
 average is subtracted) during pulse detection. This is a simple way to remove a
 drifting gain baseline at the cost of removing some of the overall pulse power,
-particually at low DM. The bright, narrow-band signal at approximately $t=0.1$
+particularly at low DM. The bright, narrow-band signal at approximately $t=0.1$
 seconds is locally generated \gls{rfi} which we will cover later in this
 section.
 
@@ -268,7 +268,7 @@ the wide width of the pulse, but peaks at a \gls{dm} trial of 293.
 
 The Arecibo telescope logging data is reported locally in SCRAM packets which
 provide pointing, frequency tuning, and receiver information at approximately
-one second resoltuion. From these logs the telescope was pointed at a fixed Dec
+one second resolution. From these logs the telescope was pointed at a fixed Dec
 (+15:11:28.34) and drifting in RA (event detected at RA=14:42:26.18), i.e. a
 fixed (alt,az) pointing during the event. No known pulsar or RRAT is within the
 beam at this pointing.
@@ -288,9 +288,6 @@ ALFABURST. This is a check on whether the analogue receiver chain is properly
 setup for \gls{alfa}, which almost always means that \gls{alfa} is in the focus.
 But, as we have found out, there are times when this is not true.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% telescope status
-% TODO: dec 4 event: turret in wrong position
 The SCRAM logs do not report the active project or observing schedule. During
 the time of the event it appears that no receiver was in use, otherwise
 \gls{alfa} would not have been active, and we see that \gls{alfa} was
@@ -301,27 +298,89 @@ P3080\footnote{http://www.naic.edu/vscience/schedule/tpfiles/MichillitagP3080tp.
 was using \gls{alfa} to perform an \gls{frb} survey of the Virgo cluster until
 09:00 local time.  After 09:00 local time Project
 R3037\footnote{http://www.naic.edu/vscience/schedule/tpfiles/TaylortagR3037tp.pdf}
-was scheduled, this is an S-Band RADAR observation.
+was scheduled, this is an S-Band RADAR observation. 
 
-%\gls{alfa} was not register as switched off until around
-%10:00, approximately 15 minutes after the event was detected. This indicated to
-%us that the events we are seeing all likely related to the setup of the S-Band
-%RADAR.
+Looking at the average bandpass of beam 0 and 5 during the time of the event, we
+see that the shape and system noise appear different to what is expected during
+typical observations (Figure \ref{fig:bandpass_response}).  The detection band
+of \gls{alfa} was chosen because it is the most sensitive region of the band,
+and relatively flat. But during the event there is a noticeable shape and slant
+to the bandpass which is different than the typical bandpass.  Beam 0 and 5
+bandpasses look related in elements of their bandpass shape, and the narrow-band
+features due to the short, bright \gls{rfi} events that occur during the
+recorded time window. The system noise appears to be higher during the event,
+which leads to the bandpasses appearing smoother than the typical bandpass.  In
+the detection pipeline the data is normalized, so all absolute scaling is
+removed in the process. This indicates that the \gls{sefd} is too low in our
+flux calibration. This increase is system noise is due to the change in turret
+position, and the \gls{alfa} feed picking up reflections from other equipment in
+the dome, and the dome as a warm source.
 
+% notebooks/event_figures.ipynb
+\begin{figure}
+    \includegraphics[width=1.0\linewidth]{figures/bandpass_response.pdf}
+    \caption{Average bandpass response during the December 4, 2016 event for beam
+    0 (green) and beam 5 (blue). A typical bandpass (red) is plotted for
+    reference. These bandpasses have been normalized in the detection pipeline.
+    }
+    \label{fig:bandpass_response}
+\end{figure}
+
+We then looked at previous recorded events close in time to the event.
+Approximately 80 seconds earlier another window was recorded which has large
+structures across the band (Figure \ref{fig:beam0_dynamic_spec_80s}). Though not
+as narrow in time as the event, they appear related to the same phenomenon.
+
+The DM - time plot (Figure \ref{fig:beam0_dmtrials_80s}) shows that much of the
+structure would be detected as dispersed pulses.  In particular, the structure
+around 4 seconds would be detected as a wide-in-time, highly dispersed pulse.
+And the structure immediately proceeding it would be detected as a negative
+dispersed pulse.  We do not detect these as pulses because we have limited our
+search space to narrow-in-time width pulses, and positive \glspl{dm}. Our choice
+of search space is reasonable for the type of events we wish to detect given
+limited computing resources. But, there are practical advantages to searching
+negative \glspl{dm} and wider-in-time pulse widths. We expect astrophysical
+pulses to have positive \glspl{dm}. But, system variation and \gls{rfi} can
+produce signals which result in positive and negative \gls{dm} detections.  A
+statistial measure can be made on any time window to differentiate times of
+significant, but low-level \gls{rfi} or system variation from actual
+astrophysical pulses. Testing out to larger pulse widths is computationally
+cheap as the time window is decimated, reducing the memory usage. Full sampling
+of larger pulse widths or negative \gls{dm} trials like the positive \gls{dm}
+trials is not necessary. Only a subset can be computed to provide a useful
+information on the stability of the system and \gls{rfi} environment.
+
+\begin{figure*}
+    \centering
+    % notebooks/event_figures.ipynb
+    \begin{subfigure}[t]{1.0\textwidth}
+        \centering\captionsetup{width=.95\linewidth}
+        \includegraphics[width=1.0\textwidth]{figures/D20161204_spect_buf21_Beam0.pdf}
+        \caption{Dynamic spectrum shows frequency evolution of the bandpass as a
+        function of time with structures similar to the D20161204 event.
+        }
+        \label{fig:beam0_dynamic_spec_80s}
+    \end{subfigure}
+    % notebooks/event_figures.ipynb
+    \begin{subfigure}[t]{1.0\textwidth}
+        \centering\captionsetup{width=.95\linewidth}
+        \includegraphics[width=1.0\textwidth]{figures/D20161204_dmtrials_buf21_Beam0.pdf}
+        \caption{DM trials from -1600 to 1600 show that there would be both
+        positive and negative pulse detections during this time window.
+        }
+        \label{fig:beam0_dmtrials_80s}
+    \end{subfigure}
+    \caption{Dynamic spectrum (top) and DM-time plot (bottom) of 6 seconds from
+    beam 0 approximately 80 seconds before the D20161204 event.
+    }
+    \label{fig:beamo0_80s}
+\end{figure*}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-But, the Beam 5 spectrogram introduces new issues with this event being an
-non-terrestrial \gls{frb}. Before and after the event there are events that look
-similar to the main event, these event SNRs are maximized by choosing a range of
-DMs.
-
-Further, there is a serious red flag when inspecting the bandpass during the
-event. The detection band of \gls{alfa} was chosen because it is the most
-sensitive region of the band, and relatively flat. But during the event there is
-a noticeable shape and slant to the bandpass which is not seen in a typical
-observation (Figure \ref{fig:bandpass_response}). The system noise appears
-higher, which could indicate an introduction of a stable, warm source to the
-system. There is also narrow-in-frequency, periodic RFI at 1468, 1480, 1496,
+% narrowband rfi
+% LO locking with PLL
+% X111 project
+The narrow-in-frequency, periodic RFI at 1468, 1480, 1496,
 1504 MHz not usually seen in this band. In the high time and frequency
 resolution view these short pulses in 12.5 MHz steps have a characteristic
 dampened harmonic oscillation due to frequency locking with a \gls{pll} (Figure
@@ -329,20 +388,8 @@ dampened harmonic oscillation due to frequency locking with a \gls{pll} (Figure
 %
 % notebooks/event_figures.ipynb
 \begin{figure}
-    \includegraphics[width=1.0\linewidth]{figures/bandpass_response.pdf}
-    \caption{Average bandpass response during the Decmber 4, 2016 event for beam
-    0 (green) and beam 5 (blue). A typical bandpass (red) is plotted for
-    reference. These bandpasses have been normalized in the detection pipeline.
-    }
-    \label{fig:bandpass_response}
-\end{figure}
-%
-
-%
-% notebooks/event_figures.ipynb
-\begin{figure}
     \includegraphics[width=1.0\linewidth]{figures/pll_spectrum.pdf}
-    \caption{Dynamic spectrum when a local oscialltor in the receiver dome is
+    \caption{Dynamic spectrum when a local oscillator in the receiver dome is
     being locked with a phased-locked loop circuit. This LO is not related to
     the receiver analogue mixing chain, but rather it is associated with RFI
     monitoring equipment.
@@ -350,11 +397,6 @@ dampened harmonic oscillation due to frequency locking with a \gls{pll} (Figure
     \label{fig:pll_spectrum}
 \end{figure}
 %
-
-Looking at a longer time window before the event we found further indication of
-time and frequency-variable structure in the band before the event which looks
-related. Approximately 90 seconds before the event we see the band change in
-multiple beams, and the appearance of narrow-in-frequency \gls{rfi}.
 
 %But, after inspecting the ancillary data such as the telescope
 %status, detections in other beams, observing schedules, and previous in time
@@ -375,7 +417,9 @@ detection look very reasonable. It is only with an extended study of the
 meta-data, earlier-in-time evolution of the band, and use of multiple beams to
 confirm that this is indeed not an FRB.
 
-\section{Verification Checks}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Verification Checks}
 
 % TODO:
 % low SNR events, due to sudden changes in the noise statistics, expect to
