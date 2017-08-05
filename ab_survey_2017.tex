@@ -403,7 +403,22 @@ bright pulse ($>32$ Jy) would be excised as \gls{rfi} in this test case. This an
 extreme case, as most \glspl{frb} are wider in width and at higher \glspl{dm}.
 Our pipeline would not excise all detected \glspl{frb} except the extreme
 FRB150807.  This also assumes the \gls{frb} is detected at boresight, we would
-still be sensitive to such bright pulses in the side lobes.
+still be sensitive to such bright pulses in the side lobes. Figure
+\ref{fig:fluence_rate} shows that ALFABURST sensitivity region based on pulse
+width and peak flux, assuming detection at boresight.
+
+% alfaburst-initial-survey/notebooks/Fluence_Rate.ipynb
+\begin{figure}
+    \includegraphics[width=1.0\linewidth]{figures/fluence_rate.pdf}
+    \caption{ALFABURST single pulse sensitivity (purple region) improves upon
+    the sensitivity of all past FRB surveys. Automated RFI excision excludes
+    narrow in width, bright FRBs such as FRB150807 (yellow region). Previously
+    detected FRBs from Parkes (black triangle), GBT (red circle), Arecibo (white
+    diamond), UTMOST (cyan pentagon), and ASKAP (green hexagon) are plotted for
+    reference.
+    }
+    \label{fig:fluence_rate}
+\end{figure}
 
 %%% EVENT RATES ENDS   %%%
 
@@ -413,7 +428,7 @@ still be sensitive to such bright pulses in the side lobes.
 \label{sec:fluence}
 
 % TODO: Keane and Petroff fluence rate, plot
-% flux density - width plane (see Keane & Petroff 2014 fig 2)
+% Keane & Petroff 2014 - fluence completeness
 % compare to flueane rate to previous surveys
 
 %%% FLUENCE RATE ENDS   %%%
