@@ -120,7 +120,7 @@ radio continuum: transients -- methods: observational
 \section{Introduction}
 \label{sec:intro}
 
-As of August 2017, 23 \glspl{frb} have been reported
+As of August 2017, 24 \glspl{frb} have been reported
 \citep{2016PASA...33...45P}. The majority of which have been detected with the
 Parkes Radio Telescope at L-Band frequencies. FRB121102 was detected in the
 PALFA survey using Arecibo Observatory, showing \glspl{frb} are not a phenomenon
@@ -129,7 +129,7 @@ only known \gls{frb} to repeat \citep{2016ApJ...833..177S}.  FRB110523 was
 detected with the Green Bank Radio Telescope at UHF frequencies, confirming
 \glspl{frb} occur at other radio frequencies \citep{2015Natur.528..523M}.
 Recently, a number of very bright \glspl{frb} have been detected with UTMOST
-\citep{2017MNRAS.468.3746C} and ASKAP \citep{2017ApJ...841L..12B}.
+\citep{2017MNRAS.468.3746C,atel10697} and ASKAP \citep{2017ApJ...841L..12B}.
 
 The population of \glspl{frb} varies significantly across the parameter space.
 The measured \glspl{dm} varies from 278 (FRB160410) to 1629 (FRB121002), with
@@ -366,7 +366,7 @@ independent \gls{sps} pipelines, useful for detection verification.
 \section{Expected FRB Event Rates}
 \label{sec:event_rates}
 
-As of this writing, only 23 \glspl{frb} have been reported. As these events vary
+As of this writing, only 24 \glspl{frb} have been reported. As these events vary
 significantly in \gls{dm}, pulse width, and flux density we assume a simple
 model to derive an expected event rate with our survey.  We use a model
 \citep{2013MNRAS.436L...5L} which assumes \gls{frb} sources are standard candles
@@ -548,21 +548,35 @@ bright pulse ($>32$ Jy) would be excised as \gls{rfi} in this test case. This an
 extreme case, as most \glspl{frb} are wider in width and at higher \glspl{dm}.
 Our pipeline would not excise all detected \glspl{frb} except the extreme
 FRB150807.  This also assumes the \gls{frb} is detected at boresight, we would
-still be sensitive to such bright pulses in the side lobes. Figure
-\ref{fig:fluence_rate} shows that ALFABURST sensitivity region based on pulse
-width and peak flux, assuming detection at boresight.
+still be sensitive to such bright pulses in the side lobes.
+
+Figure \ref{fig:sensitivity_range} shows that ALFABURST sensitivity region based
+on pulse width and peak flux, assuming detection at boresight. The ALFABURST
+sensitivity region (purple) indicates the survey would be able to detect the
+vast majority of previously reported \glspl{frb}. The upper flux limit cut-off
+due to \gls{rfi} mitigation would have clipped out some flux from the extremely
+bright, narrow, and low-DM FRB150807. Though, a portion of the flux would have
+remained, and the \gls{frb} would have still been detected as significant.
+Recent detections with UTMOST \citep{2017MNRAS.468.3746C,atel10697} indicate
+that the parameter space in pulse width should be extended.  FRB160317 has a
+measured pulse width of 21 ms. Currently the pipeline decimates in time out to
+16 ms. The pipeline still sensitive to wider pulses, but at a loss in \gls{snr}
+as indicated in the slight slope on the right side of the purple region of
+Figure \ref{fig:sensitivity_range}, but we would not have detected FRB160317. It
+is a minor change to our pipeline to increase the maximum pulse-width search.
 
 % alfaburst-initial-survey/notebooks/Fluence_Rate.ipynb
 \begin{figure}
-    \includegraphics[width=1.0\linewidth]{figures/fluence_rate.pdf}
+    \includegraphics[width=1.0\linewidth]{figures/sensitivity_range.pdf}
     \caption{ALFABURST single pulse sensitivity (purple region) improves upon
     the sensitivity of all past FRB surveys. Automated RFI excision excludes
     narrow in width, low DM, bright FRBs such as FRB150807 (yellow region).
     Previously detected FRBs from Parkes (black triangle), GBT (red circle),
-    Arecibo (white diamond), UTMOST (cyan pentagon), and ASKAP (green hexagon)
-    are plotted for reference.
+    Arecibo (white diamond), UTMOST (teal pentagon), and ASKAP (yellow-green
+    hexagon) are plotted for reference. Line of constant fluence (solid) are
+    plotted for reference.
     }
-    \label{fig:fluence_rate}
+    \label{fig:sensitivity_range}
 \end{figure}
 
 %%% EVENT RATES ENDS   %%%
@@ -575,6 +589,8 @@ width and peak flux, assuming detection at boresight.
 % TODO: Keane and Petroff fluence rate, plot
 % Keane & Petroff 2014 - fluence completeness
 % compare to fluence rate to previous surveys
+
+
 
 %%% FLUENCE RATE ENDS   %%%
 
@@ -633,7 +649,7 @@ will be duplicated for use on the \gls*{gbt} to be commensally run with L-band
 observations. 
 
 Jupyter notebooks are hosted on our public git
-repository\footnote{https://github.com/griffinfoster/ab-survey-2017}.
+repository\footnote{https://github.com/griffinfoster/alfaburst-initial-survey}.
 
 \bibliographystyle{mnras}
 \bibliography{alfaburst.bib} 
