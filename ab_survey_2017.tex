@@ -65,6 +65,7 @@
 \newacronym{frb}{FRB}{Fast Radio Burst}
 \newacronym{fwhm}{FWHM}{Full-Width at Half-Maximum}
 \newacronym{gbt}{GBT}{Greenbank Telescope}
+\newacronym{htru}{HTRU}{High Time Resolution Universe}
 \newacronym{igm}{IGM}{Intergalactic Medium}
 \newacronym{ism}{ISM}{Interstellar Medium}
 \newacronym{nip}{NIP}{Non-image Processing}
@@ -684,38 +685,61 @@ within this completeness sample except for those noted in Section
 \section{Discussion}
 \label{sec:discuss}
 
-% ARIS TODO:
+Multiple factors could be contributing to our non-detection with the ALFABURST
+survey. We derived an expected event rate based on the telescope sensitivity,
+observing time, and a standard candle model \citep{2013MNRAS.436L...5L}. This is
+a simple model based on the empirical event rates from detections in the
+\gls{htru} survey \citep{2013Sci...341...53T}.  The repeating nature of
+FRB121102 indicates that either there are necessarily at least two classes of
+\gls{frb} progenitors, or this standard candle model does not accurately model
+event rates. The detection of bright, high-DM \glspl{frb} with ASKAP
+\citep{2017ApJ...841L..12B} and UTMOST \citep{2017MNRAS.468.3746C,atel10697}
+might indicate that \glspl{frb} are not standard candles.
 
-% comment on non-detection in regards to the Cordes et al plasma lens
+The limited processing bandwidth of ALFABURST may be a cause of the survey
+non-detection. Multiple detected \glspl{frb} show apparent scintillation and
+steep spectral indices. It is not possible to differentiate between an apparent
+spectral index induced by the beam or an absolute spectral index from the
+source. Though, the localization and repeated detections of FRB121102 show there
+is significant spectral variation from the source or due to the intervening
+medium.  If an \gls{frb} did occur in the field of view of the telescope while
+ALFABURST was in operation we could have been unlucky and scintillation caused
+the pulse in the band to go below the detection threshold. An increase to the
+full \gls{alfa} band would result in a $\sqrt{6}$ increase in sensitivity,
+assuming no scintillation.
 
-% Macquart and Johnston: discount scintillation effects, they make predictions that
-% a number of FRBs should be detected with Arecibo. Our non-detection refutes this.
+The sensitivity of Arecibo allows the ALFABURST survey to probe a search volume
+out to higher red-shifts than other surveys. In the standard candle model a flat
+luminosity function is assumed. If there is a peak similar to the star
+formation rate around $z=2$ \citep{2014ARA&A..52..415M} than the expected event
+rate should be lower. Similarly, if \glspl{frb} are intrinsically steep spectra
+then distant \glspl{frb} will have a decreased observed flux at L-band, possibly
+below the search sensitivity threshold. \cite{2017arXiv170507553L} report
+FRB121102 to be band limited during simultaneous observation campaigns using
+multiple telescopes to cover a broad range of the radio band. \cite{atel10675}
+observed 15 pulses from FRB121102 across the 4-8 GHz band and reported spectral
+variation over a brief period of time.
 
-% Possible reasons for non-detection: star formation rate, scintillation, steep spectrum
-%   * Star formation rate:
-%       * implied FRB Luminosity function: cosmological star formation rate, peaks
-%       around z=2, Madau & Dickinson 2014
+% Possible reasons for non-detection:
+%   * standard candle model:
 %   * scintillation:
 %       * limited bandwidth, repeater band varies
 %       * relation to Macquart and Johnston paper: rate off/on the plane is
 %       different due to scintillation regimes
+%       * Macquart and Johnston: discount scintillation effects, they make predictions that
+%       a number of FRBs should be detected with Arecibo. Our non-detection refutes this.
 %       * repeater and low freq frb searches: spectra are not pulsar like. may be
 %       due to strong scintillation
+%   * plasma lens model (cordes et al.):
+%       * narrow bandwidth
+%   * Star formation rate:
+%       * implied FRB Luminosity function: cosmological star formation rate, peaks
+%       around z=2, Madau & Dickinson 2014
 %   * steep spectrum/band limited:
 %       * Law et al see no detections at low and 5 GHz+ freqs -> band limited,
 %       steep spectrum ; we are probing a large z, perhaps the band is shifted
 %       out of L-band
-
-The limited processing bandwidth of ALFABURST may be a cause of the survey
-non-detection. Multiple detected \glspl{frb} show apparent scintillation and
-step spectral indicies. It is not possible to differentiate between an
-apparent spectral index induced by the beam or an absolute spectral index from
-the source. If an \gls{frb} did occur in the field of view of the telescope
-while ALFABURST was in operation we could have been unlucky and scintillation
-caused the pulse in the band to go below the detection threshold. An increase to
-the full \gls{alfa} band would result in a $\sqrt{6}$ increase in sensitivity,
-assuming no scintillation. This would increase our event rates to $\sim 5$
-\glspl{frb} for the current amount of observation time.
+%       * FRB121102 shows dramatic frequency structure over wide bands
 
 \section{Future Work}
 \label{sec:future_work}
