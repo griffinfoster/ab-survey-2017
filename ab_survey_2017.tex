@@ -422,7 +422,7 @@ and pointing information.
 
 %%% JUNE 18, 2017 BEGINS %%%
 
-\subsection{The event of 2017, June 18}
+\section{The event of 2017, June 18}
 \label{sec:18062017}
 
 Though we report no detection of FRBs in the first two years of
@@ -518,7 +518,7 @@ perform a single pulse and harmonic search.
 
 %%% EVENT RATES BEGINS %%%
 
-\section{Expected FRB Event Rates}
+\section{Expected FRB Events}
 \label{sec:event_rates}
 
 The currently known 24 FRBs vary significantly in \gls{dm}, pulse
@@ -535,9 +535,8 @@ sidelobe. In practice we do this by splitting the beam and first
 sidelobe into shells of progressively lower gain but larger sky
 coverage, and integrate to obtain the totals.
 
-(THESE SUBSECTIONS NEED TO BE MERGED, we should not be making a distinction)
-\subsection{FWHM Beam}
-\label{sec:fwhm_beam_rates}
+%\subsection{FWHM Beam}
+%\label{sec:fwhm_beam_rates}
 
 An \gls{alfa} beam is approximately 3.8' x 3.3' at \gls{fwhm} across
 the band.  The ALFA beam size is known to be relatively fixed in size
@@ -560,25 +559,29 @@ S_{min} = \textrm{SEFD} \frac{\textrm{SNR}_{min}}{\sqrt{D \; \Delta \tau \;
 \end{equation}
 %
 which is a function of the telescope \gls{sefd}, the minimum \gls{snr}
-detection level $\textrm{SNR}_{min}$ and the decimation rate $D$ compared to the
-native instrumental time resolution $\tau$, this comes from the search pipeline
-which averages together spectra to search for scattered pulses. ALFABURST has a
-native resolution of $\Delta \tau = 256 \; \mu s$, effective bandwidth $\Delta
-\nu = 56 \textrm{MHz}$, and $\textrm{SNR}_{min} = 10$. The \gls{sefd} of the
-\gls{alfa} receiver is approximately 3 Jy across the band for all beams.
+detection level $\textrm{SNR}_{min}$ and the decimation rate $D$
+compared to the native instrumental time resolution $\tau$, this comes
+from the search pipeline which averages together spectra to search for
+scattered pulses. ALFABURST has a native resolution of $\Delta \tau =
+256 \; \mu s$, effective bandwidth $\Delta \nu = 56 \textrm{MHz}$, and
+$\textrm{SNR}_{min} = 10$. The FWHM \gls{sefd} of the \gls{alfa}
+receiver is approximately 3 Jy across the band for all beams.
 
-The \gls{sps} pipeline is configured to search for pulses from 256 $\mu$s to 16
-ms. Assuming a matched filter this results in a sensitivity to pulses with a
-minimum flux of $S_{256 \mu\textrm{s}} = 250$ mJy to $S_{16 \; \textrm{ms}} =
-31$ mJy. Figure \ref{fig:fwhm_sefd_z} shows the peak flux density of using the
-standard candle \gls{frb} model as a function of source redshift for different
-model spectral indices. The dashed lines of constant flux is the sensitivity of
-the ALFABURST search pipeline to pulses of different widths. Assuming a positive
-spectral index model ($\alpha=1.4$) results in a sensitivity out to the maximum
-redshift/\gls{dm} for pulses with widths of at least 1 ms. A flat spectral
-index model results in sensitivity from $z \sim 1.5$ out to $z \sim 5$ depending
-of pulse width. A negative spectral index model ($\alpha \sim -1.4$) limits the
-survey to $z < 3$ for all pulse widths.
+The \gls{sps} pipeline is configured to search for pulses from
+256~$\mu$s to 16 ms. Considering only the main beam lobe, a perfect
+matched filter would result in a sensitivity to pulses with a minimum
+flux of $S_{256 \mu\textrm{s}} = 250$ mJy to $S_{16 \; \textrm{ms}} =
+31$ mJy. Figure \ref{fig:fwhm_sefd_z} shows the peak flux density of
+using the standard candle \gls{frb} model as a function of source
+redshift for different model spectral indices. The dashed lines of
+constant flux show the sensitivity of the ALFABURST search pipeline to
+pulses of different widths. Assuming a positive spectral index model
+($\alpha=1.4$) results in a sensitivity out to the maximum
+redshift/\gls{dm} for pulses with widths of at least 1 ms. A flat
+spectral index model results in sensitivity from $z \sim 1.5$
+(256~$\mu$s) out to $z \sim 5$ (16~ms) depending on pulse width. A
+negative spectral index model ($\alpha \sim -1.4$) limits the survey
+to $z < 3$ for all pulse widths.
 
 % alfaburst-initial-survey/notebooks/ALFABURST_Derived_FRB_Rates.ipynb
 \begin{figure}
@@ -590,28 +593,31 @@ survey to $z < 3$ for all pulse widths.
     \label{fig:fwhm_sefd_z}
 \end{figure}
 
-We will assume a simple model of $\alpha=0$ as we have limited information about
-the source spectral index. And, we will use a pulse width of 4 ms as that is an
-approximate median pulse width of reported \glspl{frb}. This results in a
-maximum redshift of $z=3.4$ (a co-moving distance of 6.8 Gpc) and a survey
-volume of $6 \times 10^5$ Mpc$^3$ when using all 7 \gls{alfa} beams. The
-number of galaxies sampled in this volume is $6 \times 10^3$ assuming a constant
-galaxy number density of $10^{-2}$ per Mpc$^3$.  The volumetric event rate from
-\cite{2013Sci...341...53T} is stated to be $R_{\textrm{FRB}} = 10^{-3}$
-\glspl{frb} per galaxy per year. With these assumptions, we should expect to
-detect $\sim 1$ \glspl{frb} based on the current observation time.
+If we assume a simple model of $\alpha=0$ as we have limited
+information about the source spectral index, and a pulse width of 4 ms
+as that is an approximate median pulse width of reported \glspl{frb},
+then this results in a maximum redshift of $z=3.4$ (a co-moving
+distance of 6.8 Gpc) and a survey volume of $6 \times 10^5$ Mpc$^3$
+when using all 7 \gls{alfa} beams. The number of galaxies sampled in
+this volume is $6 \times 10^3$ assuming a constant galaxy number
+density of $10^{-2}$ per Mpc$^3$.  The volumetric event rate from
+\cite{2013Sci...341...53T} is stated to be $R_{\textrm{FRB}} =
+10^{-3}$ \glspl{frb} per galaxy per year. With these assumptions, we
+should expect to detect $\sim 1$ \glspl{frb} based on the current
+observation time. We note once again that this calculation is only
+based on the sensitivity and size of the main beam lobe.
 
-\subsection{Primary Beam and First Side Lobes}
-\label{sec:full_beam_rates}
+%\subsection{Primary Beam and First Side Lobes}
+%\label{sec:full_beam_rates}
 
-In Section \ref{sec:fwhm_beam_rates} we are only take into account the beam
-size out to the \gls{fwhm}. We can take into account the entire first side lobes
-of the beams as Arecibo would be sensitive to detect most previous
-\glspl{frb} in the first side lobes. Using the parameterized \gls{alfa} beam
-model (Figure \ref{fig:alfa_beam}) \citep{GALFAbeam} we can compute the
-\gls{frb} survey metric and expected rates as a function of beam sensitivity.
-The first side lobes peak at around $-10$ dB and provide a significant increase
-in sky coverage compared to just the primary lobes.
+As mentioned above, it is worth also taking into account the entire
+first side lobes of the beams as Arecibo would be sensitive to detect
+most previous \glspl{frb} in these. Using the parameterized \gls{alfa}
+beam model (Figure \ref{fig:alfa_beam}) \citep{GALFAbeam} we can
+compute the \gls{frb} survey metric and expected rates as a function
+of beam sensitivity.  The first side lobes peak at around $-10$ dB and
+provide a significant increase in sky coverage compared to just the
+primary lobes.
 
 % alfaburst-initial-survey/notebooks/ALFABURST_Derived_FRB_Rates.ipynb
 \begin{figure}
@@ -622,14 +628,16 @@ in sky coverage compared to just the primary lobes.
     \label{fig:alfa_beam}
 \end{figure}
 
-The total survey metric can be computed as a function of the beam sensitivity by
-integrating over the beam (Figure \ref{fig:survey_metric_sense}). The flux
-threshold has been set by assigning the $-3$ dB point the same sensitivity as the
-\gls{fwhm} sensitivity. The segment which increased the survey metric to
-approximately $30 \; \textrm{deg}^2$ hours is due to including more of the
-primary beam beyond the \gls{fwhm} point. The steep increase in the survey
-metric is from including the first side lobes. The long tail is from the residual
-sensitivity by integrating over the remaining beam.
+The total survey metric can be computed as a function of the beam
+sensitivity by integrating over the beam (Figure
+\ref{fig:survey_metric_sense}). We convert the beam model to units of
+Jy by assuming that the $-3$ dB point corresponds to the \gls{fwhm}
+SEFD of 3~Jy. The survey metric increases to approximately $30 \;
+\textrm{deg}^2$ hours by including more of the primary beam beyond the
+\gls{fwhm} point. The steep further increase in the survey metric seen
+in Figure \ref{fig:survey_metric_sense} arises from including the
+first side lobes. The long tail comes from the residual sensitivity by
+integrating over the remaining beam.
 
 % alfaburst-initial-survey/notebooks/ALFABURST_Derived_FRB_Rates.ipynb
 \begin{figure}
@@ -642,12 +650,17 @@ sensitivity by integrating over the remaining beam.
     \label{fig:survey_metric_sense}
 \end{figure}
 
-The survey volume is significantly increased by including a large portion of the
-beam. Plotting the survey metric as a function of maximum redshift (Figure
-\ref{fig:full_sefd_z}) shows the full beam model increases the survey metric as
-a function of redshift. The total survey volume is computed by integrating over
-redshift.  Including additional ALFA side lobes would have minimal increase in
-the survey volume, as those side lobe are only sensitive to the local universe.
+The survey volume is significantly increased by including a large
+portion of the beam. It is not possible to put together a figure
+similar to Figure \ref{fig:fwhm_sefd_z} when considering the full
+beam. It is however possible, under the assumption of flat intrinsic
+FRB spectra, to compute the maximum redshift as a function of beam
+size and sensitivity. Plotting the survey metric as a function of
+maximum redshift (Figure \ref{fig:full_sefd_z}) shows how the full
+beam model increases the survey metric as a function of redshift. The
+total survey volume is computed by integrating over redshift.
+Including additional ALFA side lobes results in minimal increase in
+the survey volume.
 
 % alfaburst-initial-survey/notebooks/ALFABURST_Derived_FRB_Rates.ipynb
 \begin{figure}
@@ -661,25 +674,44 @@ the survey volume, as those side lobe are only sensitive to the local universe.
     \label{fig:full_sefd_z}
 \end{figure}
 
-Accounting for this extra survey coverage results in an integrated survey volume
-of $5.8 \times 10^6$ Mpc$^3$. The expected number of \glspl{frb} in the survey is
-$\sim 3$ when using the same galaxy number density and $R_{\textrm{FRB}}$ as
-Section \ref{sec:fwhm_beam_rates}. Though this event rate is more complex to
-model, it provides a more accurate assessment of the expected detection rates
-based on the apparent flux of previously reported \glspl{frb},
+The integrated survey volume out to the first side lobe is $5.8 \times
+10^6$ Mpc$^3$. The expected number of \glspl{frb} in the survey is
+$\sim 3$ when using the galaxy number density and $R_{\textrm{FRB}}$
+stated above. Though this event rate is more complex to model, it
+provides a more accurate assessment of the expected detection rates
+based on the apparent flux of previously reported \glspl{frb}. We note
+that the volume we are sampling is biased towards small distances, due
+to the large sky coverage of the low sensitivity outer parts of the
+beam.
+
+We should note, that 
+
+
+
+
+In the analysis above, we have not provided error estimates to our
+total expected events. We are assuming standard candle FRBs and flat
+spectra, assumptions which are impossible to attribute error margins
+to. The significance of our result is difficult to quantify, beyond
+stating that, under reasonable assumptions and previous detections, we
+would have expected an FRB in our survey. However, the non-detection
+cannot be assumed to imply significant discrepancy with our current
+understanding of this population.
 
 \subsection{Sensitivity Upper Limit}
 \label{sec:upper_limit}
 
-The sensitivity limit of ALFABURST is determined by the telescope sensitivity and
-receiver beam model. But, there is also a sensitivity upper limit due to the
-real-time parameterized \gls{rfi} exciser. The choice of these parameters sets
-an upper limit on the flux of a pulse before it a portion of the flux is clipped
-and replaced. Individual frequency channels in a spectra are replaced when they
-exceed a threshold $T_{\textrm{chan}}$ after the spectra is normalized ($\mu=0$,
-$\sigma=1$). And, entire spectra are clipped when the summed spectra exceeds a
-threshold $T_{\textrm{spectra}}$. For standard ALFABURST operation
-$T_{\textrm{chan}} = 5$ and $T_{\textrm{spectra}} = 10$.
+The sensitivity limit of ALFABURST is determined by the telescope
+sensitivity and receiver beam model. However, there is also a
+sensitivity upper limit due to the real-time parameterized \gls{rfi}
+exciser. The choice of these parameters sets an upper limit on the
+flux of a pulse before it a portion of the flux is clipped and
+replaced. Individual frequency channels in a spectra are replaced when
+they exceed a threshold $T_{\textrm{chan}}$ after the spectra is
+normalized ($\mu=0$, $\sigma=1$). And, entire spectra are clipped when
+the summed spectra exceeds a threshold $T_{\textrm{spectra}}$. For
+standard ALFABURST operation $T_{\textrm{chan}} = 5$ and
+$T_{\textrm{spectra}} = 10$.
 
 For very bright, small \gls{dm} pulses the \gls{rfi} exciser will replace
 channels or spectra, reducing the overall flux or potentially removing the
