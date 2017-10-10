@@ -82,14 +82,10 @@
 \title[The ALFABURST Commensal FRB Survey]{ALFABURST: Results from a commensal search for
 fast radio bursts with the ALFA receiver}
 
-% Griffin Foster
-% Aris Karastergiou
-% Duncan Lorimer
-% Mayuresh Surnis
 \author[G. Foster et al.]{
 Griffin Foster,$^{1,2}$\thanks{E-mail: griffin.foster@physics.ox.ac.uk}
-Dan Werthimer,$^{1}$
-Jayanth Chennamangalam,
+Dan Werthimer,$^{2}$
+Jayanth Chennamangalam$^{1}$,
 Kaustubh Rajwade,$^{3}$
 \\
 % List of institutions
@@ -137,16 +133,24 @@ radio continuum: transients -- methods: observational
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% TODO:
+% probing IGM with FRBs (https://arxiv.org/pdf/1308.4459.pdf)
+% zero DM (https://arxiv.org/pdf/0901.3993.pdf)
+
 \section{Introduction}
 \label{sec:intro}
 
-\glspl{frb} are short-duration, broad-band, dispersed pulses that are
-detected at radio frequencies. They are mostly classified by virtue of
-their dispersion being far in excess of the expected Galactic
-contribution. In the field of \glspl{frb}, as with radio pulsars, the dispersion measure is defined by the expression
+\glspl{frb} are short-duration, broad-band, dispersed pulses that are detected
+at radio frequencies. They are mostly classified by virtue of their dispersion
+being far in excess of the expected Galactic contribution. In the field of
+\glspl{frb}, as with radio pulsars, the dispersion measure is defined by the
+expression
+%
 \begin{equation}
-\Delta~t = constants \times DM \times\left(\frac{1}{\nu_1^2} - \frac{1}{\nu_2^2}\right).
+\Delta~t \simeq 4.15 \times 10^6 \textrm{ms} \times DM
+\times\left(\frac{1}{\nu_1^2} - \frac{1}{\nu_2^2}\right).
 \end{equation}
+%
 Interpreting the delay to be caused by the free electrons in the
 interstellar medium, the $DM$ then corresponds to the line integral of
 the electron column density along the line of sight to the source.
@@ -156,7 +160,7 @@ however the possibility that they originate at extragalactic, or even
 cosmological distances, makes them worthy of attention. They appear as
 bright sources at telescopes on Earth, which implies very high
 luminosities given the distance. As short duration bursts, probably
-eminating from point-like sources, they offer the unique opportunities
+emanating from point-like sources, they offer the unique opportunities
 to probe the inter-galactic medium (IGM), as pulsars do for the Galactic
 ISM.
 
@@ -221,7 +225,7 @@ provide a large sky coverage with a significant enough sensitivity to
 detect bright \glspl{frb}. Interferometric arrays such as CHIME and
 MeerKAT while provide both sensitivity and sky coverage. One important
 question relating to the nature of the \gls{frb} population is what
-are the statitistics of source numbers versus source flux density, and
+are the statistics of source numbers versus source flux density, and
 whether or not they follow a logN-logS curve that corresponds to
 cosmologically distributed standard candles. To answer this question,
 it is particularly interesting to sample both extreme ends of the flux
@@ -230,15 +234,6 @@ telescopes in long duration and large sky-coverage surveys, as well as
 the weakest \glspl{frb} sampled through high-sensitivity observations
 with large telescopes, necessarily sacrificing survey time and sky
 coverage. ALFABURST provides the latter.
-
-%Only one \gls{frb} has been discovered with Arecibo, FRB121102
-%\citep{2014ApJ...790..101S}. This is the only known \gls{frb} to repeat during
-%follow up observations \citep{2016Natur.531..202S}. The repeating nature of this
-%\gls{frb} has allowed for follow-up observations to localize the source with the
-%VLA \citep{2017Natur.541...58C} and the EVN \citep{2017ApJ...834L...8M}.
-%Multi-wavelength observations have been carried out which indicate the source is
-%broad-band at radio frequencies \citep{2017arXiv170507553L,atel10675}, but has
-%significant flux variation across the band which varies between bursts. 
 
 \section{Survey (July 2015 -- August 2017)}
 \label{sec:overview}
@@ -278,7 +273,7 @@ explanations for our non-detection result in Section
 
 PALFA survey scheduling includes regularly observing known pulsars to
 verify timing analysis, this provides a consistent verification of our
-\gls{sps} to detect pulses. As the PALFA survey is targetted at the
+\gls{sps} to detect pulses. As the PALFA survey is targeted at the
 Galactic plane a number of high \gls{dm} pulsars were observed, single
 pulses from B1859+03 (\gls{dm}: 402), B1900+01 (\gls{dm}: 245) (Figure
 \ref{fig:B1900}), B2002+32 (\gls{dm}: 234), B1933+16 (\gls{dm}: 158),
@@ -363,6 +358,9 @@ observations.
 \subsection{Event Filter and Prioritizer}
 \label{sec:event_classify}
 
+% TODO:
+% add figure
+
 The significant DM trial range, variety of \gls{rfi} events, and
 commensal nature of the survey, leads to a large number of false
 detections. As mentioned above, approximately 200k unique 8.4 second
@@ -378,7 +376,6 @@ A sample of the datasets were labelled into 8 categories of RFI,
 systematic effects, and astrophysical source (pulsars). Classification
 using these labels has not been constant throughout the survey due to
 software improvement, and changes in telescope observing strategy.
-
 
 Pulses from known pulsars were used as a proxy category for the FRB
 class. The number of astrophysical pulse detections was low compared
@@ -406,6 +403,8 @@ prioritizing, and examination process was iterated on multiple times
 to improve the classifier. We continue to iterate on this model and
 will use it for future prioritization of examining events.
 
+% TODO: DM range filter numbers
+
 We have used our classifier model as a data exploration tool to add
 and refine procedural filters to the data. We have not used the
 classifier model directly in our pipeline as the black-box nature of
@@ -414,7 +413,7 @@ examination process a number of simple filters were developed to cut
 down on the number of false-positive detections without relying on the
 classifier model. For example, datasets in which the maximum DM of
 events was less than 50, and those which contain clusters that have a
-very broad range of detections (number!) in trial DMs are cut.
+very broad range of detections in trial DMs are cut.
 Applying the various filters we reduced the number of datasets to
 approximately 30k. The windows were sorted by SNR, and the top SNR
 events were examined first.  During this process all datasets were
@@ -446,12 +445,14 @@ other beams at the time.
     \label{fig:D20170618_spectrum}
 \end{figure}
 
+% TODO: dispersion fitting
+
 The shape of the pulse is made up of two clear components, with the
 secondary pulse arriving approximately 20 ms after the primary pulse,
 as seen in the dynamic spectrum (Figure
 \ref{fig:D20170618_spectrum}). In DM-time space the event is compact,
 consistent with a $\nu^{-2}$ dispersion relation (Figure
-\ref{fig:D20170618_dmspace}) (SHALL WE FIT THIS?).
+\ref{fig:D20170618_dmspace}).
 
 % watermark:/home/griffin/data/alfa/Beam5_fb_D20170618T005616.buffer2-paper.ipynb
 \begin{figure}
@@ -479,6 +480,8 @@ was detected. Based on the time stamp of the pulse and the pointing
 data the pulse occurred when beam 5 of ALFA was pointing at RA: 18~h
 45~$\pm 5$~m, Dec: +00 d 38'~$\pm 2$ (galactic coordinates $l: 32.7812, ~b:
 +1.6850$).
+
+% TODO: pointing error refinement
 
 This beam 5 pointing is close to the Galactic plane in the first quadrant. The
 DM distance estimated from the NE2001 model \citep{2002astro.ph..7156C} is
