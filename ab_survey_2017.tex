@@ -79,16 +79,17 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title[The ALFABURST Commensal FRB Survey]{ALFABURST: Results from a commensal search for
-fast radio bursts with the ALFA receiver}
+\title[The ALFABURST Commensal FRB Survey]{ALFABURST: A commensal search for
+Fast Radio Bursts with Arecibo}
 
 \author[G. Foster et al.]{Griffin Foster$^{1,2}$\thanks{E-mail: griffin.foster@physics.ox.ac.uk},
 Aris Karastergiou$^{1,3,4}$,
 Dan Werthimer$^{2}$,
 \and Jayanth Chennamangalam$^{1}$,
 Kaustubh Rajwade$^{5}$,
-Golnoosh Golpayegani$^{6,7}$,
-\and Mayuresh Surnis$^{6,7}$
+Golnoosh Golpayegani$^{6,7}$,\\
+Duncan Lorimer$^{6,7}$
+and Mayuresh Surnis$^{6,7}$
 \\
 % List of institutions
 $^{1}$University of Oxford, Sub-Department of Astrophysics, Denys Wilkinson Building, Keble Road, Oxford, OX1 3RH, United Kingdom\\
@@ -123,12 +124,12 @@ The ALFABURST fast radio burst (FRB) survey has been observing commensally with
 other projects using the Arecibo L-band Feed Array (ALFA) receiver at the
 Arecibo Observatory since July 2015. We report on the non-detection of any FRBs
 from that time until August 2017 for a total observing time of 518 hours.
-With current FRB rate models, we expected to see multiple FRBs based on the
+With current FRB rate models, we expected to see multiple **how many??** FRBs based on the
 total observing time, telescope sensitivity and beam size. We discuss the
 implications of this non-detection of FRBs in the context of recent detections
-with other telescopes and the limitation of our search pipeline. We also report
-the detection of an interesting Galactic radio transient with a DM of 281 pc
-cm$^{-3}$, which was detected while the telescope was slewing between fields.
+with other telescopes and the limitation of our search pipeline. **How many pulsars were
+detected??** We also report
+the discovery of an interesting Galactic radio transient with a DM of 281 pc~cm$^{-3}$, which was detected while the telescope was slewing between fields.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -148,27 +149,28 @@ radio continuum: transients -- methods: observational
 
 \glspl{frb} are short-duration, broad-band, dispersed pulses that are detected
 at radio frequencies. They are mostly classified by virtue of their dispersion
-being far in excess of the expected Galactic contribution. In the field of
-\glspl{frb}, as with radio pulsars, the dispersion measure is defined by the
-expression
+being far in excess of the expected Galactic contribution. As for radio pulsars,
+for FRBs, where we observe the pulse over a frequency band ranging from $\nu_1$ to $\nu_2$,
+the resulting dispersion delay 
 %
 \begin{equation}
-\Delta~t \simeq 4.15 \times 10^6 \textrm{ms} \times DM
-\times\left(\frac{1}{\nu_1^2} - \frac{1}{\nu_2^2}\right).
+\Delta t \propto {\rm DM} \, (\nu_1^{-2} - \nu_2^{-2}),
 \end{equation}
 %
-Interpreting the delay to be caused by the free electrons in the
-interstellar medium, the $DM$ then corresponds to the line integral of
+where the dispersion measure, DM, is the line integral of
 the electron column density along the line of sight to the source.
 
-The physical process that gives rise to these bursts is unknown,
-however the possibility that they originate at extragalactic, or even
-cosmological distances, makes them worthy of attention. They appear as
+Although the physical process that gives rise to FRBs is unknown,
+the possibility that they originate at 
+cosmological distances, and their potential use as natural probes of
+large-scale structure and magnetoionic content of the Universe
+makes them worthy of attention. They appear as
 bright sources at telescopes on Earth, which implies very high
-luminosities given the distance. As short duration bursts, probably
+luminosities given the distance. **not sure that they are really that
+luminous, cf GRBs or GW sources** As short duration bursts, probably
 emanating from point-like sources, they offer the unique opportunities
 to probe the inter-galactic medium (IGM), as pulsars do for the Galactic
-ISM.
+interstellar medium.
 
 Since the first reported detection \citep{2007Sci...318..777L}, a
 number of surveys using a range of radio telescopes have attempted to
