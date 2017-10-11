@@ -140,10 +140,6 @@ radio continuum: transients -- methods: observational
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% TODO:
-% probing IGM with FRBs (https://arxiv.org/pdf/1308.4459.pdf)
-% zero DM (https://arxiv.org/pdf/0901.3993.pdf)
-
 \section{Introduction}
 \label{sec:intro}
 
@@ -160,17 +156,15 @@ the resulting dispersion delay
 where the dispersion measure, DM, is the line integral of
 the electron column density along the line of sight to the source.
 
-Although the physical process that gives rise to FRBs is unknown,
-the possibility that they originate at 
-cosmological distances, and their potential use as natural probes of
-large-scale structure and magnetoionic content of the Universe
-makes them worthy of attention. They appear as
-bright sources at telescopes on Earth, which implies very high
-luminosities given the distance. **not sure that they are really that
-luminous, cf GRBs or GW sources** As short duration bursts, probably
-emanating from point-like sources, they offer the unique opportunities
-to probe the inter-galactic medium (IGM), as pulsars do for the Galactic
-interstellar medium.
+Although the physical process that gives rise to FRBs is unknown, the
+possibility that they originate at cosmological distances, and their potential
+use as natural probes of large-scale structure and magnetoionic content of the
+Universe makes them worthy of attention. They appear as bright sources at
+telescopes on Earth, which implies very high luminosities given the distance.
+**not sure that they are really that luminous, cf GRBs or GW sources** As short
+duration bursts, probably emanating from point-like sources, they offer the
+unique opportunities to probe the inter-galactic medium (IGM)
+\citep{2013ApJ...776..125M}, as pulsars do for the Galactic interstellar medium.
 
 Since the first reported detection \citep{2007Sci...318..777L}, a
 number of surveys using a range of radio telescopes have attempted to
@@ -246,16 +240,17 @@ coverage. ALFABURST provides the latter.
 \section{Survey (July 2015 -- August 2017)}
 \label{sec:overview}
 
-ALFABURST is an \gls{frb} search instrument which has been used to
-commensally observe since July 2015 with other \gls{alfa} observations
-at the Arecibo Observatory. This system is a component of the
-SETIBURST back-end \citep{2017ApJS..228...21C} and uses ARTEMIS
-\citep{2015MNRAS.452.1254K} for automated, real-time pulse
-detection. During this time period a \gls{sps} was performed from
-\gls{dm} 0 to 10000, pulse widths from $256~\mu s$ to $16$~ms,
-across a 56~MHz bandwidth for all 7 beams. We return to the effective
-\gls{dm} of the search in Section \ref{sec:event_rates}. The gain of
-Arecibo allows for the most sensitive \gls{frb} search to date.
+ALFABURST is an \gls{frb} search instrument which has been used to commensally
+observe since July 2015 with other \gls{alfa} observations at the Arecibo
+Observatory. This system is a component of the SETIBURST back-end
+\citep{2017ApJS..228...21C} and uses ARTEMIS \citep{2015MNRAS.452.1254K} for
+automated, real-time pulse detection. We perform inline RFI removal, baselining
+using zero-DM removal \citep{2009MNRAS.395..410E}, and spectrum normalization
+before single pulse detection. During this time period a \gls{sps} was
+performed from \gls{dm} 0 to 10000, pulse widths from $256~\mu s$ to $16$~ms,
+across a 56~MHz bandwidth for all 7 beams. We return to the effective \gls{dm}
+of the search in Section \ref{sec:event_rates}. The gain of Arecibo allows for
+the most sensitive \gls{frb} search to date.
 
 Detections above a peak \gls{snr} of 10 were recorded along with an
 $8.4$~s dynamic spectrum window around the event. When multiple events
@@ -312,9 +307,6 @@ near the galactic plane. These lines of sight can introduce
 significant dispersion due to the \gls{ism}. We search out to a DM of
 10000 which is well beyond the maximum galactic dispersion, but within
 the technical capabilities of our system. 
-
-%But, scintillation effects can reduce the overall \gls{frb} event
-%rates \citep{2015MNRAS.451.3278M}.
 
 Approximately 65\% of the ALFABURST survey time has been in pointings
 out of the galactic plane ($|b| > 5^{\circ}$).  These pointings are
@@ -411,22 +403,20 @@ prioritizing, and examination process was iterated on multiple times
 to improve the classifier. We continue to iterate on this model and
 will use it for future prioritization of examining events.
 
-% TODO: DM range filter numbers
-
-We have used our classifier model as a data exploration tool to add
-and refine procedural filters to the data. We have not used the
-classifier model directly in our pipeline as the black-box nature of
-the model can lead to misclassification.  During the offline data
-examination process a number of simple filters were developed to cut
-down on the number of false-positive detections without relying on the
-classifier model. For example, datasets in which the maximum DM of
-events was less than 50, and those which contain clusters that have a
-very broad range of detections in trial DMs are cut.
-Applying the various filters we reduced the number of datasets to
-approximately 30k. The windows were sorted by SNR, and the top SNR
-events were examined first.  During this process all datasets were
-labelled. Astrophysical events were identified based on the beam ID
-and pointing information.
+We have used our classifier model as a data exploration tool to add and refine
+procedural filters to the data. We have not used the classifier model directly
+in our pipeline as the black-box nature of the model can lead to
+misclassification.  During the offline data examination process a number of
+simple filters were developed to cut down on the number of false-positive
+detections without relying on the classifier model. For example, datasets in
+which the maximum DM of events was less than 50 were cut. And, given the
+SNR-maximized DM trial $DM_{\textrm{SNR}}$, if the DM range exceeds $(0.5 \times
+DM_{\textrm{SNR}}, 1.5 \times DM_{\textrm{SNR}})$, then the event is due to long
+duration RFI and is cut.  Applying the various filters we reduced the number of
+datasets to approximately 30k. The windows were sorted by SNR, and the top SNR
+events were examined first.  During this process all datasets were labelled.
+Astrophysical events were identified based on the beam ID and pointing
+information.
 
 %%% JUNE 18, 2017 BEGINS %%%
 
@@ -543,9 +533,6 @@ sidelobe. In practice we do this by splitting the beam and first
 sidelobe into shells of progressively lower gain but larger sky
 coverage, and integrate to obtain the totals.
 
-%\subsection{FWHM Beam}
-%\label{sec:fwhm_beam_rates}
-
 An \gls{alfa} beam is approximately 3.8' x 3.3' at \gls{fwhm} across
 the band.  The ALFA beam size is known to be relatively fixed in size
 across the band due to the optics \citep{GALFAbeam}.  Given the
@@ -575,23 +562,19 @@ scattered pulses. ALFABURST has a native resolution of $\Delta \tau =
 $\textrm{SNR}_{min} = 10$. The FWHM \gls{sefd} of the \gls{alfa}
 receiver is approximately 3 Jy across the band for all beams.
 
-% TODO: matched filter reference SETIBURST/ARTEMIS
-
-The \gls{sps} pipeline is configured to search for pulses from
-256~$\mu$s to 16 ms. Considering only the main beam lobe, a perfect
-matched filter would result in a sensitivity to pulses with a minimum
-flux of $S_{256 \mu\textrm{s}} = 250$ mJy to $S_{16 \; \textrm{ms}} =
-31$ mJy. Figure \ref{fig:fwhm_sefd_z} shows the peak flux density of
-using the standard candle \gls{frb} model as a function of source
-redshift for different model spectral indices. The dashed lines of
-constant flux show the sensitivity of the ALFABURST search pipeline to
-pulses of different widths. Assuming a positive spectral index model
-($\alpha=1.4$) results in a sensitivity out to the maximum
-redshift/\gls{dm} for pulses with widths of at least 1 ms. A flat
-spectral index model results in sensitivity from $z \sim 1.5$
-(256~$\mu$s) out to $z \sim 5$ (16~ms) depending on pulse width. A
-negative spectral index model ($\alpha \sim -1.4$) limits the survey
-to $z < 3$ for all pulse widths.
+The \gls{sps} pipeline is configured to search for pulses from 256~$\mu$s to 16
+ms. Considering only the main beam lobe, a perfect matched filter would result
+in a sensitivity to pulses with a minimum flux of $S_{256 \mu\textrm{s}} = 250$
+mJy to $S_{16 \; \textrm{ms}} = 31$ mJy \citep{2015MNRAS.452.1254K}. Figure
+\ref{fig:fwhm_sefd_z} shows the peak flux density of using the standard candle
+\gls{frb} model as a function of source redshift for different model spectral
+indices. The dashed lines of constant flux show the sensitivity of the ALFABURST
+search pipeline to pulses of different widths. Assuming a positive spectral
+index model ($\alpha=1.4$) results in a sensitivity out to the maximum
+redshift/\gls{dm} for pulses with widths of at least 1 ms. A flat spectral index
+model results in sensitivity from $z \sim 1.5$ (256~$\mu$s) out to $z \sim 5$
+(16~ms) depending on pulse width. A negative spectral index model ($\alpha \sim
+-1.4$) limits the survey to $z < 3$ for all pulse widths.
 
 % alfaburst-initial-survey/notebooks/ALFABURST_Derived_FRB_Rates.ipynb
 \begin{figure}
@@ -616,9 +599,6 @@ density of $10^{-2}$ per Mpc$^3$.  The volumetric event rate from
 should expect to detect $\sim 1$ \glspl{frb} based on the current
 observation time. We note once again that this calculation is only
 based on the sensitivity and size of the main beam lobe.
-
-%\subsection{Primary Beam and First Side Lobes}
-%\label{sec:full_beam_rates}
 
 As mentioned above, it is worth also taking into account the entire
 first side lobes of the beams as Arecibo would be sensitive to detect
@@ -693,6 +673,8 @@ based on the apparent flux of previously reported \glspl{frb}. We note
 that the volume we are sampling is biased towards small distances, due
 to the large sky coverage of the low sensitivity outer parts of the
 beam.
+
+%%%%%%%%%%%%%%% stopped here
 
 We should note, that 
 
