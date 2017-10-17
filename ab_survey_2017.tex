@@ -131,8 +131,9 @@ on the total observing time, telescope sensitivity and beam size. We discuss the
 implications of this non-detection of FRBs in the context of recent detections
 with other telescopes and the limitation of our search pipeline.  During the
 survey, single pulses from 17 known pulsars were detected.  We also report the
-discovery of an interesting Galactic radio transient with a DM of 281
-pc~cm$^{-3}$, which was detected while the telescope was slewing between fields.
+discovery of an interesting Galactic radio transient with a DM of
+281~pc~cm$^{-3}$, which was detected while the telescope was slewing between
+fields.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -191,13 +192,13 @@ Even with the current small sample of FRBs population, it is clear that their
 properties vary significantly. The measured \glspl{dm} range from
 176~pc~cm$^{-3}$ (FRB~170827) to 2596 pc~cm$^{-3}$ (FRB~160102), with pulse
 widths ranging from sub-ms (unresolved) to 21~ms, and apparent flux densities
-covering four orders of magnitude. The sky distribution of these sources appears
-skewed towards high Galactic latitudes \citep{2015MNRAS.451.3278M}.
-% TODO: I am not sure I believe this statement! Or at the very least, it hides a lot
-%of details. To first order, the sky distribution is isotropic.
+covering four orders of magnitude.  If the population is extragalactic then the
+sky distribution is isotropic.  But, there is an apparent observational
+dispartiy in the \gls{frb} event rate between high and low Galactic latitudes,
+possibly due to diffractive interstellar scintillation
+\cite{2015MNRAS.451.3278M}.
 
-% TODO: i don't like this opening sentence yet
-Single dish telescopes have been essential to detection of \glspl{frb}, and
+Single dish telescopes have been essential to detection of \glspl{frb} and
 continue to be useful for population statistics.  But, these telescopes provide
 limited localization.  The unknown detection position in the primary beam, and
 one-off nature of most of the \glspl{frb} does also not allow precise
@@ -280,6 +281,48 @@ Approximately $2 \times 10^5$ 8.4~s datasets were recorded between July 2015 and
 August 2017, the vast majority of which are false detections due to \gls{rfi}
 signals passing the real-time \gls{rfi} exciser. We have detected no \glspl{frb}
 in our commensal survey.
+
+%%% INLINE RFI EXCISION BEGINS %%%
+
+\subsection{Inline RFI Excision}
+\label{sec:rfi_excise}
+
+An inline RFI exciser is implemented in the pipeline to mitigate strong RFI
+sources. This leads to a significant reduction in the number of false-positive
+detections in the dedispersion search.  Individual frequency channels in a
+spectra are replaced when they exceed a threshold $T_{\textrm{chan}}$ after the
+spectra is normalized ($\mu=0$, $\sigma=1$). And, entire spectra are clipped
+when the summed spectra exceeds a threshold $T_{\textrm{spectra}}$. For standard
+ALFABURST operation $T_{\textrm{chan}} = 5$ and $T_{\textrm{spectra}} = 10$.
+The \gls{rfi} exciser only operates in the undecimated-in-time case ($D=1$), that
+is the sensitivity that we are most concerned about when setting the \gls{rfi}
+exciser thresholds.
+
+For very bright pulses, the \gls{rfi} exciser will replace channels or spectra,
+reducing the overall flux.  For the sensitivity of the \gls{alfa} receiver,
+individual channels with flux greater than 2.8 Jy and, frequency-integrated flux
+greater than $\sim250$ mJy are excised.
+
+%We see in
+%verification observations of bright, low \gls{dm} pulsars that individual
+%pulses are often excised.
+% low dm pulsars (examples) have flux clipped out but a portion remains and the
+% pulsar is regularlly detected
+
+% some FRBs will be partially clipped, but still detected with significance
+%Our pipeline would preserve the flux of all
+%detected \glspl{frb} except the extreme FRB150807, and possibly FRB170827
+%(Figure \ref{fig:sensitivity_range}). This also assumes the \gls{frb} is
+%detected at boresight, we would still be sensitive to such bright pulses in the
+%side lobes.
+
+%For reference, the minimum \gls{dm} of a pulse before the at least one channel
+%is shifted to the next spectra in time is \gls{dm} $=1.8$~pc~cm$^{-3}$ for the
+%typical ALFABURST observing band (using Eq. 5.1 of \cite{2004hpa..book.....L}).
+%And, the minimum \gls{dm} before each frequency channel is in a separate spectra
+%is \gls{dm} $=976$~pc~cm$^{-3}$. Higher DM pulses 
+
+%%% INLINE RFI EXCISION END %%%
 
 %%% SYSTEM VERIFICATION BEGINS %%%
 
@@ -383,8 +426,9 @@ spectrum, the dedispersed dynamic spectrum of the S/N-maximized DM, along with a
 frequency collapsed time series of the detection. A set of statistics for each
 of these plots was also computed when this figure was generated.
 
-A sample of the datasets were labelled into 8 categories of RFI ***should we
-expand on these 8 categories???***, systematic effects, and astrophysical source
+A sample of the datasets were labelled into 8 categories of RFI
+% TODO: should we expand on these 8 categories???
+, systematic effects, and astrophysical source
 (pulsars). Classification using these labels has not been constant throughout
 the survey due to software improvement, and changes in telescope observing
 strategy.
@@ -403,7 +447,8 @@ high recall, since in searching for \glspl{frb} we are inclined to allow for a
 large number of false-positive events (detection due to RFI or systematics) as
 long as there are no false-negative events (pulses classified as RFI).
 
-Using a probabilistic multi-label classifier **reference to relevant papers?***
+Using a probabilistic multi-label classifier
+% TODO: reference to relevant papers?
 allows us to prioritize the order and amount of time we spend on examining event
 datasets. Those with high probability of belonging to a single class can be
 examined as a group quickly.  Datasets which fall into multiple classes are
@@ -483,9 +528,9 @@ changing by approximately 5 arcminutes per second in right ascension 2
 arcminutes per second in declination. This rate gives us a conservative estimate
 of the error in pointing at the time the pulse was detected. Based on the time
 stamp of the pulse and the pointing data the pulse occurred when beam 5 of ALFA
-was pointing at right ascension: 18~h 45~$\pm 5$~m, and declination: +00 d
-38'~$\pm 2$ (Galactic coordinates $l: 32.7812, ~b: +1.6850$).
-% TODO: pointing error refinement
+was pointing at right ascension: 18~h 45~m $10 \pm 20$~s, and declination: +00 d
+$38 \pm 2$' (Galactic coordinates $l: 32.78 \pm 0.05^{\circ}, ~b: +1.68 \pm
+0.05^{\circ}$).
 
 This beam 5 pointing is close to the Galactic plane in the first quadrant. The
 DM distance estimated from the NE2001 model \citep{2002astro.ph..7156C} is
@@ -500,13 +545,14 @@ known source with a DM near 281 pc~cm$^{-3}$ within a degree of the pointing.
 
 As the telescope was slewing at the time, the source was only in the primary
 lobe for a fraction of a second (assuming it was in the primary lobe and not a
-side lobe).
-% TODO: What is the maximum duration pulse that could be seen given the slew rate and beam size??
-It could therefore be an RRAT which we
-serendipitously detected at the correct moment, or it could be an individual
-pulse from a pulsar. This region has been previously surveyed with PALFA and the
-Parkes Multi-beam Survey \citep{2001MNRAS.328...17M} with no significant
-detection of a pulsar at this DM.
+side lobe). A source on the edge of the \gls{fwhm} beam would transit the beam
+in a maximum of 500~ms for the slew rate of the telescope (at the ALFABURST
+observing frequency this corresponds to a dispersed pulse with a maximum DM of
+3500~pc~cm$^{-3}$).  It could therefore be an RRAT which we serendipitously
+detected at the correct moment, or it could be an individual pulse from a
+pulsar. This region has been previously surveyed with PALFA and the Parkes
+Multi-beam Survey \citep{2001MNRAS.328...17M} with no significant detection of a
+pulsar at this DM.
 
 The pulse appears brighter at higher frequencies, which could be due to
 scintillation. Another reason for this frequency-dependent structure is that the
@@ -612,6 +658,31 @@ sensitivity and size of the main beam lobe.
 % rate range into these estimates then the above calculation will move from $\sim
 % 1$~FRB o $<1$~FRB and there will not necessarily be any conflict with a
 % non-detection.
+%
+% but for me the most substantive one is to recommend that we adopt some all-sky
+% FRB rate from Parkes to provide a range of Rs to use rather than a single value.
+% If we take Crawford et al's updated analysis, for example, then the 99%
+% confidence interval on the rate (purely statistical errors, not systematic) put
+% the all-sky rate to be in the range 1.1 --- 7.0 FRBs/day/sky at the Parkes
+% sensitivity limit with fluence 3.8 Jy ms. If we scale that to our sensitivity
+% limit with F^-1.5, what's the all-sky rate we would be probing?
+% 
+% It seems to me that the range of numbers in R that comes out of that will then
+% give us a range of numbers of FRBs expected from the survey so far to quote.
+% What do you think? We need to think about what fluence limit we adopt.
+% 
+% I would suggest that the calculation be done just once in the text, and not as
+% it is done now with and without thinking about sidelobes. I guess what I mean is
+% to just do it assuming the sidelobes and quote the numbers from that.
+% 
+% If that range comes to be let's say 0 - 5 FRBs, then we could conclude that our
+% result is mildly at odds with F^-1.5 and then pick an exponent that gives 0-1
+% FRBs.
+% 
+% As for the fluence limit, it's tricky for the same reason (different gain for
+% different area time of survey). Maybe just take the fluence corresponding to a
+% 10 sigma detection at the edge of the beam and pick our favourite integration
+% time (few ms).
 
 As mentioned above, it is worth also taking into account the entire
 first side lobes of the beams as Arecibo would be sensitive to detect
@@ -688,11 +759,9 @@ that the volume we are sampling is biased towards small distances, due
 to the large sky coverage of the low sensitivity outer parts of the
 beam.
 
-% TODO: stopped here
-
-** I suggest clearly adopting an all-sky event rate
-with 95\% confidence interval and using that interval
-to more robustly determine the expected number of FRBs.
+% TODO: I suggest clearly adopting an all-sky event rate
+%with 95\% confidence interval and using that interval
+%to more robustly determine the expected number of FRBs.
 
 In the analysis above, we have not provided error estimates to our
 total expected events. We are assuming standard candle FRBs and flat
@@ -703,83 +772,29 @@ would have expected an FRB in our survey. However, the non-detection
 cannot be assumed to imply significant discrepancy with our current
 understanding of this population.
 
-% TODO: split apart
-\subsection{Sensitivity Upper Limit}
-\label{sec:upper_limit}
-
-The sensitivity limit of ALFABURST is determined by the telescope
-sensitivity and receiver beam model. However, there is also a
-sensitivity upper limit due to the real-time parameterized \gls{rfi}
-exciser. The choice of these parameters sets an upper limit on the
-flux of a pulse before it a portion of the flux is clipped and
-replaced. Individual frequency channels in a spectra are replaced when
-they exceed a threshold $T_{\textrm{chan}}$ after the spectra is
-normalized ($\mu=0$, $\sigma=1$). And, entire spectra are clipped when
-the summed spectra exceeds a threshold $T_{\textrm{spectra}}$. For
-standard ALFABURST operation $T_{\textrm{chan}} = 5$ and
-$T_{\textrm{spectra}} = 10$.
-
-For very bright, small \gls{dm} pulses the \gls{rfi} exciser will replace
-channels or spectra, reducing the overall flux or potentially removing the
-entire pulse.  For bright, high \gls{dm} pulses the spectra will likely not be
-replaced, but individual channels may be, resulting in a lower detected flux.
-The \gls{rfi} exciser only works in the undecimated-in-time case ($D=1$), that
-is the sensitivity that we are most concerned about when setting the \gls{rfi}
-exciser thresholds.
-
-\glspl{frb} detected at L-Band range between 200 mJy to a few Jy in flux
-density, typically on the order of 5-10 milliseconds. For the sensitivity of the
-\gls{alfa} receiver, individual channels of flux greater than 2.8 Jy will be
-flagged, this will not have an effect on our ability to detect even the
-brightest \glspl{frb}.  The maximum integrated pulse flux ($256 \; \mu$s width,
-\gls{dm} $=0$) is $\sim250$ mJy before the pulse is clipped. The maximum
-detectable flux increases as the square-root of the pulse width.  We see in
-verification observations of bright, low \gls{dm} pulsars that individual
-pulses are often excised. But, as we are interested in detecting high \gls{dm}
-\glspl{frb} we have a higher upper limit as the flux is spread over multiple
-spectra.
-
-For reference, the minimum \gls{dm} of a pulse before the at least one channel
-is shifted to the next spectra in time is \gls{dm} $=1.8$ pc cm$^{-3}$ for the
-typical ALFABURST observing band (using Eq. 5.1 of \cite{2004hpa..book.....L}).
-And, the minimum \gls{dm} before each frequency channel is in a separate spectra
-is \gls{dm} $=976$ pc cm$^{-3}$. Most reported \glspl{frb} fall with in this
-\gls{dm} range, so we consider a test \gls{frb} with a dispersion measure of 250
-pc cm$^{-3}$ and narrow pulse width of $256 \; \mu$s to report our survey
-upper-limit sensitivity. A \gls{dm} of 250 pc cm$^{-3}$ results in approximately
-$1/128$ of the pulse per spectra. A bright pulse ($>32$ Jy) would be excised as
-\gls{rfi} in this test case. This an extreme case, as most \glspl{frb} are wider
-in width and at higher \glspl{dm}.  Our pipeline would preserve the flux of all
-detected \glspl{frb} except the extreme FRB150807, and possibly FRB170827
-(Figure \ref{fig:sensitivity_range}).  This also assumes the \gls{frb} is
-detected at boresight, we would still be sensitive to such bright pulses in the
-side lobes.
-
 Figure \ref{fig:sensitivity_range} shows that ALFABURST sensitivity region based
 on pulse width and peak flux, assuming detection at boresight. The ALFABURST
-sensitivity region (purple) indicates the survey would be able to detect the
-vast majority of previously reported \glspl{frb}. The upper flux limit cut-off
-due to \gls{rfi} mitigation would have clipped out some flux from the extremely
-bright, narrow, and low-DM FRB150807. Though, a portion of the flux would have
-remained, and the \gls{frb} would have still been detected as significant.
+sensitivity region (purple) indicates the survey would be able to detect the all
+previously reported \glspl{frb}. Bright \glspl{frb} such as FRB150807 and
+FRB170827 would be partially clipped by the inline RFI exciser (Section
+\ref{sec:rfi_excise}), but they would sill be detected at a high peak S/N.
 Recent detections with UTMOST \citep{2017MNRAS.468.3746C,atel10697} indicate
 that the parameter space in pulse width should be extended.  FRB160317 has a
-measured pulse width of 21 ms. Currently the pipeline decimates in time out to
-16 ms. The pipeline still sensitive to wider pulses, but at a loss in S/N
-as indicated in the slight slope on the right side of the purple region of
-Figure \ref{fig:sensitivity_range}, but we would not have detected FRB160317. It
-is a minor change to our pipeline to increase the maximum pulse-width search.
+measured pulse width of 21~ms. Currently the pipeline decimates in time out to
+16~ms. The pipeline still sensitive to wider pulses, but at a loss in S/N as
+indicated in the slope on the right side of the shaded region of Figure
+\ref{fig:sensitivity_range}. Similarly, the left side of the region is sloped as
+ALFABURST is sensitive to bright pulses with widths narrower than $256~\mu$s.
 
 % alfaburst-initial-survey/notebooks/Fluence_Rate.ipynb
 \begin{figure}
     \includegraphics[width=1.0\linewidth]{figures/sensitivity_range.pdf}
-    \caption{ALFABURST single pulse sensitivity (purple region). Automated RFI
-    excision excludes narrow in width, low DM, bright FRBs such as FRB150807
-    (yellow region).  Previously detected FRBs from Parkes (black triangle), GBT
+    \caption{ALFABURST single pulse sensitivity (purple region).
+    Previously detected FRBs from Parkes (black triangle), GBT
     (red circle), Arecibo (white diamond), UTMOST (teal pentagon), and ASKAP
     (yellow-green hexagon) are plotted for reference. Line of constant fluence
-    (solid) are plotted for reference. The fluence completeness (dashed) is 0.5
-    Jy ms out to pulse widths of 16 milliseconds.
+    (solid) are plotted for reference. The fluence completeness (dashed) is
+    0.5~Jy~ms out to pulse widths of 16~ms.
     }
     \label{fig:sensitivity_range}
 \end{figure}
@@ -788,15 +803,11 @@ is a minor change to our pipeline to increase the maximum pulse-width search.
 
 %%% FLUENCE RATE BEGINS %%%
 
-%\subsection{Fluence Completeness}
-%\label{sec:fluence}
-
 The fluence completeness of the survey \citep{2015MNRAS.447.2852K} is determined
 by the minimum detectable fluence at the maximum sampled pulse width in the
 survey. ALFABURST has a fluence completeness of $0.5$ Jy ms up to a pulse width
 of 16 ms (Figure \ref{fig:sensitivity_range}). All previously reported FRBs are
-within this completeness sample except for those noted in Section
-\ref{sec:upper_limit}.
+within this completeness sample.
 
 %%% FLUENCE RATE ENDS   %%%
 
