@@ -301,26 +301,21 @@ exciser thresholds.
 For very bright pulses, the \gls{rfi} exciser will replace channels or spectra,
 reducing the overall flux.  For the sensitivity of the \gls{alfa} receiver,
 individual channels with flux greater than 2.8 Jy and, frequency-integrated flux
-greater than $\sim250$ mJy are excised.
+greater than $\sim250$ mJy are excised. The peaks of bright \glspl{frb} such as
+FRB150807 and FRB170827 would be significantly clipped by the exciser. But, the
+edges of the pulse would not be, these \glspl{frb} would still be detected at a
+significant peak S/N. All previously reported \glspl{frb} would be detected with
+ALFABURST at high peak S/N even if partially clipped.
 
-%We see in
-%verification observations of bright, low \gls{dm} pulsars that individual
-%pulses are often excised.
-% low dm pulsars (examples) have flux clipped out but a portion remains and the
-% pulsar is regularlly detected
-
-% some FRBs will be partially clipped, but still detected with significance
-%Our pipeline would preserve the flux of all
-%detected \glspl{frb} except the extreme FRB150807, and possibly FRB170827
-%(Figure \ref{fig:sensitivity_range}). This also assumes the \gls{frb} is
-%detected at boresight, we would still be sensitive to such bright pulses in the
-%side lobes.
-
-%For reference, the minimum \gls{dm} of a pulse before the at least one channel
-%is shifted to the next spectra in time is \gls{dm} $=1.8$~pc~cm$^{-3}$ for the
-%typical ALFABURST observing band (using Eq. 5.1 of \cite{2004hpa..book.....L}).
-%And, the minimum \gls{dm} before each frequency channel is in a separate spectra
-%is \gls{dm} $=976$~pc~cm$^{-3}$. Higher DM pulses 
+The zero-DM removal and spectra replacement affects low-DM pulses.  For
+reference, the minimum \gls{dm} of a pulse before the at least one channel is
+shifted to the next spectra in time is \gls{dm} $=1.8$~pc~cm$^{-3}$ for the
+typical ALFABURST observing band (using Eq. 5.1 of \cite{2004hpa..book.....L}).
+And, the minimum \gls{dm} before each frequency channel is in a separate spectra
+is \gls{dm} $=976$~pc~cm$^{-3}$. Single pulses from low-DM pulsars such as
+B0834+06 are often clipped by spectra replacement, but are still detected at
+significant peak S/N. As ALFABURST is focused on detecting high-DM pulses
+spectra replacement does not affect the survey sensitivity.
 
 %%% INLINE RFI EXCISION END %%%
 
@@ -413,9 +408,6 @@ observations.
 \section{Event Classification Strategy}
 \label{sec:event_classify}
 
-% TODO:
-% add figure
-% ML references
 
 The significant DM trial range, variety of \gls{rfi} events, and commensal
 nature of the survey, leads to a large number of false detections. Approximately
@@ -426,12 +418,13 @@ spectrum, the dedispersed dynamic spectrum of the S/N-maximized DM, along with a
 frequency collapsed time series of the detection. A set of statistics for each
 of these plots was also computed when this figure was generated.
 
-A sample of the datasets were labelled into 8 categories of RFI
-% TODO: should we expand on these 8 categories???
-, systematic effects, and astrophysical source
-(pulsars). Classification using these labels has not been constant throughout
-the survey due to software improvement, and changes in telescope observing
-strategy.
+% TODO:
+% add figures: class distribution, PCA of events?
+% details about classes
+A sample of the datasets were labelled into 8 categories of RFI , systematic
+effects, and astrophysical source (pulsars). Classification using these labels
+has not been constant throughout the survey due to software improvement, and
+changes in telescope observing strategy.
 
 Pulses from known pulsars were used as a proxy category for the FRB class. The
 number of astrophysical pulse detections was low compared to the number of
@@ -441,23 +434,22 @@ additional effect of balancing out the number of events in each class, making
 model training more robust.
 
 These statistics along with the labels were used to build a random forest
-probabilistic classifier model. All unlabelled datasets were given a probability
-of belonging the predefined categories. In training the model we optimized for a
-high recall, since in searching for \glspl{frb} we are inclined to allow for a
-large number of false-positive events (detection due to RFI or systematics) as
-long as there are no false-negative events (pulses classified as RFI).
+probabilistic classifier model \citep{Ho:1995:RDF:844379.844681,Breiman2001}.
+All unlabelled datasets were given a probability of belonging the predefined
+categories. In training the model we optimized for a high recall, since in
+searching for \glspl{frb} we are inclined to allow for a large number of
+false-positive events (detection due to RFI or systematics) as long as there are
+no false-negative events (pulses classified as RFI).
 
-Using a probabilistic multi-label classifier
-% TODO: reference to relevant papers?
-allows us to prioritize the order and amount of time we spend on examining event
-datasets. Those with high probability of belonging to a single class can be
-examined as a group quickly.  Datasets which fall into multiple classes are
-examined more thoroughly, they are labelled by hand, and the set of features
-extracted during the figure generation process is refined to further
-differentiate classes. This model building, prioritizing, and examination
-process was iterated on multiple times to improve the classifier. We continue to
-iterate on this model and will use it for future prioritization of examining
-events.
+Using a probabilistic multi-label classifier allows us to prioritize the order
+and amount of time we spend on examining event datasets. Those with high
+probability of belonging to a single class can be examined as a group quickly.
+Datasets which fall into multiple classes are examined more thoroughly, they are
+labelled by hand, and the set of features extracted during the figure generation
+process is refined to further differentiate classes. This model building,
+prioritizing, and examination process was iterated on multiple times to improve
+the classifier. We continue to iterate on this model and will use it for future
+prioritization of examining events.
 
 We have used our classifier model as a data exploration tool to add and refine
 procedural filters to the data. We have not used the classifier model directly
@@ -571,14 +563,12 @@ be presented elsewhere.
 \section{Expected FRB Events}
 \label{sec:event_rates}
 
-The currently known 24 FRBs vary significantly in \gls{dm}, pulse
-width, and flux density. Despite this, we assume a simple model to
-derive an expected event rate with our survey.  We use a model
-\citep{2013MNRAS.436L...5L} which assumes \gls{frb} sources are
-standard candles with a fixed spectral index, uniformly distributed in
-co-moving volume. The event rates in this model are scaled to the
-event rates reported in \cite{2013Sci...341...53T}. 
-% TODO: Why are we using such an old event rate???
+The currently known 24 FRBs vary significantly in \gls{dm}, pulse width, and
+flux density. Despite this, we assume a simple model to derive an expected event
+rate with our survey.  We use a model \citep{2013MNRAS.436L...5L} which assumes
+\gls{frb} sources are standard candles with a fixed spectral index, uniformly
+distributed in co-moving volume. The event rates in this model have been updated
+use to the event rates reported in \cite{2016MNRAS.460.3370C}. 
 
 Taking advantage of the large forward gain of Arecibo, we account for
 the sensitivity of the 7 ALFA beams out to outer edge of the first
@@ -651,6 +641,8 @@ again that the areal covereage used in this calculation is only based on the
 sensitivity and size of the main beam lobe.
 
 % TODO:
+% what fluence limit should we use?
+%
 % One thing that I think is needed here is to move to more recent rate
 % estimates. If we go to something like Rane et al --- then that's at least a
 % factor of two less than Thornton et al, with a range something like 1000--9000
@@ -671,18 +663,14 @@ sensitivity and size of the main beam lobe.
 % give us a range of numbers of FRBs expected from the survey so far to quote.
 % What do you think? We need to think about what fluence limit we adopt.
 % 
-% I would suggest that the calculation be done just once in the text, and not as
-% it is done now with and without thinking about sidelobes. I guess what I mean is
-% to just do it assuming the sidelobes and quote the numbers from that.
-% 
-% If that range comes to be let's say 0 - 5 FRBs, then we could conclude that our
-% result is mildly at odds with F^-1.5 and then pick an exponent that gives 0-1
-% FRBs.
-% 
 % As for the fluence limit, it's tricky for the same reason (different gain for
 % different area time of survey). Maybe just take the fluence corresponding to a
 % 10 sigma detection at the edge of the beam and pick our favourite integration
 % time (few ms).
+%
+% If that range comes to be let's say 0 - 5 FRBs, then we could conclude that our
+% result is mildly at odds with F^-1.5 and then pick an exponent that gives 0-1
+% FRBs. 
 
 As mentioned above, it is worth also taking into account the entire
 first side lobes of the beams as Arecibo would be sensitive to detect
@@ -759,10 +747,6 @@ that the volume we are sampling is biased towards small distances, due
 to the large sky coverage of the low sensitivity outer parts of the
 beam.
 
-% TODO: I suggest clearly adopting an all-sky event rate
-%with 95\% confidence interval and using that interval
-%to more robustly determine the expected number of FRBs.
-
 In the analysis above, we have not provided error estimates to our
 total expected events. We are assuming standard candle FRBs and flat
 spectra, assumptions which are impossible to attribute error margins
@@ -807,12 +791,33 @@ The fluence completeness of the survey \citep{2015MNRAS.447.2852K} is determined
 by the minimum detectable fluence at the maximum sampled pulse width in the
 survey. ALFABURST has a fluence completeness of $0.5$ Jy ms up to a pulse width
 of 16 ms (Figure \ref{fig:sensitivity_range}). All previously reported FRBs are
-within this completeness sample.
+within this completeness sample except FRB160317.
 
 %%% FLUENCE RATE ENDS   %%%
 
 \section{Discussion}
 \label{sec:discuss}
+
+% Possible reasons for non-detection:
+%   * standard candle model:
+%   * scintillation:
+%       * limited bandwidth, repeater band varies
+%       * relation to Macquart and Johnston paper: rate off/on the plane is
+%       different due to scintillation regimes
+%       * Macquart and Johnston: discount scintillation effects, they make predictions that
+%       a number of FRBs should be detected with Arecibo. Our non-detection refutes this.
+%       * repeater and low freq frb searches: spectra are not pulsar like. may be
+%       due to strong scintillation
+%   * plasma lens model (cordes et al.):
+%       * narrow bandwidth
+%   * Star formation rate:
+%       * implied FRB Luminosity function: cosmological star formation rate, peaks
+%       around z=2, Madau & Dickinson 2014
+%   * steep spectrum/band limited:
+%       * Law et al see no detections at low and 5 GHz+ freqs -> band limited,
+%       steep spectrum ; we are probing a large z, perhaps the band is shifted
+%       out of L-band
+%       * FRB121102 shows dramatic frequency structure over wide bands
 
 Multiple factors could be contributing to our non-detection with the ALFABURST
 survey. We derived an expected event rate based on the telescope sensitivity,
@@ -880,33 +885,12 @@ Follow-up observations of the same would reveal the true nature of
 the source. This serendipitous discovery during a slew shows the importance of 
 developing commensal backends for transient searches on large radio telescopes.
 
-% Possible reasons for non-detection:
-%   * standard candle model:
-%   * scintillation:
-%       * limited bandwidth, repeater band varies
-%       * relation to Macquart and Johnston paper: rate off/on the plane is
-%       different due to scintillation regimes
-%       * Macquart and Johnston: discount scintillation effects, they make predictions that
-%       a number of FRBs should be detected with Arecibo. Our non-detection refutes this.
-%       * repeater and low freq frb searches: spectra are not pulsar like. may be
-%       due to strong scintillation
-%   * plasma lens model (cordes et al.):
-%       * narrow bandwidth
-%   * Star formation rate:
-%       * implied FRB Luminosity function: cosmological star formation rate, peaks
-%       around z=2, Madau & Dickinson 2014
-%   * steep spectrum/band limited:
-%       * Law et al see no detections at low and 5 GHz+ freqs -> band limited,
-%       steep spectrum ; we are probing a large z, perhaps the band is shifted
-%       out of L-band
-%       * FRB121102 shows dramatic frequency structure over wide bands
-
 \section{Future Work}
 \label{sec:future_work}
 
 The ALFABURST system will continue to run commensally with other ALFA projects,
-leading to an improvement on the event rate of low-fluence \glspl{frb}.  The
-current \gls{sps} pipeline is undergoing a significant upgrade. The input
+leading to an improvement on the event rate limits of low-fluence \glspl{frb}.
+The current \gls{sps} pipeline is undergoing a significant upgrade. The input
 bandwidth is limited to 56 MHz of the full 336 MHz digital band due to IO
 limitations. A new pipeline developed for \gls{ska} \gls{nip} will be used to
 process the full \gls{alfa} band.  This will increase sensitivity, and improve
