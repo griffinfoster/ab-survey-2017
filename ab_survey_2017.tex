@@ -46,6 +46,8 @@
 \glsdisablehyper
 \usepackage{subcaption}
 \captionsetup{compatibility=false}
+\usepackage{dcolumn}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -56,6 +58,8 @@
 %\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
 
 \newcommand{\GSF}[1]{\noindent\textcolor{blue}{GSF:#1}}
+\newcommand{\sups}[1]{\textsuperscript{#1}}
+\newcommand{\subs}[1]{\textsubscript{#1}}
 
 \makeglossaries
 
@@ -84,22 +88,20 @@ Fast Radio Bursts with Arecibo}
 
 \author[G. Foster et al.]{Griffin Foster$^{1,2}$\thanks{E-mail: griffin.foster@physics.ox.ac.uk},
 Aris Karastergiou$^{1,3,4}$,
-Dan Werthimer$^{2}$,
-\and Jayanth Chennamangalam$^{1}$,
-Kaustubh Rajwade$^{5}$,
-Golnoosh Golpayegani$^{6,7}$,
-\and Duncan Lorimer$^{6,7}$,
-Mayuresh Surnis$^{6,7}$,
-Xin Pei$^{8}$
+Duncan Lorimer$^{5,6}$, Mayuresh Surnis$^{5,6}$, 
+\and Golnoosh Golpayegani$^{5,6}$, Dan Werthimer$^{2}$,
+Jayanth Chennamangalam$^{1}$,
+\and Kaustubh Rajwade$^{7}$
+ and Xin Pei$^{8}$
 \\
 % List of institutions
 $^{1}$University of Oxford, Sub-Department of Astrophysics, Denys Wilkinson Building, Keble Road, Oxford, OX1 3RH, United Kingdom\\
 $^{2}$Department of Astronomy, University of California, Berkeley, 501 Campbell Hall \#3411, Berkeley, CA, 94720, USA\\
 $^{3}$Physics Department, University of the Western Cape, Cape Town 7535, South Africa\\
 $^{4}$Department of Physics and Electronics, Rhodes University, PO Box 94, Grahamstown 6140, South Africa\\
-$^{5}$Jodrell Bank Centre for Astrophysics, University of Manchester, Oxford Road, Manchester M13 9PL, United Kingdom\\ 
-$^{6}$Department of Physics and Astronomy, West Virginia University, Morgantown, WV 26505, USA\\
-$^{7}$Center for Gravitational Waves and Cosmology, West Virginia University, Chestnut Ridge Research Building, Morgantown, WV 26505, USA\\
+$^{5}$Department of Physics and Astronomy, West Virginia University, Morgantown, WV 26505, USA\\
+$^{6}$Center for Gravitational Waves and Cosmology, West Virginia University, Chestnut Ridge Research Building, Morgantown, WV 26505, USA\\
+$^{7}$Jodrell Bank Centre for Astrophysics, University of Manchester, Oxford Road, Manchester M13 9PL, United Kingdom\\ 
 $^{8}$Xinjiang Astronomical Observatory, Chinese Academy of Sciences, Urumqi, Xinjiang 830011, China\\
 }
 
@@ -122,16 +124,16 @@ $^{8}$Xinjiang Astronomical Observatory, Chinese Academy of Sciences, Urumqi, Xi
 % How was the study done?
 % What is the main take away message?
 % What can be said about these results, and how does this affect future work?
-The ALFABURST fast radio burst (FRB) survey has been observing commensally with
+ALFABURST has been searching for Fast Radio Bursts (FRBs) commensally with
 other projects using the Arecibo L-band Feed Array (ALFA) receiver at the
-Arecibo Observatory since July 2015. We report on the non-detection of any FRBs
+Arecibo Observatory since July 2015. We describe the observing system and report on the non-detection of any FRBs
 from that time until August 2017 for a total observing time of 518 hours.  With
-current FRB rate models, we expected to see multiple **how many??** FRBs based
+current FRB rate models, we expected to see at most two FRBs based
 on the total observing time, telescope sensitivity and beam size. We discuss the
-implications of this non-detection of FRBs in the context of recent detections
+implications of this non-detection in the context of recent detections
 with other telescopes and the limitation of our search pipeline.  During the
 survey, single pulses from 17 known pulsars were detected.  We also report the
-discovery of an interesting Galactic radio transient with a DM of
+discovery of an interesting Galactic radio transient with a pulse width of 3~ms and dispersion measure of
 281~pc~cm$^{-3}$, which was detected while the telescope was slewing between
 fields.
 \end{abstract}
@@ -166,8 +168,8 @@ use as natural probes of large-scale structure and magnetoionic content of the
 Universe makes them worthy of attention. They appear as bright sources at
 telescopes on Earth, which indicates high luminosities given the implied
 distance.  As short duration bursts, probably emanating from point-like sources,
-they offer the unique opportunities to probe the inter-galactic medium (IGM)
-\citep{2013ApJ...776..125M}, as pulsars do for the Galactic interstellar medium.
+they offer the unique opportunities to probe the inter-galactic medium
+\citep[IGM;][]{2013ApJ...776..125M}, as pulsars do for the Galactic interstellar medium.
 
 Since the first reported detection \citep{2007Sci...318..777L}, a number of
 surveys using a range of radio telescopes have attempted to detect further
@@ -274,7 +276,7 @@ all 7 beams. We return to the effective \gls{dm} of the search in Section
 \ref{sec:event_rates}. The gain of Arecibo allows for the most sensitive
 \gls{frb} search to date.
 
-Detections above a peak S/N of 10 were recorded along with an $8.4$~s dynamic
+Detections above a peak signal-to-noise ratio (S/N) of 10 were recorded along with an $8.4$~s dynamic
 spectrum window around the event. When multiple events were detected in the same
 time window, these events were pooled together and recorded to disk.
 Approximately $2 \times 10^5$ 8.4~s datasets were recorded between July 2015 and
@@ -300,21 +302,21 @@ exciser thresholds.
 
 For very bright pulses, the \gls{rfi} exciser will replace channels or spectra,
 reducing the overall flux.  For the sensitivity of the \gls{alfa} receiver,
-individual channels with flux greater than 2.8 Jy and, frequency-integrated flux
+individual channels with flux greater than 2.8~Jy and, frequency-integrated flux
 greater than $\sim250$ mJy are excised. The peaks of bright \glspl{frb} such as
 FRB150807 and FRB170827 would be significantly clipped by the exciser. But, the
 edges of the pulse would not be, these \glspl{frb} would still be detected at a
 significant peak S/N. All previously reported \glspl{frb} would be detected with
 ALFABURST at high peak S/N even if partially clipped.
 
-The zero-DM removal and spectra replacement affects low-DM pulses.  For
+The zero-DM removal and spectra replacement affects low-DM pulses. For
 reference, the minimum \gls{dm} of a pulse before the at least one channel is
 shifted to the next spectra in time is \gls{dm} $=1.8$~pc~cm$^{-3}$ for the
 typical ALFABURST observing band (using Eq. 5.1 of \cite{2004hpa..book.....L}).
 And, the minimum \gls{dm} before each frequency channel is in a separate spectra
 is \gls{dm} $=976$~pc~cm$^{-3}$. Single pulses from low-DM pulsars such as
 B0834+06 are often clipped by spectra replacement, but are still detected at
-significant peak S/N. As ALFABURST is focused on detecting high-DM pulses
+significant peak S/N (see Table \ref{tab:knpsrtab}). As ALFABURST is focused on detecting high-DM pulses
 spectra replacement does not affect the survey sensitivity.
 
 %%% INLINE RFI EXCISION END %%%
@@ -324,14 +326,50 @@ spectra replacement does not affect the survey sensitivity.
 \subsection{Single Pulse Search Verification}
 \label{sec:system_verify}
 
-PALFA survey scheduling includes regularly observing known pulsars to verify
-timing analysis, this provides a consistent verification of our \gls{sps} to
-detect pulses. As the PALFA survey is targeted at the Galactic plane a number of
-high \gls{dm} pulsars were observed, single pulses from B1859+03 (\gls{dm}:
-402), B1900+01 (\gls{dm}: 245) (Figure \ref{fig:B1900}), B2002+32 (\gls{dm}:
-234), B1933+16 (\gls{dm}: 158), among others were detected.
+The PALFA survey schedule includes regular observations of known pulsars to verify
+their data analysis pipeline. This provides a consistent verification of our \gls{sps} to
+detect dispersed pulses. As the PALFA survey is targeted at the Galactic plane, a number of
+high \gls{dm} pulsars were observed. Single pulses from B1859+03 (\gls{dm}:
+402), B1900+01 (\gls{dm}: 245) (Figure \ref{fig:B1900}), B2002+31 (\gls{dm}:
+234), B1933+16 (\gls{dm}: 158), among others were detected. Table \ref{tab:knpsrtab} lists the parameters for the known pulsars detected by the \gls{sps}.
 
-% TODO: table of detected pulsars: max SNR, SNR-maximized DM, number of pulses
+% Table of detected pulsars: max SNR, SNR-maximized DM, number of pulses
+\begin{table}
+\begin{center}
+
+\begin{tabular}{cd{2.1}d{3.2}d{3.0}d{4.0}d{2.1}}
+
+\hline
+\multicolumn{1}{c}{PSR} & \multicolumn{1}{c}{S\subs{1400}} & \multicolumn{1}{c}{DM\subs{cat}}    & \multicolumn{1}{c}{DM\subs{obs}}    & \multicolumn{1}{c}{N\subs{pulses}}   & \multicolumn{1}{c}{S/N\subs{max}} \\
+                         & \multicolumn{1}{c}{(mJy)}        & \multicolumn{1}{c}{pc cm\sups{--3}} & \multicolumn{1}{c}{pc cm\sups{--3}} &                       &     \\
+\hline
+
+B0525+21    &   9.0  &   50.87  &   50  &     1  &  72.3  \\
+B0540+23    &   9.0  &   77.70  &   77  &     1  &  11.7  \\
+B0611+22    &   2.2  &   96.91  &  101  &  5192  &  48.8  \\ 
+J0631+1036  &   0.9  &  125.36  &  125  &     7  &  10.2  \\
+B0834+06    &   4.0  &   12.86  &    9  &   223  &  35.0  \\
+B1133+16    &  32.0  &    4.84  &    7  &   291  &  15.5  \\
+B1737+13    &   3.9  &   48.67  &   46  &  1880  &  49.4  \\
+B1859+03    &   4.2  &  402.08  &  402  &     2  &  20.4  \\
+B1900+01    &   5.5  &  245.17  &  246  &   151  &  35.4  \\
+J1908+0457  &   0.9  &  360.00  &  352  &     3  &  12.9  \\
+J1908+0500  &   0.8  &  201.42  &  202  &   160  &  18.5  \\
+J1910+0728  &   0.9  &  283.70  &  288  &     2  &  10.2  \\
+J1913+0904  &   0.2  &   95.30  &   97  &  1524  &  44.7  \\
+B1913+10    &   1.3  &  241.69  &  245  &     2  &  16.1  \\
+B1933+16    &  42.0  &  158.52  &  154  &    10  &  30.5  \\
+B1937+24    &    *   &  142.88  &  146  &    37  &  24.6  \\
+B2002+31    &   1.8  &  234.82  &  250  &     4  &  27.6  \\ 
+
+\hline
+
+\end{tabular}
+\end{center}
+
+\caption{Parameters for known pulsars detected in the ALFABURST survey. The columns from left to right are, pulsar name, mean flux density at 1400~MHz, catalog DM, observed DM of the strongest pulse, number of detected single-pulses, and maximum single-pulse S/N. The mean flux density at 1400 MHz and catalog DM were obtained from the ATNF pulsar catalog (version 1.56).}
+\label{tab:knpsrtab}
+\end{table}
 
 % alfaburst-initial-survey/notebooks/B1900_01.ipynb
 \begin{figure}
@@ -398,8 +436,7 @@ functional for, on average, 322 hours per beam.  The current system is setup to
 be reliably in use for all beams any time \gls{alfa} is active and in the
 correct receiver turret position. Since April 2017 this stable version of the
 pipeline has run for an additional 196 hours. This has resulted in a total of
-518 hours of processed observing time since ALFABURST began commensal
-observations.
+518 hours of processed observing time since ALFABURST began commensal observations.
 
 %%% OBSERVATION TIME ENDS   %%%
 
@@ -408,11 +445,10 @@ observations.
 \section{Event Classification Strategy}
 \label{sec:event_classify}
 
-
 The significant DM trial range, variety of \gls{rfi} events, and commensal
 nature of the survey, leads to a large number of false detections. Approximately
 $2 \times 10^5$ unique 8.4~s datasets were recorded with at least one detection
-above the minimum peak signal-to-noise (S/N) threshold of 10. For each event
+above the minimum peak S/N threshold of 10. For each event
 window, a diagnostic plot was generated which contained the original dynamic
 spectrum, the dedispersed dynamic spectrum of the S/N-maximized DM, along with a
 frequency collapsed time series of the detection. A set of statistics for each
@@ -475,7 +511,7 @@ Though we report no detection of FRBs in the first two years of observations
 with ALFABURST we have made an initial detection of an as yet unknown broad-band
 (within our band) pulse (Figure \ref{fig:D20170618_spectrum}) at a peak S/N of
 18. The peak S/N is maximized by dedispersion using a DM of 281~pc~cm$^{-3}$ and
-time decimation factor 8. The pulse width is approximately 3 ms wide. The pulse
+time decimation factor 8. The pulse width is approximately 3~ms. The pulse
 occurred in beam 5, and there were no other detections in the other beams at the
 time.
 
@@ -486,13 +522,13 @@ time.
     detected in beam 5 while the telescope was slewing during a PALFA
     observation. There is no known source which has been associated with this
     detection. As the observation was in the galactic plane it is likely
-    galactic in origin.
+    Galactic in origin.
     }
     \label{fig:D20170618_spectrum}
 \end{figure}
 
 The shape of the pulse is made up of two clear components, with the secondary
-pulse arriving approximately 20 ms after the primary pulse, as seen in the
+pulse arriving approximately 20~ms after the primary pulse, as seen in the
 dynamic spectrum (Figure \ref{fig:D20170618_spectrum}). In DM-time space the
 event is compact, consistent with a $\nu^{-2}$ dispersion relation (Figure
 \ref{fig:D20170618_dmspace}), though such a fit has large error bars due to the
@@ -503,13 +539,13 @@ small fractional bandwidth that is processed with ALFABURST.
     \includegraphics[width=1.0\linewidth]{figures/Beam5_fb_D20170618T005616_buffer2_dmspace.pdf}
     \caption{DM-time plot of the 2017 June 18 pulse. The pulse is compact in
     DM-time space, consistent with an astrophysical event. The secondary pulse
-    20 ms after the primary pulse causes the intensity to be slightly elongated
+    20~ms after the primary pulse causes the intensity to be slightly elongated
     to higher trial DMs.
     }
     \label{fig:D20170618_dmspace}
 \end{figure}
 
-The detection occurred at 04:56:16 UT on 2017, June 18 (MJD 57922) during a
+The detection occurred at 04:56:16~UT on 2017, June 18 (MJD 57922) during a
 PALFA observing run. The event was not seen by the PALFA collaboration as it
 occurred when the telescope was slewing between fields and the PALFA
 spectrometers were not running. This is the first known detection of a
@@ -530,7 +566,7 @@ approximately 6 kpc, which is well within the Galaxy. The maximum Galactic
 contribution along this line of sight would produce a DM of
 $\sim800$~pm~cm$^{-3}$.  A search of the ATNF pulsar
 database\footnote{http://www.atnf.csiro.au/people/pulsar/psrcat}
-\citep{2005AJ....129.1993M}, RRAT
+\citep{2005AJ....129.1993M}, Rotating Radio Transient (RRAT)
 catalog\footnote{http://astro.phys.wvu.edu/rratalog}, and recent PALFA
 discoveries \footnote{http://www.naic.edu/$\sim$palfa/newpulsars/} revealed no
 known source with a DM near 281 pc~cm$^{-3}$ within a degree of the pointing.
@@ -540,7 +576,7 @@ lobe for a fraction of a second (assuming it was in the primary lobe and not a
 side lobe). A source on the edge of the \gls{fwhm} beam would transit the beam
 in a maximum of 500~ms for the slew rate of the telescope (at the ALFABURST
 observing frequency this corresponds to a dispersed pulse with a maximum DM of
-3500~pc~cm$^{-3}$).  It could therefore be an RRAT which we serendipitously
+3500~pc~cm$^{-3}$).  It could therefore be a RRAT which we serendipitously
 detected at the correct moment, or it could be an individual pulse from a
 pulsar. This region has been previously surveyed with PALFA and the Parkes
 Multi-beam Survey \citep{2001MNRAS.328...17M} with no significant detection of a
@@ -569,6 +605,8 @@ rate with our survey.  We use a model \citep{2013MNRAS.436L...5L} which assumes
 \gls{frb} sources are standard candles with a fixed spectral index, uniformly
 distributed in co-moving volume. The event rates in this model have been updated
 use to the event rates reported in \cite{2016MNRAS.460.3370C}. 
+
+*** DRL IS HERE ***
 
 Taking advantage of the large forward gain of Arecibo, we account for
 the sensitivity of the 7 ALFA beams out to outer edge of the first
