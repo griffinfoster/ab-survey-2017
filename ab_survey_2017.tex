@@ -326,49 +326,55 @@ spectra replacement does not affect the survey sensitivity.
 \subsection{Single Pulse Search Verification}
 \label{sec:system_verify}
 
-The PALFA survey schedule includes regular observations of known pulsars to verify
-their data analysis pipeline. This provides a consistent verification of our \gls{sps} to
-detect dispersed pulses. As the PALFA survey is targeted at the Galactic plane, a number of
-high \gls{dm} pulsars were observed. Single pulses from B1859+03 (\gls{dm}:
-402), B1900+01 (\gls{dm}: 245) (Figure \ref{fig:B1900}), B2002+31 (\gls{dm}:
-234), B1933+16 (\gls{dm}: 158), among others were detected. Table \ref{tab:knpsrtab} lists the parameters for the known pulsars detected by the \gls{sps}.
+The PALFA survey schedule includes regular observations of known pulsars to
+verify their data analysis pipeline. This provides a consistent verification of
+our \gls{sps} to detect dispersed pulses. As the PALFA survey is targeted at the
+Galactic plane, a number of high \gls{dm} pulsars were observed. Single pulses
+from B1859+03 (\gls{dm}: 402), B1900+01 (\gls{dm}: 245) (Figure
+\ref{fig:B1900}), B2002+31 (\gls{dm}: 234), B1933+16 (\gls{dm}: 158), among
+others were detected. Table \ref{tab:knpsrtab} lists the parameters for the
+known pulsars detected by the \gls{sps}.
 
-% Table of detected pulsars: max SNR, SNR-maximized DM, number of pulses
 \begin{table}
-\begin{center}
-
-\begin{tabular}{cd{2.1}d{3.2}d{3.0}d{4.0}d{2.1}}
-
-\hline
-\multicolumn{1}{c}{PSR} & \multicolumn{1}{c}{S\subs{1400}} & \multicolumn{1}{c}{DM\subs{cat}}    & \multicolumn{1}{c}{DM\subs{obs}}    & \multicolumn{1}{c}{N\subs{pulses}}   & \multicolumn{1}{c}{S/N\subs{max}} \\
-                         & \multicolumn{1}{c}{(mJy)}        & \multicolumn{1}{c}{pc cm\sups{--3}} & \multicolumn{1}{c}{pc cm\sups{--3}} &                       &     \\
-\hline
-
-B0525+21    &   9.0  &   50.87  &   50  &     1  &  72.3  \\
-B0540+23    &   9.0  &   77.70  &   77  &     1  &  11.7  \\
-B0611+22    &   2.2  &   96.91  &  101  &  5192  &  48.8  \\ 
-J0631+1036  &   0.9  &  125.36  &  125  &     7  &  10.2  \\
-B0834+06    &   4.0  &   12.86  &    9  &   223  &  35.0  \\
-B1133+16    &  32.0  &    4.84  &    7  &   291  &  15.5  \\
-B1737+13    &   3.9  &   48.67  &   46  &  1880  &  49.4  \\
-B1859+03    &   4.2  &  402.08  &  402  &     2  &  20.4  \\
-B1900+01    &   5.5  &  245.17  &  246  &   151  &  35.4  \\
-J1908+0457  &   0.9  &  360.00  &  352  &     3  &  12.9  \\
-J1908+0500  &   0.8  &  201.42  &  202  &   160  &  18.5  \\
-J1910+0728  &   0.9  &  283.70  &  288  &     2  &  10.2  \\
-J1913+0904  &   0.2  &   95.30  &   97  &  1524  &  44.7  \\
-B1913+10    &   1.3  &  241.69  &  245  &     2  &  16.1  \\
-B1933+16    &  42.0  &  158.52  &  154  &    10  &  30.5  \\
-B1937+24    &    *   &  142.88  &  146  &    37  &  24.6  \\
-B2002+31    &   1.8  &  234.82  &  250  &     4  &  27.6  \\ 
-
-\hline
-
-\end{tabular}
-\end{center}
-
-\caption{Parameters for known pulsars detected in the ALFABURST survey. The columns from left to right are, pulsar name, mean flux density at 1400~MHz, catalog DM, observed DM of the strongest pulse, number of detected single-pulses, and maximum single-pulse S/N. The mean flux density at 1400 MHz and catalog DM were obtained from the ATNF pulsar catalog (version 1.56).}
-\label{tab:knpsrtab}
+    \begin{center}
+    
+    \begin{tabular}{cd{2.1}d{3.2}d{3.0}d{4.0}d{2.1}}
+    
+    \hline
+    \multicolumn{1}{c}{PSR} & \multicolumn{1}{c}{S\subs{1400}} & \multicolumn{1}{c}{DM\subs{cat}}    & \multicolumn{1}{c}{DM\subs{obs}}    & \multicolumn{1}{c}{N\subs{pulses}}   & \multicolumn{1}{c}{S/N\subs{max}} \\
+                             & \multicolumn{1}{c}{(mJy)}        & \multicolumn{1}{c}{pc cm\sups{--3}} & \multicolumn{1}{c}{pc cm\sups{--3}} &                       &     \\
+    \hline
+    
+    B0525+21    &   9.0  &   50.87  &   50  &     1  &  72.3  \\
+    B0540+23    &   9.0  &   77.70  &   77  &     1  &  11.7  \\
+    B0611+22    &   2.2  &   96.91  &  101  &  5192  &  48.8  \\ 
+    J0631+1036  &   0.9  &  125.36  &  125  &     7  &  10.2  \\
+    B0834+06    &   4.0  &   12.86  &    9  &   223  &  35.0  \\
+    B1133+16    &  32.0  &    4.84  &    7  &   291  &  15.5  \\
+    B1737+13    &   3.9  &   48.67  &   46  &  1880  &  49.4  \\
+    B1859+03    &   4.2  &  402.08  &  402  &     2  &  20.4  \\
+    B1900+01    &   5.5  &  245.17  &  246  &   151  &  35.4  \\
+    J1908+0457  &   0.9  &  360.00  &  352  &     3  &  12.9  \\
+    J1908+0500  &   0.8  &  201.42  &  202  &   160  &  18.5  \\
+    J1910+0728  &   0.9  &  283.70  &  288  &     2  &  10.2  \\
+    J1913+0904  &   0.2  &   95.30  &   97  &  1524  &  44.7  \\
+    B1913+10    &   1.3  &  241.69  &  245  &     2  &  16.1  \\
+    B1933+16    &  42.0  &  158.52  &  154  &    10  &  30.5  \\
+    B1937+24    &    *   &  142.88  &  146  &    37  &  24.6  \\
+    B2002+31    &   1.8  &  234.82  &  250  &     4  &  27.6  \\ 
+    
+    \hline
+    
+    \end{tabular}
+    \end{center}
+    
+    \caption{Parameters for known pulsars detected in the ALFABURST survey. The
+    columns from left to right are, pulsar name, mean flux density at 1400~MHz,
+    catalog DM, observed DM of the strongest pulse, number of detected
+    single-pulses, and maximum single-pulse S/N. The mean flux density at 1400
+    MHz and catalog DM were obtained from the ATNF pulsar catalog (version
+    1.56).}
+    \label{tab:knpsrtab}
 \end{table}
 
 % alfaburst-initial-survey/notebooks/B1900_01.ipynb
