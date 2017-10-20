@@ -91,8 +91,9 @@ Aris Karastergiou$^{1,3,4}$,
 Duncan Lorimer$^{5,6}$, Mayuresh Surnis$^{5,6}$, 
 \and Golnoosh Golpayegani$^{5,6}$, Dan Werthimer$^{2}$,
 Jayanth Chennamangalam$^{1}$,
-\and Kaustubh Rajwade$^{7}$
- and Xin Pei$^{8}$
+\and Kaustubh Rajwade$^{7}$,
+Wes Armour$^{8}$
+ and Xin Pei$^{9}$
 \\
 % List of institutions
 $^{1}$University of Oxford, Sub-Department of Astrophysics, Denys Wilkinson Building, Keble Road, Oxford, OX1 3RH, United Kingdom\\
@@ -102,7 +103,8 @@ $^{4}$Department of Physics and Electronics, Rhodes University, PO Box 94, Graha
 $^{5}$Department of Physics and Astronomy, West Virginia University, Morgantown, WV 26505, USA\\
 $^{6}$Center for Gravitational Waves and Cosmology, West Virginia University, Chestnut Ridge Research Building, Morgantown, WV 26505, USA\\
 $^{7}$Jodrell Bank Centre for Astrophysics, University of Manchester, Oxford Road, Manchester M13 9PL, United Kingdom\\ 
-$^{8}$Xinjiang Astronomical Observatory, Chinese Academy of Sciences, Urumqi, Xinjiang 830011, China\\
+$^{8}$OeRC, Department of Engineering Science, University of Oxford, Keble Road, Oxford, OX1 3QG, United Kingdom\\
+$^{9}$Xinjiang Astronomical Observatory, Chinese Academy of Sciences, Urumqi, Xinjiang 830011, China\\
 }
 
 % These dates will be filled out by the publisher
@@ -607,19 +609,18 @@ be presented elsewhere.
 
 The currently known 24 FRBs vary significantly in \gls{dm}, pulse width, and
 flux density. Despite this, we assume a simple model to derive an expected event
-rate with our survey.  We use a model \citep{2013MNRAS.436L...5L} which assumes
+rate with our survey.  We use a model \citep[see equation 9 of][]{2013MNRAS.436L...5L} which assumes
 \gls{frb} sources are standard candles with a fixed spectral index, uniformly
 distributed in co-moving volume. The event rates in this model have been updated
-use to the event rates reported in \cite{2016MNRAS.460.3370C}. 
-
-*** DRL IS HERE ***
+use to the event rates reported in \cite{2016MNRAS.460.3370C}. For an observed
+pulse of typical width 4~ms (see below), these event rates are in the range 1100--7000
+bursts per sky per day, where the range indicates statistical errors for the 99\% credible region.
 
 Taking advantage of the large forward gain of Arecibo, we account for
-the sensitivity of the 7 ALFA beams out to outer edge of the first
+the sensitivity of the 7 \gls{alfa} beams out to outer edge of the first
 sidelobe. In practice we do this by splitting the beam and first
 sidelobe into shells of progressively lower gain but larger sky
 coverage, and integrate to obtain the totals.
-
 An \gls{alfa} beam is approximately 3.8'~$\times$~3.3' at \gls{fwhm} across the
 band.  The ALFA beam size is known to be relatively fixed in size across the
 band due to the optics \citep{GALFAbeam}.  Given the average observing time per
@@ -629,7 +630,8 @@ small survey coverage compared to most other \gls{frb} surveys, primarily due to
 the narrow beam size of Arecibo. The combined Parkes multi-beam surveys have a
 total of 8231 observation hours \citep{2016MNRAS.460.3370C}, and a FWHM survey
 metric of $\sim 4500 \; \textrm{deg}^2$ hours.  ALFABURST does not compete with
-other surveys on sky coverage, rather it competes on sensitivity.  Using
+other surveys on sky coverage, rather it competes on sensitivity. This results 
+probing a greater greater redshift range than for Parkes. Using
 Equation 6 of \cite{2015MNRAS.452.1254K}, a  single-pulse-search pipeline is
 sensitive to pulses with a minimum flux density
 %
@@ -645,12 +647,12 @@ from the search pipeline which averages together spectra to search for
 scattered pulses. ALFABURST has a native resolution of $\Delta \tau =
 256 \; \mu s$, effective bandwidth $\Delta \nu = 56 \textrm{MHz}$, and
 $\textrm{S/N}_{min} = 10$. The FWHM \gls{sefd} of the \gls{alfa}
-receiver is approximately 3 Jy across the band for all beams.
+receiver is approximately 3~Jy across the band for all beams.
 
 The \gls{sps} pipeline is configured to search for pulses from 256~$\mu$s to 16
 ms. Considering only the main beam lobe, a perfect matched filter would result
 in a sensitivity to pulses with a minimum flux of $S_{256 \mu\textrm{s}} = 250$
-mJy to $S_{16 \; \textrm{ms}} = 31$ mJy \citep{2015MNRAS.452.1254K}. Figure
+mJy to $S_{16 \; \textrm{ms}} = 31$~mJy \citep{2015MNRAS.452.1254K}. Figure
 \ref{fig:fwhm_sefd_z} shows the peak flux density of using the standard candle
 \gls{frb} model as a function of source redshift for different model spectral
 indices. The dashed lines of constant flux show the sensitivity of the ALFABURST
@@ -678,9 +680,12 @@ redshift of $z=3.4$ (a co-moving distance of 6.8 Gpc) and a survey volume of $6
 \times 10^5$ Mpc$^3$ when using all 7 \gls{alfa} beams. The number of galaxies
 sampled in this volume is $6 \times 10^3$ assuming a constant galaxy number
 density of $10^{-2}$ per Mpc$^3$.  The volumetric event rate from
-\cite{2013Sci...341...53T} is stated to be $R_{\textrm{FRB}} = 10^{-3}$
-\glspl{frb} per galaxy per year. With these assumptions, we should expect to
-detect $\sim 1$ \glspl{frb} based on the current observation time. We note once
+\cite{2013Sci...341...53T}, is stated to be $R_{\textrm{FRB}} = 10^{-3}$
+\glspl{frb} per galaxy per year. Adopting the more realistic lower rates
+found by \cite{2016MNRAS.460.3370C}
+based on a larger sample of discoveries, we adopt $R_{\textrm{FRB}}$ to be
+in the range $1.1 \times 10^{-4}$---$7.0 \times 10^{-4}$ \glspl{frb} per galaxy per year.
+With these assumptions, we do not expect any FRB detections based on the current observation time. We note once
 again that the areal covereage used in this calculation is only based on the
 sensitivity and size of the main beam lobe.
 
@@ -783,22 +788,13 @@ the survey volume.
 
 The integrated survey volume out to the first side lobe is $5.8 \times
 10^6$ Mpc$^3$. The expected number of \glspl{frb} in the survey is
-$\sim 3$ when using the galaxy number density and $R_{\textrm{FRB}}$
-stated above. Though this event rate is more complex to model, it
-provides a more accurate assessment of the expected detection rates
+0--2 when using the galaxy number density and range of $R_{\textrm{FRB}}$
+stated above. Though this event rate is more complex to model, it attempts
+to provide a more realistic assessment of the expected detection rates
 based on the apparent flux of previously reported \glspl{frb}. We note
 that the volume we are sampling is biased towards small distances, due
 to the large sky coverage of the low sensitivity outer parts of the
 beam.
-
-In the analysis above, we have not provided error estimates to our
-total expected events. We are assuming standard candle FRBs and flat
-spectra, assumptions which are impossible to attribute error margins
-to. The significance of our result is difficult to quantify, beyond
-stating that, under reasonable assumptions and previous detections, we
-would have expected an FRB in our survey. However, the non-detection
-cannot be assumed to imply significant discrepancy with our current
-understanding of this population.
 
 Figure \ref{fig:sensitivity_range} shows that ALFABURST sensitivity region based
 on pulse width and peak flux, assuming detection at boresight. The ALFABURST
@@ -865,14 +861,26 @@ within this completeness sample except FRB160317.
 
 Multiple factors could be contributing to our non-detection with the ALFABURST
 survey. We derived an expected event rate based on the telescope sensitivity,
-observing time, and a standard candle model \citep{2013MNRAS.436L...5L}. This is
-a simple model based on the empirical event rates from detections in the
-\gls{htru} survey \citep{2013Sci...341...53T}. The repeating nature of
-FRB121102 indicates that there could be multiple classes of \gls{frb}
-progenitors, or this standard candle model does not accurately model event
-rates. The detection of bright, high-DM \glspl{frb} with ASKAP
+observing time, and a standard candle model \citep{2013MNRAS.436L...5L} where the
+rate of FRBs per host galaxy is independent of redsift. This is
+a simple model based on updates to the empirical event rates from detections in the
+\gls{htru} survey \citep{2013Sci...341...53T} by \cite{2016MNRAS.460.3370C}, and 
+assumes that FRBs are singular events. All of these assumptions are subject to
+uncertainty. As shown by recent statistical studies of the Parkes FRBs, there is
+growing evidence that they are not  standard candles, and their event rate is
+redshift dependent (Caleb et al.~2016; Rane 2017). %This is a citation to Akshaya's PhD thesis
+In addition, the recent detections of bright, high-DM \glspl{frb} with ASKAP
 \citep{2017ApJ...841L..12B} and UTMOST \citep{2017MNRAS.468.3746C,atel10697}
-might indicate that \glspl{frb} are not standard candles.
+also calls into question the assumption that \glspl{frb} are  standard candles.
+The repeating nature of
+FRB121102 \citep{2016Natur.531..202S} indicates that there could be multiple classes of \gls{frb}
+progenitors, or this standard candle model does not accurately model event
+rates. The fact that our simple estimate of 0--2 detections so far
+is broadly consistent with our actual null detection indicates that our results
+are not highly sensitive to these assumptions, but that further ALFABURST observations
+will begin to probe the variety of currently highly uncertain features of the FRB
+population. We discuss these issues, and other
+potentially relevent factors, further below.
 
 The limited processing bandwidth of ALFABURST may be a cause of the survey
 non-detection. Multiple detected \glspl{frb} show apparent scintillation and
@@ -910,12 +918,21 @@ indicates that the \cite{2015MNRAS.451.3278M} flux density distribution is not
 as steep as predicted.
 
 The sensitivity of Arecibo allows the ALFABURST survey to probe a search volume
-out to higher red-shifts than other surveys. In the standard candle model a flat
-luminosity function is assumed. If there is a peak similar to the star formation
+out to higher red-shifts than other surveys. Our number estimates have assumed 
+that the density of sources per unit comoving volume is constant.
+If there is a peak similar to the star formation
 rate around $z=2$ \citep{2014ARA&A..52..415M} than the expected event rate
-should be lower. Similarly, if \glspl{frb} are intrinsically steep spectra then
-distant \glspl{frb} will have a decreased observed flux at L-band, possibly
-below the search sensitivity threshold. \cite{2017arXiv170507553L} report
+that our deeper ALFABURST survey probes would actually be higher than our
+simple estimates. \citet{2016MNRAS.458..708C} and Rane (2017) show that a larger
+sample of FRBs in the Parkes surveys is currently required in order to distinguish
+between a constant density versus a redshift dependent model. Neglecting other factors
+that might hinder detection, our null result suggests
+that the density of FRBs per unit comoving volume does not change substantially.
+
+If \glspl{frb} are inherently not flat-spectrum sources, then their fluxes
+will be modified substantially: a steeper spectrum population would be harder
+to detect, while a rising spectrum population would be more readily detectable.
+\cite{2017arXiv170507553L} report
 FRB121102 to be band limited during simultaneous observation campaigns using
 multiple telescopes to cover a broad range of the radio band. \cite{atel10675}
 observed 15 pulses from FRB121102 across the 4-8 GHz band and reported spectral
@@ -923,14 +940,18 @@ variation over a brief period of time. A high redshift, band-limited \gls{frb},
 which ALFABURST is sensitive to, could be shifted below L-band. Such a pulse
 would not be detected with ALFABURST.
 
-That being said, we were able to demonstrate the science capabilities of the 
-instrument with the discovery of a high DM transient in the Galactic Plane. 
+\section{Conclusions and Future Work}
+\label{sec:future_work}
+
+We have described the implementation and initial operations of a commensal
+search for transient dispersed pulses using the ALFA receiver on the Arecibo
+telescope. In our observations carried out so far, we have detected 17 previously known
+pulsars and found one new  high DM transient in the Galactic Plane. 
 Follow-up observations of the same would reveal the true nature of 
 the source. This serendipitous discovery during a slew shows the importance of 
 developing commensal backends for transient searches on large radio telescopes.
 
-\section{Future Work}
-\label{sec:future_work}
+No new FRBs were found in our observations to date. ***MADE IT HERE****
 
 The ALFABURST system will continue to run commensally with other ALFA projects,
 leading to an improvement on the event rate limits of low-fluence \glspl{frb}.
