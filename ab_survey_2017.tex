@@ -88,11 +88,13 @@ Fast Radio Bursts with Arecibo}
 
 \author[G. Foster et al.]{Griffin Foster$^{1,2}$\thanks{E-mail: griffin.foster@physics.ox.ac.uk},
 Aris Karastergiou$^{1,3,4}$,
-Duncan Lorimer$^{5,6}$, Mayuresh Surnis$^{5,6}$, 
-\and Golnoosh Golpayegani$^{5,6}$, Dan Werthimer$^{2}$,
+Golnoosh Golpayegani$^{5,6}$,
+Mayuresh Surnis$^{5,6}$, 
+\and Duncan R. Lorimer$^{5,6}$,  Dan Werthimer$^{2}$,
 Jayanth Chennamangalam$^{1}$,
 \and Kaustubh Rajwade$^{7}$,
-Wes Armour$^{8}$
+Wes Armour$^{8}$,
+Maura McLaughlin$^{5.6}$
  and Xin Pei$^{9}$
 \\
 % List of institutions
@@ -130,10 +132,11 @@ ALFABURST has been searching for Fast Radio Bursts (FRBs) commensally with
 other projects using the Arecibo L-band Feed Array (ALFA) receiver at the
 Arecibo Observatory since July 2015. We describe the observing system and report on the non-detection of any FRBs
 from that time until August 2017 for a total observing time of 518 hours.  With
-current FRB rate models, we expected to see at most two FRBs based
-on the total observing time, telescope sensitivity and beam size. We discuss the
-implications of this non-detection in the context of recent detections
-with other telescopes and the limitation of our search pipeline.  During the
+current FRB rate models, along with 
+measurements of telescope sensitivity and beam size, we estimate
+that this survey probed redshifts out to about 3.4 with an effective survey volume of around 600,000~Mpc$^3$. Based on this, we would expect
+to see at most two FRBs based. We discuss the
+implications of this non-detection in the context of results from other telescopes and the limitation of our search pipeline.  During the
 survey, single pulses from 17 known pulsars were detected.  We also report the
 discovery of an interesting Galactic radio transient with a pulse width of 3~ms and dispersion measure of
 281~pc~cm$^{-3}$, which was detected while the telescope was slewing between
@@ -339,10 +342,10 @@ high \gls{dm} pulsars were observed. Single pulses from B1859+03 (\gls{dm}:
 \begin{table}
 \begin{center}
 
-\begin{tabular}{cd{2.1}d{3.2}d{3.0}d{4.0}d{2.1}}
+\begin{tabular}{lrrrrr}
 
 \hline
-\multicolumn{1}{c}{PSR} & \multicolumn{1}{c}{S\subs{1400}} & \multicolumn{1}{c}{DM\subs{cat}}    & \multicolumn{1}{c}{DM\subs{obs}}    & \multicolumn{1}{c}{N\subs{pulses}}   & \multicolumn{1}{c}{S/N\subs{max}} \\
+\multicolumn{1}{c}{PSR} & \multicolumn{1}{c}{S\subs{1400}} & \multicolumn{1}{c}{DM\subs{cat}}    & \multicolumn{1}{c}{DM\subs{obs}}    & \multicolumn{1}{c}{N\subs{pulses}}   & \multicolumn{1}{c}{S/N} \\
                          & \multicolumn{1}{c}{(mJy)}        & \multicolumn{1}{c}{pc cm\sups{--3}} & \multicolumn{1}{c}{pc cm\sups{--3}} &                       &     \\
 \hline
 
@@ -603,7 +606,8 @@ be presented elsewhere.
 
 The currently known 24 FRBs vary significantly in \gls{dm}, pulse width, and
 flux density. Despite this, we assume a simple model to derive an expected event
-rate with our survey.  We use a model \citep[see equation 9 of][]{2013MNRAS.436L...5L} which assumes
+rate with our survey\footnote{Jupyter notebooks used to carry out this work are freely available and are hosted at https://github.com/griffinfoster/alfaburst-initial-survey}.
+We use a model \citep[see equation 9 of][]{2013MNRAS.436L...5L} which assumes
 \gls{frb} sources are standard candles with a fixed spectral index, uniformly
 distributed in co-moving volume. The event rates in this model have been updated
 use to the event rates reported in \cite{2016MNRAS.460.3370C}. For an observed
@@ -750,7 +754,7 @@ integrating over the remaining beam.
     \caption{Survey metric as a function of the ALFA receiver minimum
     sensitivity using the ALFA primary and first side lobes. The $-9$ dB point
     (green circle) which is the beginning of the first side lobe sensitivity and
-    $-12$ dB point (red square) which is the FWHM of the first side lobe are
+    $-12$~dB point (red square) which is the FWHM of the first side lobe are
     marked.
     }
     \label{fig:survey_metric_sense}
@@ -781,7 +785,7 @@ the survey volume.
 \end{figure}
 
 The integrated survey volume out to the first side lobe is $5.8 \times
-10^6$ Mpc$^3$. The expected number of \glspl{frb} in the survey is
+10^6$~Mpc$^3$. The expected number of \glspl{frb} in the survey is
 0--2 when using the galaxy number density and range of $R_{\textrm{FRB}}$
 stated above. Though this event rate is more complex to model, it attempts
 to provide a more realistic assessment of the expected detection rates
@@ -945,10 +949,18 @@ Follow-up observations of the same would reveal the true nature of
 the source. This serendipitous discovery during a slew shows the importance of 
 developing commensal backends for transient searches on large radio telescopes.
 
-No new FRBs were found in our observations to date. ***MADE IT HERE****
+No new FRBs were found in our observations to date. This appears to be
+broadly consistent with the expectations from a simple model
+in which FRBs are treated as flat-spectrum standard candles uniformly distributed per unit
+comoving volume. We expect continued observations with ALFABURST to run commensally 
+with other ALFA projects,
+leading to an improvement on the event rate limits of low-fluence \glspl{frb}. Quadrupling
+the current time on-sky, for example, 
+would lead to an expectation of several FRBs and allow us to more
+quantitatively test the validity of
+our assumptions about their underlying
+population.
 
-The ALFABURST system will continue to run commensally with other ALFA projects,
-leading to an improvement on the event rate limits of low-fluence \glspl{frb}.
 The current \gls{sps} pipeline is undergoing a significant upgrade. The input
 bandwidth is limited to 56 MHz of the full 336 MHz digital band due to IO
 limitations. A new pipeline developed for \gls{ska} \gls{nip} will be used to
@@ -961,15 +973,13 @@ features and auto-generate classes. This will allow for an improved follow-up
 and analysis cycle.
 
 Over the time period ALFABURST has been active, the use of \gls{alfa} has
-decreased as the PALFA and AGES surveys end. The 327 MHz and L-band wide feeds
-are commonly used. We are generalizing the \gls{alfa} specific \gls{sps}
-pipeline to be used when these feeds are active, increasing our survey time and
-sampling a larger portion of frequency space. Additionally, our search pipeline
-will be duplicated for use on the \gls{gbt} to be commensally run with L-band
-observations. 
+decreased as a number of surveys carried out with it have come to an end. We are currently generalizing the \gls{alfa} specific \gls{sps}
+pipeline to be used when other feeds are active. The results from this study would increase our survey time and
+sampling a larger portion of frequency space and will be reported elsewhere. 
 
-Jupyter notebooks are hosted on our public git
-repository\footnote{https://github.com/griffinfoster/alfaburst-initial-survey}.
+ 
+
+
 
 \bibliographystyle{mnras}
 \bibliography{alfaburst.bib} 
