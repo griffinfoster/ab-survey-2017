@@ -451,21 +451,44 @@ pipeline has run for an additional 196 hours. This has resulted in a total of
 \label{sec:event_classify}
 
 The significant DM trial range, variety of \gls{rfi} events, and commensal
-nature of the survey, leads to a large number of false detections. Approximately
-$2 \times 10^5$ unique 8.4~s datasets were recorded with at least one detection
-above the minimum peak S/N threshold of 10. For each event
+nature of the survey, leads to a large number of false detections.
+Approximately $2 \times 10^5$ unique 8.4~s datasets were recorded with at least
+one detection above the minimum peak S/N threshold of 10. For each event
 window, a diagnostic plot was generated which contained the original dynamic
-spectrum, the dedispersed dynamic spectrum of the S/N-maximized DM, along with a
-frequency collapsed time series of the detection. A set of statistics for each
-of these plots was also computed when this figure was generated.
+spectrum, the dedispersed dynamic spectrum of the S/N-maximized DM, along with
+a frequency collapsed time series of the detection. A set of statistics for
+each of these plots was also computed when this figure was generated.
 
 % TODO:
-% add figures: class distribution, PCA of events?
-% details about classes
+% class descriptions, distribution
+% model description:
+%	raw features
+%	reduced features
+%	preprocessing
+%	random forest with one vs rest multiclass
+%	stratified k fold cross validation
+%	hyper parameter search
+%	confusion matrix
+%	log-loss/cross entropy
+% histogram: probability to class 9 true-positive
+% top features
+
 A sample of the datasets were labelled into 8 categories of RFI , systematic
 effects, and astrophysical source (pulsars). Classification using these labels
 has not been constant throughout the survey due to software improvement, and
 changes in telescope observing strategy.
+
+\begin{enumerate}
+	\item Unclipped RFI or Noise
+	\item Wide-band, duration > 1 second clipped RFI (2016+)
+	\item Wide-band, duration < 1 second clipped RFI (2016+)
+	\item Wide-band, short duration clipped RFI (2015)
+	\item Sharp bandpass transition
+	\item Wide-band, bursty, clipped RFI (2015)
+	\item Error in spectra captue or replacement
+	\item Systematic int/float overflow
+	\item Astrophysical pulse or unknown event
+\end{enumerate}
 
 Pulses from known pulsars were used as a proxy category for the FRB class. The
 number of astrophysical pulse detections was low compared to the number of
