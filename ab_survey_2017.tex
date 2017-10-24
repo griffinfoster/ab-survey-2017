@@ -190,7 +190,7 @@ been detected with UTMOST \citep{2017MNRAS.468.3746C,atel10697,atel10867} and
 ASKAP \citep{2017ApJ...841L..12B}.
 
 Even with the current small sample of FRBs population, it is clear that their
-properties vary significantly. The measured \glspl{dm} range from
+ properties vary significantly. The measured \glspl{dm} range from
 176~pc~cm$^{-3}$ (FRB~170827) to 2596 pc~cm$^{-3}$ (FRB~160102), with pulse
 widths ranging from sub-ms (unresolved) to 26~ms, and apparent flux densities
 covering four orders of magnitude.  If the population is extragalactic then the
@@ -291,32 +291,31 @@ have detected no \glspl{frb} in our commensal survey.
 An inline RFI exciser is implemented in the pipeline to mitigate strong RFI
 sources. This leads to a significant reduction in the number of false-positive
 detections in the dedispersion search.  Individual frequency channels in a
-spectra are replaced when they exceed a threshold $T_{\textrm{chan}}$ after the
-spectra is normalized ($\mu=0$, $\sigma=1$). And, entire spectra are clipped
-when the summed spectra exceeds a threshold $T_{\textrm{spectra}}$. For standard
+spectrum are replaced when the power exceeds a threshold $T_{\textrm{chan}}$ after the
+spectrum is normalized ($\mu=0$, $\sigma=1$). Entire spectra are also clipped
+when their frequency-integrated power exceeds a threshold $T_{\textrm{spectra}}$. For standard
 ALFABURST operation $T_{\textrm{chan}} = 5$ and $T_{\textrm{spectra}} = 10$.
-The \gls{rfi} exciser only operates in the undecimated-in-time case ($D=1$), that
-is the sensitivity that we are most concerned about when setting the \gls{rfi}
-exciser thresholds.
+The \gls{rfi} exciser operates on data prior to any time integration ($D=1$).
 
-For very bright pulses, the \gls{rfi} exciser will replace channels or spectra,
+For very bright pulses, the \gls{rfi} exciser will erroneously replace channels or spectra,
 reducing the overall flux.  For the sensitivity of the \gls{alfa} receiver,
 individual channels with flux greater than 2.8~Jy and, frequency-integrated flux
 greater than $\sim250$ mJy are excised. The peaks of bright \glspl{frb} such as
 FRB150807 and FRB170827 would be significantly clipped by the exciser. But, the
-edges of the pulse would not be, these \glspl{frb} would still be detected at a
+edges of the pulse would not. Both of these \glspl{frb} would still be detected at a
 significant peak S/N. All previously reported \glspl{frb} would be detected with
 ALFABURST at high peak S/N even if partially clipped.
 
-The zero-DM removal and spectra replacement affects low-DM pulses. For
-reference, the minimum \gls{dm} of a pulse before the at least one channel is
-shifted to the next spectra in time is \gls{dm} $=1.8$~pc~cm$^{-3}$ for the
+The zero-DM removal and spectral replacement affects low-DM pulses. For
+reference, the minimum \gls{dm} before the total dispersive delay across the
+band is equal to a time sample is \gls{dm}~$=1.8$~pc~cm$^{-3}$ for the
 typical ALFABURST observing band (using Eq. 5.1 of \cite{2004hpa..book.....L}).
-And, the minimum \gls{dm} before each frequency channel is in a separate
-spectra is \gls{dm} $=976$~pc~cm$^{-3}$. Single pulses from low-DM pulsars such
-as B0834+06 are often clipped by spectra replacement, but are still detected at
+The minimum \gls{dm} before the dispersive delay within a single channel equals
+the sampling time (also known as the diagonal \gls{dm}) is 
+\gls{dm}~$=976$~pc~cm$^{-3}$. Single pulses from low-DM pulsars such
+as B0834+06 are often clipped by the exciser, but are still detected at
 significant peak S/N (see Table \ref{tab:knpsrtab}). As ALFABURST is focused on
-detecting high-DM pulses spectra replacement does not affect the survey
+detecting high-DM pulses, spectral replacement does not affect the survey
 sensitivity.
 
 %%% INLINE RFI EXCISION END %%%
@@ -338,7 +337,7 @@ known pulsars detected by the \gls{sps}.
 \begin{table}
     \begin{center}
     
-    \begin{tabular}{cd{2.1}d{3.2}d{3.0}d{4.0}d{2.1}}
+    \begin{tabular}{ld{2.1}d{3.2}d{3.0}d{4.0}d{2.1}}
     
     \hline
     \multicolumn{1}{c}{PSR} & \multicolumn{1}{c}{S\subs{1400}} & \multicolumn{1}{c}{DM\subs{cat}}    & \multicolumn{1}{c}{DM\subs{obs}}    & \multicolumn{1}{c}{N\subs{pulses}}   & \multicolumn{1}{c}{S/N\subs{max}} \\
@@ -713,18 +712,18 @@ freely available and are hosted at
 https://github.com/griffinfoster/alfaburst-initial-survey}.  We use a model
 \citep[see equation 9 of][]{2013MNRAS.436L...5L} which assumes \gls{frb} sources
 are standard candles with a fixed spectral index, uniformly distributed in
-co-moving volume. The event rates in this model have been updated use to the
+co-moving volume. The event rates in this model have been updated to the
 event rates reported in \cite{2016MNRAS.460.3370C}. For an observed pulse of
 typical width 4~ms (see below), these event rates are in the range 1100--7000
 bursts per sky per day, where the range indicates statistical errors for the
 99\% credible region.
 
 Taking advantage of the large forward gain of Arecibo, we account for the
-sensitivity of the 7 \gls{alfa} beams out to outer edge of the first side lobe.
+sensitivity of the 7 \gls{alfa} beams out to the outer edge of the first side lobe.
 In practice we do this by splitting the beam and first side lobe into shells of
 progressively lower gain but larger sky coverage, and integrate to obtain the
 totals.  An \gls{alfa} beam is approximately 3.8'~$\times$~3.3' at \gls{fwhm}
-across the band.  The ALFA beam size is known to be relatively fixed in size
+across the band.  The ALFA beam is known to be relatively fixed in size
 across the band due to the optics \citep{GALFAbeam}.  Given the average
 observing time per beam of 518 hours this results in a survey coverage of $\sim
 10 \; \textrm{deg}^2 \; \textrm{hours}$ when accounting for all 7 beams. This is
@@ -733,7 +732,7 @@ to the narrow beam size of Arecibo. The combined Parkes multi-beam surveys have
 a total of 8231 observation hours \citep{2016MNRAS.460.3370C}, and a FWHM survey
 metric of $\sim 4500 \; \textrm{deg}^2$ hours.  ALFABURST does not compete with
 other surveys on sky coverage, rather it competes on sensitivity. This results
-probing a greater greater redshift range than for Parkes. Using Equation 6 of
+in probing a greater redshift range than for Parkes. Using Equation 6 of
 \cite{2015MNRAS.452.1254K}, a  single-pulse-search pipeline is sensitive to
 pulses with a minimum flux density
 %
@@ -743,7 +742,7 @@ S_{\rm min} = \textrm{SEFD} \frac{\textrm{S/N}_{\rm min}}{\sqrt{D \; \Delta \tau
 \end{equation}
 %
 which is a function of the telescope \gls{sefd}, the minimum S/N detection level
-$\textrm{S/N}_{\rm min}$ and the decimation rate $D$ compared to the native
+$\textrm{S/N}_{\rm min}$ and the decimation factor $D$ compared to the native
 instrumental time resolution $\tau$, this comes from the search pipeline which
 averages together spectra to search for scattered pulses. ALFABURST has a native
 resolution of $\Delta \tau = 256 \; \mu s$, effective bandwidth $\Delta \nu = 56
@@ -837,7 +836,7 @@ redshift as a function of beam size and sensitivity. Plotting the survey metric
 as a function of maximum redshift (Figure \ref{fig:full_sefd_z}) shows how the
 full beam model increases the survey metric as a function of redshift. The total
 survey volume is computed by integrating over redshift.  Including additional
-ALFA side lobes results in minimal increase in the survey volume.
+ALFA side lobes beyond the first side lobes, results in minimal increase in the survey volume.
 
 % alfaburst-initial-survey/notebooks/ALFABURST_Derived_FRB_Rates.ipynb
 \begin{figure}
@@ -856,20 +855,21 @@ The integrated survey volume out to the first side lobe is $5.8 \times
 using the galaxy number density and range of $R_{\textrm{FRB}}$ stated above.
 Though this event rate is more complex to model, it attempts to provide a more
 realistic assessment of the expected detection rates based on the apparent flux
-of previously reported \glspl{frb}. We note that the volume we are sampling is
-biased towards small distances, due to the large sky coverage of the low
-sensitivity outer parts of the beam.
+of previously reported \glspl{frb} and a flat spectral index.
+%We note that the volume we are sampling is
+%biased towards small distances, due to the large sky coverage of the low
+%sensitivity outer parts of the beam.
 
-Figure \ref{fig:sensitivity_range} shows that ALFABURST sensitivity region based
+Figure \ref{fig:sensitivity_range} shows the ALFABURST sensitivity  based
 on pulse width and peak flux, assuming detection at boresight. The ALFABURST
-sensitivity region (purple) indicates the survey would be able to detect the all
+sensitivity region (purple) indicates the survey would be able to detect all
 previously reported \glspl{frb}. Bright \glspl{frb} such as FRB150807 and
 FRB170827 would be partially clipped by the inline RFI exciser (Section
 \ref{sec:rfi_excise}), but they would sill be detected at a high peak S/N.
 Recent detections with UTMOST \citep{2017MNRAS.468.3746C,atel10697,atel10867}
 indicate that the parameter space in pulse width should be extended.  FRB170827
 has a measured pulse width of 26~ms. Currently the pipeline decimates in time
-out to 16~ms. The pipeline still sensitive to wider pulses, but at a loss in S/N
+out to 16~ms. The pipeline is still sensitive to wider pulses, but at a loss in S/N
 as indicated in the slope on the right side of the shaded region of Figure
 \ref{fig:sensitivity_range}.  Similarly, the left side of the region is sloped
 as ALFABURST is sensitive to bright pulses with widths narrower than $256~\mu$s.
@@ -914,7 +914,7 @@ growing evidence that they are not  standard candles, and their event rate is
 redshift dependent \citep{2016MNRAS.458..708C,ranethesis}.  In addition, the
 recent detections of bright, high-DM \glspl{frb} with ASKAP
 \citep{2017ApJ...841L..12B} and UTMOST \citep{2017MNRAS.468.3746C,atel10697}
-also calls into question the assumption that \glspl{frb} are  standard candles.
+also call into question the assumption that \glspl{frb} are  standard candles.
 The repeating nature of FRB121102 \citep{2016Natur.531..202S} indicates that
 there could be multiple classes of \gls{frb} progenitors, or this standard
 candle model does not accurately model event rates. The fact that our simple
@@ -928,10 +928,10 @@ The limited processing bandwidth of ALFABURST may be a cause of the survey
 non-detection. Multiple detected \glspl{frb} show apparent scintillation and
 steep spectral indices. It is not possible to differentiate between an apparent
 spectral index induced by the beam or an absolute spectral index from the
-source. Though, the localization and repeated detections of FRB121102 show there
-is significant spectral variation from the source or due to the intervening
+source. The localization and repeated detections of FRB121102, however, show there
+is significant spectral variation, either intrinsic to the source or due to the intervening
 medium. Other \glspl{frb} show frequency-dependent structure which could be due
-to beam colorization, intrinsic structure, or due an intermediate effect. Plasma
+to beam colorization, intrinsic structure, or due to an intermediate effect. Plasma
 lenses in the \gls{frb} progenitor host galaxy could be modulating the pulse
 amplitude as a function of frequency and time (if the source repeats)
 \citep{2017ApJ...842...35C}. This effect introduces an additional uncertainty in
@@ -940,19 +940,19 @@ the \gls{frb} rate modeling as the apparent spectral indices of detected
 \gls{frb} (repeating or not) would be dependent on multiple factors including
 observing frequency, bandwidth, epoch, and even sky direction. If an \gls{frb}
 did occur in the field of view of the telescope while ALFABURST was in operation
-we could have been unlucky and scintillation or lensing caused the pulse in the
+we could have been unlucky, scintillation or lensing having caused the pulse in the
 band to go below the detection threshold. Assuming no scintillation or lensing,
 an increase to the full \gls{alfa} band would result in a $\sqrt{6}$ increase in
-sensitivity. But, also important is a more complete sampling of the frequency
+sensitivity compared to what we currently have. But, also important is a more complete sampling of the frequency
 space if these effects are modulating the pulse.
 
 \cite{2015MNRAS.451.3278M} conclude that the apparent deficit of \glspl{frb} at
 low galactic latitudes is due to diffractive interstellar scintillation. Their
 model shows that the true event rate is a factor of $\sim 4$ lower than the rate
-reported in \cite{2013Sci...341...53T}, which the rate used in the standard
-candle model \citep{2013MNRAS.436L...5L}. Though the ALFABURST survey is evenly
+reported in \cite{2013Sci...341...53T}, which is also the rate used in the standard
+candle model \citep{2013MNRAS.436L...5L}. The ALFABURST survey is evenly
 split across high and low galactic latitudes.  \cite{2015MNRAS.451.3278M} predict
-that the increase in sensitivity of using Arecibo compared to Parkes should
+that the increase in sensitivity of Arecibo compared to Parkes should
 result in a factor of 14 increase in detections, assuming a similar bandwidth
 ($\sim 300$ MHz). Accounting for the smaller bandwidth of ALFABURST means there
 should still be a factor of a few increase in rates. This non-detection result
@@ -972,7 +972,7 @@ factors that might hinder detection, our null result suggests that the density
 of FRBs per unit co-moving volume does not change substantially.
 
 If \glspl{frb} are inherently not flat-spectrum sources, then their fluxes will
-be modified substantially: a steeper spectrum population would be harder to
+be modified substantially: a steeper negative spectrum population would be harder to
 detect, while a rising spectrum population would be more readily detectable.
 \cite{2017arXiv170507553L} report FRB121102 to be band limited during
 simultaneous observation campaigns using multiple telescopes to cover a broad
@@ -989,7 +989,7 @@ We have described the implementation and initial operations of a commensal
 search for transient dispersed pulses using the ALFA receiver on the Arecibo
 telescope. In our observations carried out so far, we have detected 17
 previously known pulsars and found one new  high DM transient in the Galactic
-Plane.  Follow-up observations of the same would reveal the true nature of the
+Plane.  Follow-up observations of the same will reveal the true nature of the
 source. This serendipitous discovery during a slew shows the importance of
 developing commensal backends for transient searches on large radio telescopes.
 
@@ -1001,7 +1001,7 @@ other ALFA projects, leading to an improvement on the event rate limits of
 low-fluence \glspl{frb}. Quadrupling the current time on-sky, for example,
 would lead to an expectation of several FRBs and allow us to more
 quantitatively test the validity of our assumptions about their underlying
-population.
+population, especially the rate dependence on redshift.
 
 The current \gls{sps} pipeline is undergoing a significant upgrade. The input
 bandwidth is limited to 56 MHz of the full 336 MHz digital band due to IO
@@ -1018,8 +1018,7 @@ Over the time period ALFABURST has been active, the use of \gls{alfa} has
 decreased as a number of surveys carried out with it have come to an end. We
 are currently generalizing the \gls{alfa} specific \gls{sps} pipeline to be
 used when other feeds are active. The results from this study would increase
-our survey time and sampling a larger portion of frequency space and will be
-reported elsewhere. 
+our survey time, and sample a larger portion of frequency space. 
 
 \section*{ACKNOWLEDGEMENTS}
 
@@ -1029,7 +1028,7 @@ supported by NSF award number OIA-1458952.  G.F. acknowledges support from the
 Breakthrough Listen Initiative. Breakthrough Listen is managed by the
 Breakthrough Initiatives, sponsored by the Breakthrough Prize
 Foundation\footnote{breakthroughinitiatives.org}.
-
+ 
 \bibliographystyle{mnras}
 \bibliography{alfaburst.bib} 
 
