@@ -74,7 +74,7 @@
 \newacronym{igm}{IGM}{Intergalactic Medium}
 \newacronym{ism}{ISM}{Interstellar Medium}
 \newacronym{nip}{NIP}{Non-image Processing}
-\newacronym{paf}{PAF}{Phased-Array Feeds}
+\newacronym{paf}{PAF}{Phased-Array Feed}
 \newacronym{rfi}{RFI}{Radio-frequency Interference}
 \newacronym{ska}{SKA}{Square Kilometre Array}
 \newacronym{sefd}{SEFD}{System Equivalent Flux Density}
@@ -93,11 +93,14 @@ Golnoosh Golpayegani$^{5,6}$,
 \and Mayuresh Surnis$^{5,6}$, 
 Duncan R. Lorimer$^{5,6}$,
 Jayanth Chennamangalam$^{1}$,
-Maura McLaughlin$^{5,6}$,
-\and Wes Armour$^{8}$,
-Xin Pei$^{9}$,
-Kaustubh Rajwade$^{7},
+\and Maura McLaughlin$^{5,6}$,
+Wes Armour$^{7}$,
+Xin Pei$^{8}$,
+Kaustubh Rajwade$^{9}$, 
 \and Dan Werthimer$^{2}$,
+David H. E. MacMahon$^{2}$,
+Andrew P. V. Siemion$^{2,10,11}$,
+\and Jeff Cobb$^{2}$,
 and Chris J. Williams$^{1}$
 \\
 % List of institutions
@@ -107,9 +110,11 @@ $^{3}$Physics Department, University of the Western Cape, Cape Town 7535, South 
 $^{4}$Department of Physics and Electronics, Rhodes University, PO Box 94, Grahamstown 6140, South Africa\\
 $^{5}$Department of Physics and Astronomy, West Virginia University, Morgantown, WV 26505, USA\\
 $^{6}$Center for Gravitational Waves and Cosmology, West Virginia University, Chestnut Ridge Research Building, Morgantown,\\ WV 26505, USA\\
-$^{7}$Jodrell Bank Centre for Astrophysics, University of Manchester, Oxford Road, Manchester M13 9PL, United Kingdom\\ 
-$^{8}$OeRC, Department of Engineering Science, University of Oxford, Keble Road, Oxford, OX1 3QG, United Kingdom\\
-$^{9}$Xinjiang Astronomical Observatory, Chinese Academy of Sciences, Urumqi, Xinjiang 830011, China\\
+$^{7}$OeRC, Department of Engineering Science, University of Oxford, Keble Road, Oxford, OX1 3QG, United Kingdom\\
+$^{8}$Xinjiang Astronomical Observatory, Chinese Academy of Sciences, Urumqi, Xinjiang 830011, China\\
+$^{9}$Jodrell Bank Centre for Astrophysics, University of Manchester, Oxford Road, Manchester M13 9PL, United Kingdom\\
+$^{10}$Radboud University, Nijmegen, Netherlands\\
+$^{11}$SETI Institute, Mountain View, California, USA\\
 }
 
 % These dates will be filled out by the publisher
@@ -169,7 +174,7 @@ density along the line of sight to the source.
 Although the physical process that gives rise to FRBs is unknown, the
 possibility that they originate at cosmological distances, and their potential
 use as natural probes of large-scale structure and magneto-ionic content of the
-Universe makes them worthy of attention. They appear as bright sources at
+Universe makes them worthy of attention. They appear as bright sources at the
 telescopes on Earth, which indicates high luminosities given the implied
 distance.  As short duration bursts, probably emanating from point-like sources,
 they offer the unique opportunities to probe the inter-galactic medium
@@ -196,7 +201,7 @@ Even with the current small sample of FRBs population, it is clear that their
 widths ranging from sub-ms (unresolved) to 26~ms, and apparent flux densities
 covering four orders of magnitude.  If the population is extragalactic then the
 sky distribution is isotropic.  But, there is an apparent observational
-dispartiy in the \gls{frb} event rate between high and low Galactic latitudes,
+disparity in the \gls{frb} event rate between high and low Galactic latitudes,
 possibly due to diffractive interstellar scintillation
 \citep{2015MNRAS.451.3278M}.
 
@@ -271,7 +276,8 @@ automated, real-time pulse detection. We perform inline radio-frequency
 interference (RFI) removal, baselining using zero-DM removal
 \citep{2009MNRAS.395..410E}, and spectrum normalization before single pulse
 detection. During this time period a \gls{sps} was performed from \gls{dm} 0 to
-10000~pc~cm$^{-3}$, pulse widths from $256~\mu s$ to $16$~ms, across a 56~MHz bandwidth for
+10000~pc~cm$^{-3}$, pulse widths from $256~\mu s$ to $16$~ms (using a logarithmic
+decimation factor $D=1,2,4,\ldots,64$), across a 56~MHz bandwidth for
 all 7 beams. We return to the effective \gls{dm} of the search in Section
 \ref{sec:event_rates}. The gain of Arecibo allows for the most sensitive
 \gls{frb} search to date.
@@ -297,14 +303,14 @@ after the spectrum is normalized to zero mean, unity standard deviation
 ($\mu=0$, $\sigma=1$). Entire spectra are also clipped when their
 frequency-integrated power exceeds a threshold $T_{\textrm{spectra}}$. For
 standard ALFABURST operation $T_{\textrm{chan}} = 5$ and $T_{\textrm{spectra}} =
-10$.  The \gls{rfi} exciser operates on data prior to any time integration
-($D=1$).
+10$.  The \gls{rfi} exciser operates on data prior to any time decimation and 
+integration ($D=1$).
 
 For very bright pulses, the \gls{rfi} exciser will erroneously replace channels or spectra,
 reducing the overall flux.  For the sensitivity of the \gls{alfa} receiver,
 individual channels with flux greater than 2.8~Jy and, frequency-integrated flux
 greater than $\sim250$ mJy are excised. The peaks of bright \glspl{frb} such as
-FRB150807 and FRB170827 would be significantly clipped by the exciser. But, the
+FRB~150807 and FRB~170827 would be significantly clipped by the exciser. But, the
 edges of the pulse would not. Both of these \glspl{frb} would still be detected at a
 significant peak S/N. All previously reported \glspl{frb} would be detected with
 ALFABURST at high peak S/N even if partially clipped.
@@ -511,14 +517,14 @@ updated, the RFI environment has changed, and the telescope observing schedule
 has changed over the time the survey has run. Classes 2 and 3 occur after the
 inline RFI exciser was improved in 2016. Whereas classes 4 and 6 are events
 that occur with the original RFI exciser. Because the ALFABURST is operating in
-commensal mode the band can unexpectedly be change due to a change in the
-observing frequency, these are labelled as class 5 events. Class 7 and 8 are due
+commensal mode, the band can unexpectedly be changed due to a change in the
+observing frequency, these event windows are labelled as class 5 events. Class 7 and 8 are due
 to packet loss and incorrect digital gain settings. We found that class 8 events
 can be removed simply by checking for overflow values in the spectra, and
 therefore this class is dropped before building a classifier model.
 
 Pulses from known pulsars were used as a proxy class for the FRB class. The
-number of astrophysical pulse detections was low compared to the number of
+number of astrophysical pulse detections was low compared to the total number of
 false-positive detections. It was necessary to use a large number of classes
 as RFI and systematic effects took on a variety of forms.  This had the
 additional effect of balancing out the number of events in each class, making
@@ -528,12 +534,12 @@ These features along with the labels were used to build a random forest
 probabilistic classifier model \citep{Ho:1995:RDF:844379.844681,Breiman2001}.
 This model is then used to probabilistically predict which class belongs to an unlabelled
 data set. A one vs. the rest multi-class classifier strategy was used
-for training. Before training, the features of the labelled data set was median
+for training. Before training, the features of the labelled data sets were median
 removed and standard deviation normalized using an interquartile robust scaler.
 A random forest of 80 trees and 20 random features per node split was found to
 produce the best score in a hyper-parameter grid search using a
 log-loss scoring metric. During training and hyper-parameter optimization a
-stratified k-fold cross-validation (3 splits) procedure was used.
+stratified k-fold **What is this??? Add ref?*** cross-validation (3 splits) procedure was used.
 
 The trained model is successful at predicting the majority of the astrophysical
 events to be astrophysical with high probability, as shown in the confusion
@@ -543,7 +549,7 @@ were misclassified as being likely astrophysical. A reasonably small number of
 false-positive events to inspect. But, of the 163 astrophysical pulses in the
 testing set, 6 events were misclassified. This is a more serious issue as we
 would like to minimize the number of false-negative events for astrophysical
-events.
+event windows.
 
 % watermark:/home/griffin/data/alfa/priorityModel/notebooks/modelSandbox.ipynb
 \begin{figure}
@@ -564,8 +570,6 @@ pulses to be of the astrophysical class in the test set are all above 0.25
 false-positive for class 9 above this probability. We use this threshold to
 select the top candidates from the survey. The events are sorted into a priority
 queue based on the probability the event is astrophysical.
-% TODO: Can you quote the Recall and FNR for comparison with other AI
-% implementations?
 
 % watermark:/home/griffin/data/alfa/priorityModel/notebooks/modelSandbox.ipynb
 \begin{figure}
@@ -604,7 +608,7 @@ simple filters to reduce the number of false-positive detections without relying
 on the classifier model. For example, datasets in which the maximum DM of events
 was less than 50 were cut.  Given the optimal dispersion measure,
 DM$_{\textrm{opt}}$, obtained from the S/N-maximized DM trial,  if the DM range
-exceeds $(0.5 \times DM_{\textrm{opt}}, 1.5 \times DM_{\textrm{opt}})$, then the
+exceeds $(0.5 \times {\rm DM}_{\textrm{opt}}, 1.5 \times {\rm DM}_{\textrm{opt}})$, then the
 event is due to long duration RFI and is cut.  Applying the various filters we
 reduced the number of datasets to approximately 30,000. The windows were sorted
 by S/N, and the top S/N events were examined first.  During this process all
