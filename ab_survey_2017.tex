@@ -95,13 +95,13 @@ Duncan R. Lorimer$^{5,6}$,
 Jayanth Chennamangalam$^{1}$,
 \and Maura McLaughlin$^{5,6}$,
 Wes Armour$^{7}$,
-Xin Pei$^{8}$,
-Kaustubh Rajwade$^{9}$, 
-\and Dan Werthimer$^{2}$,
+Jeff Cobb$^{2}$,
 David H. E. MacMahon$^{2}$,
+\and Xin Pei$^{8}$,
+Kaustubh Rajwade$^{9}$, 
 Andrew P. V. Siemion$^{2,10,11}$,
-\and Jeff Cobb$^{2}$,
-and Chris J. Williams$^{1}$
+Dan Werthimer$^{2}$,
+\and and Chris J. Williams$^{1}$
 \\
 % List of institutions
 $^{1}$University of Oxford, Sub-Department of Astrophysics, Denys Wilkinson Building, Keble Road, Oxford, OX1 3RH,\\United Kingdom\\
@@ -142,9 +142,9 @@ redshifts out to about 3.4 with an effective survey volume of around
 to see at most two FRBs.  We discuss the implications of this non-detection in
 the context of results from other telescopes and the limitation of our search
 pipeline.  During the survey, single pulses from 17 known pulsars were detected.
-We also report the discovery of a Galactic radio transient with a
-pulse width of 3~ms and dispersion measure of 281~pc~cm$^{-3}$, which was
-detected while the telescope was slewing between fields.
+We also report the discovery of a Galactic radio transient with a pulse width of
+3~ms and dispersion measure of 281~pc~cm$^{-3}$, which was detected while the
+telescope was slewing between fields.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -192,8 +192,9 @@ Pulsar Arecibo L-band Feed Array (PALFA) \citep{2014ApJ...790..101S}. This
 FRB~110523 was detected with the Green Bank Telescope (GBT) at 820~MHz
 frequencies, confirming \glspl{frb} are observable outside L-band
 \citep{2015Natur.528..523M}.  Recently, a number of very bright \glspl{frb} has
-been detected with UTMOST at 843~MHz \citep{2017MNRAS.468.3746C,atel10697,atel10867} and
-ASKAP at 1.4~GHz \citep{2017ApJ...841L..12B}.
+been detected with UTMOST at 843~MHz
+\citep{2017MNRAS.468.3746C,atel10697,atel10867} and ASKAP at 1.4~GHz
+\citep{2017ApJ...841L..12B}.
 
 Even with the current small sample of FRBs population, it is clear that their
  properties vary significantly. The measured \glspl{dm} range from
@@ -306,14 +307,15 @@ standard ALFABURST operation $T_{\textrm{chan}} = 5$ and $T_{\textrm{spectra}} =
 10$.  The \gls{rfi} exciser operates on data prior to any time decimation and 
 integration ($D=1$).
 
-For very bright pulses, the \gls{rfi} exciser will erroneously replace channels or spectra,
-reducing the overall flux.  For the sensitivity of the \gls{alfa} receiver,
-individual channels with flux greater than 2.8~Jy and, frequency-integrated flux
-greater than $\sim250$ mJy are excised. The peaks of bright \glspl{frb} such as
-FRB~150807 and FRB~170827 would be significantly clipped by the exciser. But, the
-edges of the pulse would not. Both of these \glspl{frb} would still be detected at a
-significant peak S/N. All previously reported \glspl{frb} would be detected with
-ALFABURST at high peak S/N even if partially clipped.
+For very bright pulses, the \gls{rfi} exciser will erroneously replace channels
+or spectra, reducing the overall flux.  For the sensitivity of the \gls{alfa}
+receiver, individual channels with flux greater than 2.8~Jy and,
+frequency-integrated flux greater than $\sim250$ mJy are excised. The peaks of
+bright \glspl{frb} such as FRB~150807 and FRB~170827 would be significantly
+clipped by the exciser. But, the edges of the pulse would not. Both of these
+\glspl{frb} would still be detected at a significant peak S/N. All previously
+reported \glspl{frb} would be detected with ALFABURST at high peak S/N even if
+partially clipped.
 
 The zero-DM removal and spectral replacement affects low-DM pulses. For
 reference, the minimum \gls{dm} before the total dispersive delay across the
@@ -515,13 +517,13 @@ to train the priority classifier model.}
 The class distribution is time-dependent as the detection pipeline has been
 updated, the RFI environment has changed, and the telescope observing schedule
 has changed over the time the survey has run. Classes 2 and 3 occur after the
-inline RFI exciser was improved in 2016. Whereas classes 4 and 6 are events
-that occur with the original RFI exciser. Because the ALFABURST is operating in
+inline RFI exciser was improved in 2016. Whereas classes 4 and 6 are events that
+occur with the original RFI exciser. Because the ALFABURST is operating in
 commensal mode, the band can unexpectedly be changed due to a change in the
-observing frequency, these event windows are labelled as class 5 events. Class 7 and 8 are due
-to packet loss and incorrect digital gain settings. We found that class 8 events
-can be removed simply by checking for overflow values in the spectra, and
-therefore this class is dropped before building a classifier model.
+observing frequency, these event windows are labelled as class 5 events. Class 7
+and 8 are due to packet loss and incorrect digital gain settings. We found that
+class 8 events can be removed simply by checking for overflow values in the
+spectra, and therefore this class is dropped before building a classifier model.
 
 Pulses from known pulsars were used as a proxy class for the FRB class. The
 number of astrophysical pulse detections was low compared to the total number of
@@ -532,14 +534,15 @@ model training more robust.
 
 These features along with the labels were used to build a random forest
 probabilistic classifier model \citep{Ho:1995:RDF:844379.844681,Breiman2001}.
-This model is then used to probabilistically predict which class belongs to an unlabelled
-data set. A one vs. the rest multi-class classifier strategy was used
-for training. Before training, the features of the labelled data sets were median
-removed and standard deviation normalized using an interquartile robust scaler.
-A random forest of 80 trees and 20 random features per node split was found to
-produce the best score in a hyper-parameter grid search using a
+This model is then used to probabilistically predict which class belongs to an
+unlabelled data set. A one vs. the rest multi-class classifier strategy was used
+for training. Before training, the features of the labelled data sets were
+median removed and standard deviation normalized using an interquartile robust
+scaler.  A random forest of 80 trees and 20 random features per node split was
+found to produce the best score in a hyper-parameter grid search using a
 log-loss scoring metric. During training and hyper-parameter optimization a
-stratified k-fold **What is this??? Add ref?*** cross-validation (3 splits) procedure was used.
+stratified k-fold cross-validation (3 splits)
+\citep{Kohavi:1995:SCB:1643031.1643047} procedure was used.
 
 The trained model is successful at predicting the majority of the astrophysical
 events to be astrophysical with high probability, as shown in the confusion
@@ -602,18 +605,18 @@ longest period of the dynamic spectrum with a derivative of zero. This makes
 sense, as wideband RFI is replaced by a mean-zero noise spectrum. The most
 important features for correctly predicting an astrophysical pulse were the
 statistics from coarse pixelization of the dedispersed time series. This can be
-attributed to the detection of a high S/N event in an otherwise noisy time series.
-Understanding the feature importance has led to the development of a number of
-simple filters to reduce the number of false-positive detections without relying
-on the classifier model. For example, datasets in which the maximum DM of events
-was less than 50 were cut.  Given the optimal dispersion measure,
-DM$_{\textrm{opt}}$, obtained from the S/N-maximized DM trial,  if the DM range
-exceeds $(0.5 \times {\rm DM}_{\textrm{opt}}, 1.5 \times {\rm DM}_{\textrm{opt}})$, then the
-event is due to long duration RFI and is cut.  Applying the various filters we
-reduced the number of datasets to approximately 30,000. The windows were sorted
-by S/N, and the top S/N events were examined first.  During this process all
-datasets were labelled.  Astrophysical events were identified based on the beam
-ID and pointing information.
+attributed to the detection of a high S/N event in an otherwise noisy time
+series.  Understanding the feature importance has led to the development of a
+number of simple filters to reduce the number of false-positive detections
+without relying on the classifier model. For example, datasets in which the
+maximum DM of events was less than 50 were cut.  Given the optimal dispersion
+measure, DM$_{\textrm{opt}}$, obtained from the S/N-maximized DM trial,  if the
+DM range exceeds $(0.5 \times {\rm DM}_{\textrm{opt}}, 1.5 \times {\rm
+DM}_{\textrm{opt}})$, then the event is due to long duration RFI and is cut.
+Applying the various filters we reduced the number of datasets to approximately
+30,000. The windows were sorted by S/N, and the top S/N events were examined
+first.  During this process all datasets were labelled.  Astrophysical events
+were identified based on the beam ID and pointing information.
 
 %%% PRIORITIZER ENDS %%%
 
@@ -760,17 +763,18 @@ resolution of $\Delta \tau = 256 \; \mu s$, effective bandwidth $\Delta \nu = 56
 
 The \gls{sps} pipeline is configured to search for pulses from 256~$\mu$s to 16
 ms. Considering only the main beam lobe, a perfect matched filter would result
-in a sensitivity to pulses with a minimum frequency-averaged flux of $S_{256 \mu\textrm{s}} = 250$
-mJy to $S_{16 \; \textrm{ms}} = 31$~mJy \citep{2015MNRAS.452.1254K}. Figure
-\ref{fig:fwhm_sefd_z} shows the peak flux density of using the standard candle
-\gls{frb} model as a function of source redshift for different model spectral
-indices. The dashed lines of constant flux show the sensitivity of the ALFABURST
-search pipeline to pulses of different widths. Assuming a positive spectral
-index model ($\alpha=1.4$) results in a sensitivity out to the maximum
-redshift/\gls{dm} for pulses with widths of at least 1 ms. A flat spectral index
-model results in sensitivity from $z \sim 1.5$ (256~$\mu$s) out to $z \sim 5$
-(16~ms) depending on pulse width. A negative spectral index model ($\alpha \sim
--1.4$) limits the survey to $z < 3$ for all pulse widths.
+in a sensitivity to pulses with a minimum frequency-averaged flux of $S_{256
+\mu\textrm{s}} = 250$ mJy to $S_{16 \; \textrm{ms}} = 31$~mJy
+\citep{2015MNRAS.452.1254K}. Figure \ref{fig:fwhm_sefd_z} shows the peak flux
+density of using the standard candle \gls{frb} model as a function of source
+redshift for different model spectral indices. The dashed lines of constant flux
+show the sensitivity of the ALFABURST search pipeline to pulses of different
+widths. Assuming a positive spectral index model ($\alpha=1.4$) results in a
+sensitivity out to the maximum redshift/\gls{dm} for pulses with widths of at
+least 1 ms. A flat spectral index model results in sensitivity from $z \sim 1.5$
+(256~$\mu$s) out to $z \sim 5$ (16~ms) depending on pulse width. A negative
+spectral index model ($\alpha \sim -1.4$) limits the survey to $z < 3$ for all
+pulse widths.
 
 % alfaburst-initial-survey/notebooks/ALFABURST_Derived_FRB_Rates.ipynb
 \begin{figure}
@@ -845,7 +849,8 @@ redshift as a function of beam size and sensitivity. Plotting the survey metric
 as a function of maximum redshift (Figure \ref{fig:full_sefd_z}) shows how the
 full beam model increases the survey metric as a function of redshift. The total
 survey volume is computed by integrating over redshift.  Including additional
-ALFA side lobes beyond the first side lobes, results in minimal increase in the survey volume.
+ALFA side lobes beyond the first side lobes, results in minimal increase in the
+survey volume.
 
 % alfaburst-initial-survey/notebooks/ALFABURST_Derived_FRB_Rates.ipynb
 \begin{figure}
@@ -983,15 +988,15 @@ factors that might hinder detection, our null result suggests that the density
 of FRBs per unit co-moving volume does not change substantially.
 
 If \glspl{frb} are inherently not flat-spectrum sources, then their fluxes will
-be modified substantially: a steeper negative spectrum population would be harder to
-detect, while a rising spectrum population would be more readily detectable.
-\cite{2017arXiv170507553L} report FRB121102 to be band limited during
-simultaneous observation campaigns using multiple telescopes to cover a broad
-range of the radio band. \cite{atel10675} observed 15 pulses from FRB121102
-across the 4-8 GHz band and reported spectral variation over a brief period of
-time. A high redshift, band-limited \gls{frb}, which ALFABURST is sensitive to,
-could be shifted below L-band. Such a pulse would not be detected with
-ALFABURST.
+be modified substantially: a steeper negative spectrum population would be
+harder to detect, while a rising spectrum population would be more readily
+detectable.  \cite{2017arXiv170507553L} report FRB121102 to be band limited
+during simultaneous observation campaigns using multiple telescopes to cover a
+broad range of the radio band. \cite{atel10675} observed 15 pulses from
+FRB121102 across the 4-8 GHz band and reported spectral variation over a brief
+period of time. A high redshift, band-limited \gls{frb}, which ALFABURST is
+sensitive to, could be shifted below L-band. Such a pulse would not be detected
+with ALFABURST.
 
 \section{Conclusions and Future Work}
 \label{sec:future_work}
@@ -1000,9 +1005,10 @@ We have described the implementation and initial operations of a commensal
 search for transient dispersed pulses using the ALFA receiver on the Arecibo
 telescope. In our observations carried out so far, we have detected 17
 previously known pulsars and found one new  high DM transient in the Galactic
-Plane.  Follow-up observations of the same will hopefully reveal the true nature of the
-source. This serendipitous discovery during a slew shows the importance of
-developing commensal backends for transient searches on large radio telescopes.
+Plane.  Follow-up observations of the same will hopefully reveal the true nature
+of the source. This serendipitous discovery during a slew shows the importance
+of developing commensal backends for transient searches on large radio
+telescopes.
 
 No new FRBs were found in our observations to date. This appears to be broadly
 consistent with the expectations from a simple model in which FRBs are treated
