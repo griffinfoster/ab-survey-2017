@@ -219,9 +219,11 @@ arc-second accuracy, such as MeerKAT, ASKAP, and the SKA.
 Apart from localization, \gls{frb} spectra offer important clues on the nature
 of the emission process. Low frequency searches with LOFAR
 \citep{2015MNRAS.452.1254K}, MWA \citep{2015AJ....150..199T}, and the GBT
-\citep{2017arXiv170107457C} have reported non-detections.  No large surveys for
-\glspl{frb} have been done above L-band frequencies. This is, in part, due to
-the narrowing of beam size which limits sky coverage.
+\citep{2017arXiv170107457C} have reported non-detections.
+\textbf{A limited number of \gls{frb} surveys have been above L-band frequencies.
+This is, in part, due to the narrowing of beam size which limits sky coverage.
+V-FASTR \citep{2016ApJ...826..223B}, a commensal survey on the VLBA, has
+eported a non-detection on observations up to 100~GHz.}
 \cite{2017arXiv170507553L} ran a coordinated-in-time, multi-telescope campaign
 of the repeater \gls{frb}.  They report non-detection of pulses at VHF, C-band,
 Ku-band during periods of detected bursts in L-band and S-band. \cite{atel10675}
@@ -231,14 +233,17 @@ follow the steep power law example of radio pulsars, and may even not be smooth
 and continuous with frequency.
 
 For single dish telescopes there is a trade-off of sensitivity for survey speed.
-Large beams, while providing a large sky coverage, have been unsuccessful at
-detecting \glspl{frb}. Conversely, Arecibo provides the highest sensitivity, but
-with a very narrow beam. Parkes appears to be near the optimal trade-off point
-between sensitivity and beam size for this class of object. ASKAP dishes with
-\glspl{paf} provide a large sky coverage with a significant enough sensitivity
-to detect bright \glspl{frb}. Interferometric arrays such as CHIME and MeerKAT
-while provide both sensitivity and sky coverage. One important question relating
-to the nature of the \gls{frb} population is what are the statistics of source
+\textbf{Small dishes, such as those in the ATA `Fly's Eye' survey
+\citep{2012ApJ...744..109S}, allow for a large sky coverage, but have low
+sensitivity.  ASKAP dishes with \glspl{paf} provide a large sky coverage with a
+significant enough sensitivity to detect bright \glspl{frb}.} Conversely,
+Arecibo provides the highest sensitivity, but with a very narrow beam.
+\textbf{The majority of \glspl{frb} have been discovered with Parkes using the
+multi-beam system. The high sensitivity, large number of survey hours, and
+increased field of view from using multiple beams all contribute to the large
+number of detections.} Interferometric arrays such as CHIME and MeerKAT will
+provide both sensitivity and sky coverage. One important question relating to
+the nature of the \gls{frb} population is what are the statistics of source
 numbers versus source flux density, and whether or not the cumulative flux
 density distribution is consistent with a population of cosmologically
 distributed standard candles. To answer this question, it is particularly
@@ -466,8 +471,10 @@ nature of the survey, leads to a large number of false detections.
 Approximately $2 \times 10^5$ unique 8.4~s datasets were recorded with at least
 one detection above the minimum peak S/N threshold of 10. In order to reduce the
 number of events we need to visually inspect we have developed a prioritizer
-model based on a trained probabilistic classifier. The model can be found in the
-survey git
+model based on a trained probabilistic classifier.  \textbf{The use of trained
+classifier models is becoming a common post-processing technique in \gls{frb}
+surveys \citep{2016PASP..128h4503W} in order to manage the large number of
+detected events.} Our model can be found in the survey git
 repository\footnote{https://github.com/griffinfoster/alfaburst-survey}.
 
 Building the model involved inspecting and labelling a sample of the events. We
@@ -533,7 +540,8 @@ additional effect of balancing out the number of events in each class, making
 model training more robust.
 
 These features along with the labels were used to build a random forest
-probabilistic classifier model \citep{Ho:1995:RDF:844379.844681,Breiman2001}.
+probabilistic classifier model \citep{Ho:1995:RDF:844379.844681,Breiman2001}
+using the \texttt{scikit-learn} package \citep{scikit-learn}.
 This model is then used to probabilistically predict which class belongs to an
 unlabelled data set. A one vs. the rest multi-class classifier strategy was used
 for training. Before training, the features of the labelled data sets were
@@ -874,17 +882,19 @@ of previously reported \glspl{frb} and a flat spectral index.
 %biased towards small distances, due to the large sky coverage of the low
 %sensitivity outer parts of the beam.
 
-Figure \ref{fig:sensitivity_range} shows the ALFABURST sensitivity  based
-on pulse width and peak flux, assuming detection at boresight. The ALFABURST
+Figure \ref{fig:sensitivity_range} shows the ALFABURST sensitivity  based on
+pulse width and peak flux, assuming detection at boresight. The ALFABURST
 sensitivity region (purple) indicates the survey would be able to detect all
 previously reported \glspl{frb}. Bright \glspl{frb} such as FRB150807 and
 FRB170827 would be partially clipped by the inline RFI exciser (Section
 \ref{sec:rfi_excise}), but they would sill be detected at a high peak S/N.
-Recent detections with UTMOST \citep{2017MNRAS.468.3746C,atel10697,atel10867}
-indicate that the parameter space in pulse width should be extended.  FRB170827
-has a measured pulse width of 26~ms. Currently the pipeline decimates in time
-out to 16~ms. The pipeline is still sensitive to wider pulses, but at a loss in S/N
-as indicated in the slope on the right side of the shaded region of Figure
+\textbf{Additionally, in a multiple beam system a bright \gls{frb} would be
+picked up at a lower flux in the side lobes of nearby beams.} Recent detections
+with UTMOST \citep{2017MNRAS.468.3746C,atel10697,atel10867} indicate that the
+parameter space in pulse width should be extended.  FRB170827 has a measured
+pulse width of 26~ms. Currently the pipeline decimates in time out to 16~ms. The
+pipeline is still sensitive to wider pulses, but at a loss in S/N as indicated
+in the slope on the right side of the shaded region of Figure
 \ref{fig:sensitivity_range}.  Similarly, the left side of the region is sloped
 as ALFABURST is sensitive to bright pulses with widths narrower than $256~\mu$s.
 
