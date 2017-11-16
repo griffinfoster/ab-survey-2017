@@ -614,17 +614,29 @@ sense, as wideband RFI is replaced by a mean-zero noise spectrum. The most
 important features for correctly predicting an astrophysical pulse were the
 statistics from coarse pixelization of the dedispersed time series. This can be
 attributed to the detection of a high S/N event in an otherwise noisy time
-series.  Understanding the feature importance has led to the development of a
+series.
+
+Understanding the feature importance has led to the development of a
 number of simple filters to reduce the number of false-positive detections
-without relying on the classifier model. For example, datasets in which the
-maximum DM of events was less than 50 were cut.  Given the optimal dispersion
-measure, DM$_{\textrm{opt}}$, obtained from the S/N-maximized DM trial,  if the
-DM range exceeds $(0.5 \times {\rm DM}_{\textrm{opt}}, 1.5 \times {\rm
-DM}_{\textrm{opt}})$, then the event is due to long duration RFI and is cut.
-Applying the various filters we reduced the number of datasets to approximately
-30,000. The windows were sorted by S/N, and the top S/N events were examined
-first.  During this process all datasets were labelled.  Astrophysical events
-were identified based on the beam ID and pointing information.
+without relying on the classifier model. \textbf{Data sets were cut if any of the
+following criteria were met:}
+
+\begin{itemize}
+    \item The maximum DM of events was less than 50~cm$^{-3}$~pc.
+    \item Given the optimal dispersion measure, DM$_{\textrm{opt}}$, obtained
+    from the S/N-maximized DM trial, if the DM range exceeds $(0.5 \times {\rm
+    DM}_{\textrm{opt}}, 1.5 \times {\rm DM}_{\textrm{opt}})$, then the event is
+    due to long duration RFI.
+    \item More than 50\% of the spectra were replaced in the dataset.
+    \item Any values in the dataset exceed the \texttt{int32} maximum value.
+    These are is class 8 events, and due to errors in receiving packets.
+\end{itemize}
+
+These filters were applied to each dataset in post-processing to reduce the
+number of datasets to approximately 30,000. The windows were sorted by S/N, and
+the top S/N events were examined first.  During this process all datasets were
+labelled.  Astrophysical events were identified based on the beam ID and
+pointing information.
 
 %%% PRIORITIZER ENDS %%%
 
@@ -834,12 +846,17 @@ compared to just the primary lobes.
 The total survey metric can be computed as a function of the beam sensitivity by
 integrating over the beam (Figure \ref{fig:survey_metric_sense}). We convert the
 beam model to units of Jy by assuming that the $-3$ dB point corresponds to the
-\gls{fwhm} SEFD of 3~Jy. The survey metric increases to approximately $30 \;
+\gls{fwhm} SEFD of 3~Jy. The survey metric increases to approximately $26 \;
 \textrm{deg}^2$ hours by including more of the primary beam beyond the
 \gls{fwhm} point. The steep further increase in the survey metric seen in Figure
 \ref{fig:survey_metric_sense} arises from including the first side lobes. The
 long tail comes from the residual sensitivity by integrating over the remaining
-beam.
+beam. \textbf{The beam model and polynomial fits to the survey metric curves are
+included in the event rate notebooks.}
+%\textbf{The curve in Figure \ref{fig:survey_metric_sense} can be fit with an
+%$8^{\textrm{th}}$-order polynomial $$M_{\textrm{survey}} = \sum_{i=0}^{8} p_i
+%(\log S_{\textrm{min}})^i$$
+%with coefficents $\{67.12, 26.91, -48.37, 45.87, 30.83, -63.17, 6.64, 23.27, -8.49 \}$}
 
 % alfaburst-initial-survey/notebooks/ALFABURST_Derived_FRB_Rates.ipynb
 \begin{figure}
@@ -876,7 +893,7 @@ survey volume.
     \label{fig:full_sefd_z}
 \end{figure}
 
-The integrated survey volume out to the first side lobe is $5.8 \times
+The integrated survey volume out to the first side lobe is $5.2 \times
 10^6$~Mpc$^3$. The expected number of \glspl{frb} in the survey is 0--2 when
 using the galaxy number density and range of $R_{\textrm{FRB}}$ stated above.
 Though this event rate is more complex to model, it attempts to provide a more
