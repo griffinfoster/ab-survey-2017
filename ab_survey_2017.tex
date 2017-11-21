@@ -220,10 +220,10 @@ Apart from localization, \gls{frb} spectra offer important clues on the nature
 of the emission process. Low frequency searches with LOFAR
 \citep{2015MNRAS.452.1254K}, MWA \citep{2015AJ....150..199T}, and the GBT
 \citep{2017arXiv170107457C} have reported non-detections.
-\textbf{A limited number of \gls{frb} surveys have been above L-band frequencies.
+A limited number of \gls{frb} surveys have been above L-band frequencies.
 This is, in part, due to the narrowing of beam size which limits sky coverage.
 V-FASTR \citep{2016ApJ...826..223B}, a commensal survey on the VLBA, has
-reported a non-detection on observations up to 100~GHz.}
+reported a non-detection on observations up to 100~GHz.
 \cite{2017arXiv170507553L} ran a coordinated-in-time, multi-telescope campaign
 of the repeater \gls{frb}.  They report non-detection of pulses at VHF, C-band,
 Ku-band during periods of detected bursts in L-band and S-band. \cite{atel10675}
@@ -233,15 +233,15 @@ follow the steep power law example of radio pulsars, and may even not be smooth
 and continuous with frequency.
 
 For single dish telescopes there is a trade-off of sensitivity for survey speed.
-\textbf{Small dishes, such as those in the ATA `Fly's Eye' survey
+Small dishes, such as those in the ATA `Fly's Eye' survey
 \citep{2012ApJ...744..109S}, allow for a large sky coverage, but have low
 sensitivity.  ASKAP dishes with \glspl{paf} provide a large sky coverage with a
-significant enough sensitivity to detect bright \glspl{frb}.} Conversely,
+significant enough sensitivity to detect bright \glspl{frb}. Conversely,
 Arecibo provides the highest sensitivity, but with a very narrow beam.
-\textbf{The majority of \glspl{frb} have been discovered with Parkes using the
+The majority of \glspl{frb} have been discovered with Parkes using the
 multi-beam system. The high sensitivity, large number of survey hours, and
 increased field of view from using multiple beams all contribute to the large
-number of detections.} Interferometric arrays such as CHIME and MeerKAT will
+number of detections. Interferometric arrays such as CHIME and MeerKAT will
 provide both sensitivity and sky coverage. One important question relating to
 the nature of the \gls{frb} population is what are the statistics of source
 numbers versus source flux density, and whether or not the cumulative flux
@@ -471,10 +471,10 @@ nature of the survey, leads to a large number of false detections.
 Approximately $2 \times 10^5$ unique 8.4~s datasets were recorded with at least
 one detection above the minimum peak S/N threshold of 10. In order to reduce the
 number of events we need to visually inspect we have developed a prioritizer
-model based on a trained probabilistic classifier.  \textbf{The use of trained
+model based on a trained probabilistic classifier. The use of trained
 classifier models is becoming a common post-processing technique in \gls{frb}
 surveys \citep{2016PASP..128h4503W} in order to manage the large number of
-detected events.} Our model can be found in the survey git
+detected events. Our model can be found in the survey git
 repository\footnote{https://github.com/griffinfoster/alfaburst-survey}.
 
 Building the model involved inspecting and labelling a sample of the events. We
@@ -618,8 +618,8 @@ series.
 
 Understanding the feature importance has led to the development of a
 number of simple filters to reduce the number of false-positive detections
-without relying on the classifier model. \textbf{Data sets were cut if any of the
-following criteria were met:}
+without relying on the classifier model. Data sets were cut if any of the
+following criteria were met:
 
 \begin{itemize}
     \item The maximum DM of events was less than 50~cm$^{-3}$~pc.
@@ -716,11 +716,11 @@ in a maximum of 500~ms for the slew rate of the telescope (at the ALFABURST
 observing frequency this corresponds to a dispersed pulse with a maximum DM of
 3500~pc~cm$^{-3}$).  It could therefore be a RRAT which we serendipitously
 detected at the correct moment, or it could be an individual pulse from a
-pulsar.  \textbf{This event is similar to FRB010621 \citep{2011MNRAS.415.3065K}
+pulsar. This event is similar to FRB010621 \citep{2011MNRAS.415.3065K}
 which is likely of galactic origin \citep{2014MNRAS.440..353B}.
 \cite{2012MNRAS.425L..71K} suggest FRB010621 is due to pulsar giant pulse or
 annihilating black holes. The second component would seem to rule out the latter
-interpretation in this instance.} This region has been previously surveyed with
+interpretation in this instance. This region has been previously surveyed with
 PALFA and the Parkes Multi-beam Survey \citep{2001MNRAS.328...17M} with no
 significant detection of a pulsar at this DM.
 
@@ -851,8 +851,8 @@ beam model to units of Jy by assuming that the $-3$ dB point corresponds to the
 \gls{fwhm} point. The steep further increase in the survey metric seen in Figure
 \ref{fig:survey_metric_sense} arises from including the first side lobes. The
 long tail comes from the residual sensitivity by integrating over the remaining
-beam. \textbf{The beam model and polynomial fits to the survey metric curves are
-included in the event rate notebooks.}
+beam. The beam model and polynomial fits to the survey metric curves are
+included in the event rate notebooks.
 %\textbf{The curve in Figure \ref{fig:survey_metric_sense} can be fit with an
 %$8^{\textrm{th}}$-order polynomial $$M_{\textrm{survey}} = \sum_{i=0}^{8} p_i
 %(\log S_{\textrm{min}})^i$$
@@ -909,8 +909,8 @@ sensitivity region (purple) indicates the survey would be able to detect all
 previously reported \glspl{frb}. Bright \glspl{frb} such as FRB150807 and
 FRB170827 would be partially clipped by the inline RFI exciser (Section
 \ref{sec:rfi_excise}), but they would sill be detected at a high peak S/N.
-\textbf{Additionally, in a multiple beam system a bright \gls{frb} would be
-picked up at a lower flux in the side lobes of nearby beams.} Recent detections
+Additionally, in a multiple beam system a bright \gls{frb} would be
+picked up at a lower flux in the side lobes of nearby beams. Recent detections
 with UTMOST \citep{2017MNRAS.468.3746C,atel10697,atel10867} indicate that the
 parameter space in pulse width should be extended.  FRB170827 has a measured
 pulse width of 26~ms. Currently the pipeline decimates in time out to 16~ms. The
@@ -996,27 +996,30 @@ space if these effects are modulating the pulse.
 \cite{2015MNRAS.451.3278M} conclude that the apparent deficit of \glspl{frb} at
 low Galactic latitudes is due to diffractive interstellar scintillation. Their
 model shows that the true event rate is a factor of $\sim 4$ lower than the rate
-reported in \cite{2013Sci...341...53T}, which is also the rate used in the standard
-candle model \citep{2013MNRAS.436L...5L}. The ALFABURST survey is evenly
-split across high and low Galactic latitudes.  \cite{2015MNRAS.451.3278M} predict
-that the increase in sensitivity of Arecibo compared to Parkes should
+reported in \cite{2013Sci...341...53T}, which is also the rate used in the
+standard candle model \citep{2013MNRAS.436L...5L}. The ALFABURST survey is
+evenly split across high and low Galactic latitudes.  \cite{2015MNRAS.451.3278M}
+predict that the increase in sensitivity of Arecibo compared to Parkes should
 result in a factor of 14 increase in detections, assuming a similar bandwidth
 ($\sim 300$ MHz). Accounting for the smaller bandwidth of ALFABURST means there
 should still be a factor of a few increase in rates. This non-detection result
 indicates that the \cite{2015MNRAS.451.3278M} flux density distribution is not
-as steep as predicted, {\bf or that the source count distribution begins to flatten below the Parkes sensitivity threshold \citep[for further discussion on FRB source counts, see][]{2017arXiv171011493M}.}
+as steep as predicted, or that the source count distribution begins to
+flatten below the Parkes sensitivity threshold \citep[for further discussion on
+FRB source counts, see][]{2017arXiv171011493M}.
 
 The sensitivity of Arecibo allows the ALFABURST survey to probe a search volume
 out to higher redshifts than other surveys. Our number estimates have assumed
-that the density of sources per unit co-moving volume is constant.  If {\bf FRBs are standard candles, and that} there is
-a peak similar to the star formation rate around $z=2$
-\citep{2014ARA&A..52..415M} than the expected event rate that our deeper
-ALFABURST survey probes would actually be higher than our simple estimates.
-\citet{2016MNRAS.458..708C} and \citet{ranethesis} show that a larger sample of
-FRBs in the Parkes surveys is currently required in order to distinguish
-between a constant density versus a redshift dependent model. Neglecting other
-factors that might hinder detection, {\bf and keeping in mind the standard candle assumption}, our null result suggests that the density
-of FRBs per unit co-moving volume does not change substantially.
+that the density of sources per unit co-moving volume is constant.  If FRBs
+are standard candles, and that there is a peak similar to the star formation
+rate around $z=2$ \citep{2014ARA&A..52..415M} than the expected event rate that
+our deeper ALFABURST survey probes would actually be higher than our simple
+estimates.  \citet{2016MNRAS.458..708C} and \citet{ranethesis} show that a
+larger sample of FRBs in the Parkes surveys is currently required in order to
+distinguish between a constant density versus a redshift dependent model.
+Neglecting other factors that might hinder detection, and keeping in mind
+the standard candle assumption, our null result suggests that the density of
+FRBs per unit co-moving volume does not change substantially.
 
 If \glspl{frb} are inherently not flat-spectrum sources, then their fluxes will
 be modified substantially: a steeper negative spectrum population would be
@@ -1070,12 +1073,14 @@ our survey time, and sample a larger portion of frequency space.
 
 \section*{ACKNOWLEDGEMENTS}
 
-We thank the referee for constructive comments on the manuscript. ALFABURST activities are supported by a National Science Foundation (NSF) award
-AST-1616042.  MAM was supported by NSF award number AST-1517003. MPS and DRL were
-supported by NSF award number OIA-1458952.  G.F., D.M, A.S. acknowledges support from the
-Breakthrough Listen Initiative. Breakthrough Listen is managed by the
-Breakthrough Initiatives, sponsored by the Breakthrough Prize
-Foundation\footnote{breakthroughinitiatives.org}.
+We thank the referee for constructive comments on the manuscript. ALFABURST
+activities are supported by a National Science Foundation (NSF) award
+AST-1616042.  MAM was supported by NSF award number AST-1517003. MPS and DRL
+were supported by NSF award number OIA-1458952.  A.K., J.C., G.F. would like to
+thank the Leverhulme Trust for supporting this work.  G.F., D.M, A.S.
+acknowledges support from the Breakthrough Listen Initiative. Breakthrough
+Listen is managed by the Breakthrough Initiatives, sponsored by the Breakthrough
+Prize Foundation\footnote{breakthroughinitiatives.org}.
  
 \bibliographystyle{mnras}
 \bibliography{alfaburst.bib} 
